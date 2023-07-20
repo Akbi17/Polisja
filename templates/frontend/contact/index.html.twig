@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ <h1>Contact Form</h1>
+ {% if app.session.flashbag.has('success') %}
+						<div class="alert alert-success">
+							{{ app.session.flashbag.get('success')[0] }}
+						</div>
+					{% endif %}
+<!-- Contact Form -->
+						<div class="col-md-8 col-sm-6 col-xs-12">
+							{{ form_start(form, {'attr': {'class': 'form', 'novalidate': 'novalidate', 'method': 'post', 'action': path('contact') } })}}
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Full Name', 'required': 'required'}}) }}
+											{% if form_errors(form.name) %}
+												<div class="alert alert-danger">{{ form_errors(form.fullName) }}</div>
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Your Email', 'required': 'required'}}) }}
+											{% if form_errors(form.email) %}
+												<div class="alert alert-danger">{{ form_errors(form.email) }}</div>
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											{{ form_widget(form.subject, {'attr': {'class': 'form-control', 'placeholder': 'Subject', 'required': 'required'}}) }}
+											{% if form_errors(form.subject) %}
+												<div class="alert alert-danger">{{ form_errors(form.subject) }}</div>
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											{{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Type Your Message Here'}}) }}
+											{% if form_errors(form.message) %}
+												<div class="alert alert-danger">{{ form_errors(form.message) }}</div>
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group button">
+											<button type="submit" class="btn primary">Submit Message</button>
+										</div>
+									</div>
+								</div>
+								{{ form_end(form) }}
+
+						</div>
+{% endblock %}

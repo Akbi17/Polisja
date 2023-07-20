@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block auto %}
+<style>
+    /* Form container styles */
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Form field styles */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Form button style */
+    .form-group button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="form-container">
+    <form id="carInsuranceForm" method="POST">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="carMake">Car Make</label>
+            <input type="text" class="form-control" id="carMake" name="carMake" required>
+        </div>
+        <div class="form-group">
+            <label for="carModel">Car Model</label>
+            <input type="text" class="form-control" id="carModel" name="carModel" required>
+        </div>
+        <div class="form-group">
+            <label for="carYear">Car Year</label>
+            <input type="number" class="form-control" id="carYear" name="carYear" required>
+        </div>
+        <div class="form-group">
+            <label for="coverageType">Coverage Type</label>
+            <select class="form-control" id="coverageType" name="coverageType" required>
+                <option value="">Select coverage type</option>
+                <option value="comprehensive">Comprehensive</option>
+                <option value="third_party">Third Party</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit">Get a Quote</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

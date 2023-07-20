@@ -1,0 +1,4 @@
+# routes.yaml
+app:
+    resource: '../src/Controller/'
+    type: annotation

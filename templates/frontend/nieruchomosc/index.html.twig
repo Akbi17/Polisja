@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block statment %}
+<div class="form-container">
+ <form id="propertyInsuranceForm" method="POST">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="typeOfHouse">Type of House</label>
+            <select class="form-control" id="typeOfHouse" name="typeOfHouse" required>
+                <option value="">Select type</option>
+                <option value="house">House</option>
+                <option value="apartment">Apartment</option>
+                <option value="condo">Condo</option>
+                <option value="villa">Villa</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="place">Place</label>
+            <input type="text" class="form-control" id="place" name="place" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="residentialArea">Residential Area</label>
+            <input type="number" class="form-control" id="residentialArea" name="residentialArea" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="mail">Mail</label>
+            <input type="email" class="form-control" id="mail" name="mail" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="propertyAddress">Property Address</label>
+            <input type="text" class="form-control" id="propertyAddress" name="propertyAddress" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="yearBuilt">Year Built</label>
+            <input type="number" class="form-control" id="yearBuilt" name="yearBuilt" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="constructionType">Construction Type</label>
+            <select class="form-control" id="constructionType" name="constructionType" required>
+                <option value="">Select construction type</option>
+                <option value="brick">Brick</option>
+                <option value="wood">Wood</option>
+                <option value="concrete">Concrete</option>
+                <option value="steel">Steel</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="coverageAmount">Coverage Amount</label>
+            <input type="number" class="form-control" id="coverageAmount" name="coverageAmount" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="policyStartDate">Policy Start Date</label>
+            <input type="date" class="form-control" id="policyStartDate" name="policyStartDate" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </div>
+</form>
+</div>
+<style>
+    
+    .form-container {
+        padding-left: 80px; 
+    }
+</style>
+
+
+{% endblock %}
