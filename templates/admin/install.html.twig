@@ -1,0 +1,25 @@
+<div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center">WebPages</h1>
+                {{ form_start(webPageConfigForm, {'attr': {'class': 'my-form-class'}}) }}
+                <div class="form-group">
+                    {{ form_label(webPageConfigForm.webPage, 'Web Page', {'label_attr': {'class': 'my-label-class'}}) }}
+                    {{ form_widget(webPageConfigForm.webPage, {'attr': {'class': 'form-control', 'placeholder': 'Wpisz nazwę strony'}}) }}
+                    {{ form_errors(webPageConfigForm.webPage, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(webPageConfigForm.status, 'Status', {'label_attr': {'class': 'my-label-class'}}) }}
+                    {{ form_widget(webPageConfigForm.status, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(webPageConfigForm.status, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Zapisz</button>
+                {{ form_end(webPageConfigForm) }}
+            </div>
+        </div>
+    </div>
+   
+{{ form_start(form) }}
+    <input type="submit" value="Zarejestruj">
+{{ form_end(form) }}
+

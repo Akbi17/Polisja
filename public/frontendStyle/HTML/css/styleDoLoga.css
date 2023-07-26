@@ -100,3 +100,25 @@
 section.call-to-action.footer {
     margin: 10px 0 40px;
 }
+.kontakt .push-top {
+  margin-top: 0px;
+}
+.webdesing  {
+  background-color: #fff;
+}
+section.highlight.footer {
+  margin: 0px 0 -70px;
+}
+.webdesing {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-bottom: 40px;
+}
+.read {
+  background-color: #fff;
+}
+.read .container {
+  margin-top: 20px;
+  padding-top: 20px;
+}
+

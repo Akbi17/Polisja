@@ -4,8 +4,8 @@
 <style>
     /* Dodaj odstęp od lewej krawędzi dla formularza */
     .form-container {
-        padding-left: 20px;
-        max-width: 600px; /* Ogranicz maksymalną szerokość formularza do 600px */
+        padding-left: 2px;
+        width: 100%; /* Ogranicz maksymalną szerokość formularza do 600px */
         margin: 0 auto; /* Możesz dostosować wartość odstępu do swoich potrzeb */
     }
     @media (max-width: 640px) {
@@ -13,76 +13,98 @@
             max-width: 100%; /* Na mniejszych ekranach formularz będzie zajmował całą dostępną szerokość */
         }
     }
+    
 </style>
-
-<div class="form-container">
-    <form id="businessInsuranceForm" method="POST">
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="businessName">Business Name</label>
-                <input type="text" class="form-control" id="businessName" name="businessName" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="businessType">Business Type</label>
-                <input type="text" class="form-control" id="businessType" name="businessType" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="businessAddress">Business Address</label>
-                <input type="text" class="form-control" id="businessAddress" name="businessAddress" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="businessPhone">Business Phone</label>
-                <input type="tel" class="form-control" id="businessPhone" name="businessPhone" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="businessMail">Business Mail</label>
-                <input type="email" class="form-control" id="businessMail" name="businessMail" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="contactPerson">Contact Person</label>
-                <input type="text" class="form-control" id="contactPerson" name="contactPerson" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="policyStartDate">Policy Start Date</label>
-                <input type="date" class="form-control" id="policyStartDate" name="policyStartDate" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="policyEndDate">Policy End Date</label>
-                <input type="date" class="form-control" id="policyEndDate" name="policyEndDate" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="coverageAmount">Coverage Amount</label>
-                <input type="number" class="form-control" id="coverageAmount" name="coverageAmount" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="insuranceType">Insurance Type</label>
-                <select class="form-control" id="insuranceType" name="insuranceType" required>
-                    <option value="">Select insurance type</option>
-                    <option value="property">Property</option>
-                    <option value="health">Health</option>
-                    <option value="life">Life</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="additionalInfo">Additional Information</label>
-                <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="4" required></textarea>
-            </div>
-        </div>
-        <div class="row">
+	<div class="container">
+        <div class="row ">
             <div class="col-md-12">
-                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                <h2 class="short word-rotator-title"><strong>Polisja</strong> to <strong class="inverted" data-appear-animation="bounceIn">
+                    <span class="word-rotate" data-plugin-options='{"delay": 2000}'>
+                        <span class="word-rotate-items">
+                            <span>biezpieczne.</span>
+                            <span>najlepsze.</span>
+        					<span>wygodne.</span>
+		    			</span>
+					</span>
+    				</strong>
+				</h2>
+                    <p> Klienci cenią nas za kompleksowość działań i profesjonalizm. Nasi doradcy podczas bezpłatnej konsultacji zaledwie w kilka minut porównują oferty ubezpieczeniowe ponad 30 działających 
+                        na rynku Towarzystw i pomagają wybrać najkorzystniejsze ubezpieczenie domu, życia i zdrowia, 
+                        podróży albo firmy. Współpracujemy z najlepszymi towarzystwami ubezpieczeniowymi działającymi na rynku. 
+                        Kontaktując się z nami oszczędzasz czas i pieniądze.
+                    </p>
+			</div>
+		</div>
+	</div>
+<div class="container">
+<div class="form-container">
+    {{ form_start(form, {'attr': {'id': 'businessInsuranceForm'}}) }}
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="{{ form.nameOfBusiness.vars.id }}">{{ form.nameOfBusiness.vars.label }}</label>
+            {{ form_widget(form.nameOfBusiness, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        </div>
+        <div class="form-group col-md-6">
+            <label for="{{ form.name.vars.id }}">{{ form.name.vars.label }}</label>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="{{ form.surname.vars.id }}">{{ form.surname.vars.label }}</label>
+            {{ form_widget(form.surname, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        </div>
+        <div class="form-group col-md-6">
+            <label for="{{ form.phone.vars.id }}">{{ form.phone.vars.label }}</label>
+            {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="{{ form.mail.vars.id }}">{{ form.mail.vars.label }}</label>
+            {{ form_widget(form.mail, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        </div>
+        <div class="form-group col-md-6">
+            <label for="{{ form.place.vars.id }}">{{ form.place.vars.label }}</label>
+            {{ form_widget(form.place, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="{{ form.policystartdate.vars.id }}">{{ form.policystartdate.vars.label }}</label>
+            {{ form_widget(form.policystartdate, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        </div>
+        <div class="form-group col-md-6">
+            <label for="{{ form.policyenddate.vars.id }}">{{ form.policyenddate.vars.label }}</label>
+            {{ form_widget(form.policyenddate, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="{{ form.information.vars.id }}">{{ form.information.vars.label }}</label>
+            {{ form_widget(form.information, {'attr': {'class': 'form-control', 'required': 'required', 'style': 'height: 150px;'}}) }}
+        </div>
+    </div>
+
+    
+    
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary btn-lg">Wyślij</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>
+</div>
+
+<div class="container">
+    <section class="call-to-action featured footer">
+        <div class="container">
+            <div class="row">
+                <div class="center">
+                    <h3>Chcesz porozmawiać o naszej <strong>ofercie ubezpieczeniowej</strong>  i  <strong>poznać ceny</strong>? <a href="{{'contact'}}" target="_blank" class="btn btn-lg btn-primary" data-appear-animation="bounceIn">Skontaktuj się</a> <span class="arrow hlb hidden-xs hidden-sm hidden-md" data-appear-animation="rotateInUpLeft" style="top: -22px;"></span></h3>                </div>
             </div>
         </div>
-    </form>
+    </section>
 </div>
 {% endblock %}

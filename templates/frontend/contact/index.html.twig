@@ -1,55 +1,360 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
- <h1>Contact Form</h1>
- {% if app.session.flashbag.has('success') %}
-						<div class="alert alert-success">
-							{{ app.session.flashbag.get('success')[0] }}
-						</div>
-					{% endif %}
-<!-- Contact Form -->
-						<div class="col-md-8 col-sm-6 col-xs-12">
-							{{ form_start(form, {'attr': {'class': 'form', 'novalidate': 'novalidate', 'method': 'post', 'action': path('contact') } })}}
-								<div class="row">
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<title>Tucson - Responsive HTML5 Template 2.1.0</title>		
+		<meta name="keywords" content="HTML5 Template" />
+		<meta name="description" content="Tucson - Responsive HTML5 Template">
+		<meta name="author" content="okler.net">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Web Fonts  -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Alegreya|Alegreya+SC|Oswald:400,300" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="frontendStyle/HTML/vendor/bootstrap/bootstrap.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/vendor/fontawesome/css/font-awesome.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/vendor/rs-plugin/css/settings.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/vendor/owlcarousel/owl.carousel.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/vendor/owlcarousel/owl.theme.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/vendor/magnific-popup/magnific-popup.css">
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="frontendStyle/HTML/css/theme.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-elements.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-blog.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-shop.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-animate.css">
+
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="frontendStyle/HTML/css/skins/default.css">
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="frontendStyle/HTML/css/custom.css">
+
+		<!-- Head Libs -->
+		<script src="frontendStyle/HTML/vendor/modernizr/modernizr.js"></script>
+		<link rel="stylesheet" href="frontendStyle/HTML/css/styleDoLoga.css">	
+	</head>
+<body>
+	<div class="body">
+		<header id="header">
+				<div class="container">
+					<h1 class="logo">
+						<a href="index.html">
+							<img alt="Tucson" width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisja.jpg">
+						</a>
+					</h1>
+					<button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+						<i class="fa fa-bars"></i>
+					</button>
+				</div>
+				<div class="navbar-collapse nav-main-collapse collapse">
+					<div class="container">
+						
+						<nav class="nav-main mega-menu">
+							<ul class="nav nav-pills nav-main" id="mainMenu">
+								<li>
+									<a href="{{'main'}}">Główna</a>
+								</li>
+								<li>
+									<a href="{{'auto'}}">Samochody</a>
+								</li>
+								<li>
+									<a href="{{'nieruchomosc'}}">Dom</a>
+								</li>
+								<li>
+									<a href="{{'zycie'}}">Zycie</a>
+								</li>
+								<li>
+									<a href="{{'biznes'}}">Bizness</a>
+								</li>
+								<li>
+									<a href="{{'contact'}}">Kontakt</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+		</header>
+		<div class="body">
+			<div role="main" class="main">
+				<!-- Google Maps -->
+				<div id="googlemaps" class="google-map">
+					<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=17.297081134414675%2C50.94159451536118%2C17.307595393753054%2C50.94582631510307&amp;layer=mapnik&amp;marker=50.94371046338211%2C17.3023382640838" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=50.94371&amp;mlon=17.30234#map=18/50.94371/17.30234">Wyświetl większą mapę</a></small>
+				</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="alert alert-success hidden" id="contactSuccess">
+								<strong>Success!</strong> Your message has been sent to us.
+							</div>
+
+							<div class="alert alert-danger hidden" id="contactError">
+								<strong>Error!</strong> There was an error sending your message.
+							</div>
+
+							<h2 class="short">Napisz do<strong> nas</strong></h2>
+							<div class="form-container">
+							{{ form_start(form, {'attr': {'id': 'contactForm', 'action': path('contact'), 'method': 'post'}}) }}
+							<div class="row">
+								<div class="form-group">
 									<div class="col-md-6">
-										<div class="form-group">
-											{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Full Name', 'required': 'required'}}) }}
-											{% if form_errors(form.name) %}
-												<div class="alert alert-danger">{{ form_errors(form.fullName) }}</div>
-											{% endif %}
-										</div>
+										<label>Your name *</label>
+										{{ form_widget(form.name, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
 									</div>
 									<div class="col-md-6">
-										<div class="form-group">
-											{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Your Email', 'required': 'required'}}) }}
-											{% if form_errors(form.email) %}
-												<div class="alert alert-danger">{{ form_errors(form.email) }}</div>
-											{% endif %}
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											{{ form_widget(form.subject, {'attr': {'class': 'form-control', 'placeholder': 'Subject', 'required': 'required'}}) }}
-											{% if form_errors(form.subject) %}
-												<div class="alert alert-danger">{{ form_errors(form.subject) }}</div>
-											{% endif %}
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											{{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Type Your Message Here'}}) }}
-											{% if form_errors(form.message) %}
-												<div class="alert alert-danger">{{ form_errors(form.message) }}</div>
-											{% endif %}
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group button">
-											<button type="submit" class="btn primary">Submit Message</button>
-										</div>
+										<label>Your email address *</label>
+										{{ form_widget(form.email, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
 									</div>
 								</div>
-								{{ form_end(form) }}
-
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<div class="col-md-12">
+										<label>Subject</label>
+										{{ form_widget(form.subject, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<div class="col-md-12">
+										<label>Message *</label>
+										{{ form_widget(form.message, {'attr': {'class': 'form-control', 'required': 'required', 'rows': 5, 'placeholder': 'Type Your Message Here'}}) }}
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<input type="submit" value="Wyślij" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+								</div>
+							</div>
+							{{ form_end(form) }}
 						</div>
-{% endblock %}
+						</div>
+						<div class="col-md-6">
+							<h4 class="push-top">Kontakt z <strong>nami</strong></h4>
+							<p>Wypełnij formularz znajdujący się obok, a nasz Konsultant oddzwoni do Ciebie, aby porozmawiać
+								o ofercie ubezpieczenia. Skontaktuj się z nami jak najszybciej i ubezpiecz to, co dla Ciebie najważniejsze.</p>
+							<hr />
+							<h4><strong>Lokalizacja</strong></h4>
+							<ul class="list-unstyled">
+								<li><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, City Name, United States</li>
+								<li><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:" id="email"></a></li>
+								<li><i class="fa fa-phone"></i> <strong>Phone:</strong> <a href="#" id="callToPhoneNumber"></a></li>
+							</ul>
+							<hr />
+							<h4><strong>Czas pracy</strong></h4>
+							<ul class="list-unstyled">
+								<li><i class="fa fa-time"></i> Monday - Friday 9am to 5pm</li>
+								<li><i class="fa fa-time"></i> Saturday - 9am to 2pm</li>
+								<li><i class="fa fa-time"></i> Sunday - Closed</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<footer id="footer">
+			<div class="container">
+				<div class="row">
+				<div class="col-md-3">
+					<a href="{{'main'}}" class="logo push-bottom">
+					<img alt="Tucson" width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisjanowa.jpg">
+					</a>
+					<p>Polisja to najlepsza wyszukiwarka ubezpieczeń AC/OC oraz ubezpieczenia zdrowia, mieszkania oraz firmy <a href="{{'main'}}" class="btn-flat btn-xs">Zobacz więcej <i class="fa fa-arrow-right"></i></a></p>
+					<div class="contact-details">
+					<ul class="contact">
+						<li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 123 Street Name, City, USA</p></li>
+						<li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> <a href="tel" id="callToPhoneNumberfooter"></a</p></li>
+						<li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:" id="emailfooter"></a></p></li>
+					</ul>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<h4>Polisja Wyszukiwarka Ubezpieczeń</h4>
+					<ul class="nav nav-list primary push-bottom">
+					<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'auto'}}">Jeżdij śmiało z Polisją</a></li>
+					<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'nieruchomosc'}}">Ubezpiecz nieruchomość z Polisją</a></li>
+					<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'zycie'}}">Bądź biezpieczny z Polisją</a></li>
+					<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'biznes'}}">Bądź biezpieczny za swoje investycje z Polisją</a></li>
+					</ul>
+				</div>
+				</div>
+			</div>
+</footer>
+
+
+	</div>
+<!-- Vendor -->
+		<script src="frontendStyle/HTML/vendor/jquery/jquery.js"></script>
+		<script src="frontendStyle/HTML/vendor/jquery.appear/jquery.appear.js"></script>
+		<script src="frontendStyle/HTML/vendor/jquery.easing/jquery.easing.js"></script>
+		<script src="frontendStyle/HTML/vendor/jquery-cookie/jquery-cookie.js"></script>
+		<script src="frontendStyle/HTML/vendor/bootstrap/bootstrap.js"></script>
+		<script src="frontendStyle/HTML/vendor/common/common.js"></script>
+		<script src="frontendStyle/HTML/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+		<script src="frontendStyle/HTML/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+		<script src="frontendStyle/HTML/vendor/jquery.validation/jquery.validation.js"></script>
+		<script src="frontendStyle/HTML/vendor/jquery.stellar/jquery.stellar.js"></script>
+		<script src="frontendStyle/HTML/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+		<script src="frontendStyle/HTML/vendor/jquery.gmap/jquery.gmap.js"></script>
+		<script src="frontendStyle/HTML/vendor/twitterjs/twitter.js"></script>
+		<script src="frontendStyle/HTML/vendor/isotope/jquery.isotope.js"></script>
+		<script src="frontendStyle/HTML/vendor/owlcarousel/owl.carousel.js"></script>
+		<script src="frontendStyle/HTML/vendor/jflickrfeed/jflickrfeed.js"></script>
+		<script src="frontendStyle/HTML/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+		<script src="frontendStyle/HTML/vendor/vide/vide.js"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="frontendStyle/HTML/js/theme.js"></script>
+		
+		<!-- Specific Page Vendor and Views -->
+		<script src="frontendStyle/HTML/js/views/view.home.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="frontendStyle/HTML/js/custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="frontendStyle/HTML/js/theme.init.js"></script>
+
+	
+		<script src="https://www.openstreetmap.org/?mlat=50.94371&mlon=17.30234#map=18/50.94371/17.30234"></script>
+		<script>
+			var mapMarkers = [{
+			address: "54 East 41st Street, New York, NY 10017",
+			html: "<strong>New York Office</strong><br>New York, NY 10017",
+			icon: {
+				image: "frontendStyle/HTML/img/pin-logo.png",
+				iconsize: [154, 65],
+				iconanchor: [77, 65]
+				}}];
+
+			// Map Initial Location
+			var initLatitude = 40.75213;
+			var initLongitude = -73.98200;
+
+			// Map Extended Settings
+			var mapSettings = {
+				controls: {
+					panControl: true,
+					zoomControl: true,
+					mapTypeControl: true,
+					scaleControl: true,
+					streetViewControl: true,
+					overviewMapControl: true
+				},
+				scrollwheel: false,
+				markers: mapMarkers,
+				latitude: initLatitude,
+				longitude: initLongitude,
+				zoom: 17
+			};
+
+			var map = $("#googlemaps").gMap(mapSettings),
+				mapRef = $("#googlemaps").data('gMap.reference');
+
+			// Map Center At
+			var mapCenterAt = function(options, e) {
+				e.preventDefault();
+				$("#googlemaps").gMap("centerAt", options);
+			}
+
+			// Create an array of styles.
+			var mapColor = "#E36159";
+
+			var styles = [{
+				stylers: [{
+					hue: mapColor
+				}]
+			}, {
+				featureType: "road",
+				elementType: "geometry",
+				stylers: [{
+					lightness: 0
+				}, {
+					visibility: "simplified"
+				}]
+			}, {
+				featureType: "road",
+				elementType: "labels",
+				stylers: [{
+					visibility: "off"
+				}]
+			}];
+
+			var styledMap = new google.maps.StyledMapType(styles, {
+				name: "Styled Map"
+			});
+
+			mapRef.mapTypes.set('map_style', styledMap);
+			mapRef.setMapTypeId('map_style');
+
+		</script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$(document).ready(function() {
+			var images = $(".grid-container img");
+			var infoBox = $(".informacjeDodatkowe");
+			var currentIndex = 0;
+			var interval = 4000; // Czas zmiany zdjęcia (4 sekundy)
+
+			function showInfo(index) {
+			var currentImage = images.eq(index);
+			var text = currentImage.data("text");
+			infoBox.text(text).fadeIn();
+
+			if (!currentImage.hasClass("active")) {
+				// Animacja powiększenia tylko dla jednego zdjęcia (bez hovera)
+				images.removeClass("active").css("transform", "scale(1)");
+				currentImage.addClass("active").css("transform", "scale(1.1)");
+
+				// Po 3 sekundy zmniejszamy zdjęcie i ukrywamy informacje dodatkowe
+				setTimeout(function() {
+				currentImage.css("transform", "scale(1)");
+				infoBox.fadeOut();
+				}, 3000);
+			}
+			}
+
+			// Funkcja do obsługi efektu powiększenia przy najechaniu na zdjęcie
+			images.on("mouseenter", function() {
+			if (!$(this).hasClass("active")) {
+				$(this).css("transform", "scale(1.1)");
+				infoBox.text($(this).data("text")).fadeIn();
+			}
+			});
+
+			images.on("mouseleave", function() {
+			if (!$(this).hasClass("active")) {
+				$(this).css("transform", "scale(1)");
+				infoBox.hide();
+			}
+			});
+
+			// Wywołujemy funkcję na początku dla pierwszego zdjęcia
+			showInfo(currentIndex);
+
+			// Ustawienie animacji na następne zdjęcie co 4 sekundy
+			setInterval(function() {
+			currentIndex = (currentIndex + 1) % images.length;
+			showInfo(currentIndex);
+			}, interval);
+			});
+		</script>
+    </body>
+</html>	
+
+		
+
+		
+
+		
+

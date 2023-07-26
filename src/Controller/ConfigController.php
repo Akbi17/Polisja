@@ -16,6 +16,9 @@ class ConfigController extends AbstractController
     #[Route('/admin/config', name: 'admin_config')]
     public function adminConfig(Request $request)
     {
+        return $this->render('config/index.html.twig',[
+            
+        ]);
     }
 
 }

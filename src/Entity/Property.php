@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\PropertyRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PropertyRepository::class)]
@@ -31,6 +32,15 @@ class Property
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\Column]
+    private ?int $yearbuilt = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $constructiontype = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $policyStartDate = null;
 
     public function getId(): ?int
     {
@@ -105,6 +115,42 @@ class Property
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getYearbuilt(): ?int
+    {
+        return $this->yearbuilt;
+    }
+
+    public function setYearbuilt(int $yearbuilt): static
+    {
+        $this->yearbuilt = $yearbuilt;
+
+        return $this;
+    }
+
+    public function getConstructiontype(): ?string
+    {
+        return $this->constructiontype;
+    }
+
+    public function setConstructiontype(string $constructiontype): static
+    {
+        $this->constructiontype = $constructiontype;
+
+        return $this;
+    }
+
+    public function getPolicyStartDate(): ?\DateTimeInterface
+    {
+        return $this->policyStartDate;
+    }
+
+    public function setPolicyStartDate(\DateTimeInterface $policyStartDate): static
+    {
+        $this->policyStartDate = $policyStartDate;
 
         return $this;
     }

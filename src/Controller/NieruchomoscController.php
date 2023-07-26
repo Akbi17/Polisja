@@ -25,16 +25,10 @@ class NieruchomoscController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            $property->setTypeOfHouse($form->get('typeOfHouse')->getData());
-            $property->setResidentialArea($form->get('residentialArea')->getData());
-            $property->setName($form->get('name')->getData());
-            $property->setPhone($form->get('phone')->getData());
-            $property->setMail($form->get('mail')->getData());
-            $property->setPlace($form->get('place')->getData());
             $entityManager->persist($property);
             $entityManager->flush();
             $this->addFlash('success','Your message has been sent successfully.');
-
+        
             return $this->redirectToRoute('app_nieruchomosc');
         }
         return $this->render('frontend/nieruchomosc/index.html.twig', [

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\HealthRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HealthRepository::class)]
@@ -25,6 +26,18 @@ class Health
 
     #[ORM\Column(length: 255)]
     private ?string $phone = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateofbirth = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $gender = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $occupation = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $policyStartDate = null;
 
     public function getId(): ?int
     {
@@ -75,6 +88,54 @@ class Health
     public function setPhone(string $phone): static
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getDateofbirth(): ?\DateTimeInterface
+    {
+        return $this->dateofbirth;
+    }
+
+    public function setDateofbirth(\DateTimeInterface $dateofbirth): static
+    {
+        $this->dateofbirth = $dateofbirth;
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(string $gender): static
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getOccupation(): ?string
+    {
+        return $this->occupation;
+    }
+
+    public function setOccupation(string $occupation): static
+    {
+        $this->occupation = $occupation;
+
+        return $this;
+    }
+
+    public function getPolicyStartDate(): ?\DateTimeInterface
+    {
+        return $this->policyStartDate;
+    }
+
+    public function setPolicyStartDate(\DateTimeInterface $policyStartDate): static
+    {
+        $this->policyStartDate = $policyStartDate;
 
         return $this;
     }
