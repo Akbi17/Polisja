@@ -17,19 +17,19 @@ class BiznesType extends AbstractType
     {
         $builder
             ->add('nameOfBusiness',TextType::class, [
-                'label' => 'Business Name',
+                'label' => 'Nazwa Firmy',
                 'required' => true,
             ])
             ->add('name',TextType::class, [
-                'label' => 'The name of owner the business',
+                'label' => 'Imię właściiela firmy',
                 'required' => true,
             ])
             ->add('surname',TextType::class, [
-                'label' => 'Owner Surename',
+                'label' => 'Nazwisko właściciela',
                 'required' => true,
             ])
             ->add('phone',TelType::class, [
-                'label' => 'Phone',
+                'label' => 'Numer',
                 'required' => true,
             ])
             ->add('mail',TextType::class, [
@@ -37,19 +37,19 @@ class BiznesType extends AbstractType
                 'required' => true,
             ])
             ->add('place',TextType::class, [
-                'label' => 'Place',
+                'label' => 'Adres',
                 'required' => true,
             ])
             ->add('policystartdate',DateType::class, [
-                'label' => 'Policy Start Date',
+                'label' => 'Data początku polisy',
                 'required' => true,
             ])
             ->add('policyenddate',DateType::class, [
-                'label' => 'Policy End Date',
+                'label' => 'Data konca polisy',
                 'required' => true,
             ])
             ->add('information',TextType::class, [
-                'label' => 'Additional Information',
+                'label' => 'Informacja dodatkowa',
                 'required' => true,
             ])
         ;

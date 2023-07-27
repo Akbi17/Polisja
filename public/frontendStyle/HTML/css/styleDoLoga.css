@@ -1,79 +1,45 @@
 
-	.outer-container {
-  position: absolute;
-  transform: scale(0.3);
-  display: inline-block;
-  left: 610px;
-  top: -55px;
+
+.polisja-logo {
+  position: relative; /* Ustaw pozycję na relative, aby umożliwić .grid-container nałożenie się na niego */
+  width: 30%;
+  
+}
+
+.polisja-logo img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
 .grid-container {
+  position: absolute; /* Dodaj pozycję absolute dla .grid-container */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 65px;
+  grid-gap: 40px;
+  padding-bottom: 2em;
 }
 
-.grid-container img {
-  width: 50%;
-  height: auto;
-  left: 1px;
-  transition: transform 0.2s, filter 0.2s;
+.grid-container a {
+  display: flex; /* Ustawienie flex dla linków wewnątrz .grid-container */
+  justify-content: center; /* Wyśrodkowanie zawartości w poziomie */
+  align-items: center; /* Wyśrodkowanie zawartości w pionie */
+}
+@media (max-width: 320px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
+  .grid-container {
+    transform: translate(-50%, -50%) scale(1); /* Zwiększamy skalę do 1 */
+  }
+  .grid-container a {
+  display: flex; /* Ustawienie flex dla linków wewnątrz .grid-container */
+  justify-content: center; /* Wyśrodkowanie zawartości w poziomie */
+  align-items: center; /* Wyśrodkowanie zawartości w pionie */
+}
 }
 
-.autopolisa {
 
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto
-}
-
-.biuropolisa {
-  margin-top: -14px;
- margin-left: auto;
-  margin-right: auto
-}
-
-.sercepolisa {
-  margin-top: 20px;
- margin-left: auto;
-  margin-right: auto
-}
-
-.dompolisa {
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto
-}
-
-/* Poprawione style dla linków */
-.autopolisa,
-.biuropolisa,
-.sercepolisa,
-.dompolisa {
-  display: inline-block;
-  text-decoration: none;
-}
-
-.autopolisa img,
-.biuropolisa img,
-.sercepolisa img,
-.dompolisa img {
-  width: 100%;
-  height: auto;
-}
-
-/* Zaznaczenie linków po najechaniu */
-.autopolisa:hover,
-.biuropolisa:hover,
-.sercepolisa:hover,
-.dompolisa:hover {
-  transform: scale(1.1);
-}
-.polisja-logo {
-    position: relative;
-    left: 54%;
-    width: 30%;
-}
 
 .informacjeDodatkowe {
     display: none;

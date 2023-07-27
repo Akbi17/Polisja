@@ -25,15 +25,15 @@ class PropertyType extends AbstractType
     {
         $builder
             ->add('typeOfHouse', TextType::class, [
-                'label' => 'Type of House',
+                'label' => 'Typ budynku',
                 'required' => true,
             ])
             ->add('residentialArea', IntegerType::class, [
-                'label' => 'Residential Area (in square meters)',
+                'label' => 'Powierzchnia ( w metrach kwadratowych)',
                 'required' => true,
             ])
             ->add('place', TextType::class, [
-                'label' => 'Place',
+                'label' => 'Adress',
                 'required' => true,
             ])
             ->add('mail', TextType::class, [
@@ -41,23 +41,23 @@ class PropertyType extends AbstractType
                 'required' => true,
             ])
             ->add('phone', TextType::class, [
-                'label' => 'Phone',
+                'label' => 'Numer',
                 'required' => true,
             ])
             ->add('name', TextType::class, [
-                'label' => 'Name',
+                'label' => 'Imię',
                 'required' => true,
             ])
             ->add('yearbuilt', IntegerType::class, [
-                'label' => 'Year Built',
+                'label' => 'Rok zabudowy budynku',
                 'required' => true,
             ])
             ->add('policyStartDate', DateType::class, [
-                'label' => 'Polica Start Date',
+                'label' => 'Dzień zaczęcia polisy',
                 'required' => true,
             ])
             ->add('constructiontype', TextType::class, [
-                'label' => 'Construction Type',
+                'label' => 'Z czego jest zbudowana budynek',
                 'required' => true,
             ]);
     }

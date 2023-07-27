@@ -17,11 +17,11 @@ class HealthType extends AbstractType
     {
         $builder
             ->add('name',TextType::class, [
-                'label' => 'Name',
+                'label' => 'Imię',
                 'required' => true,
             ])
             ->add('surname',TextType::class, [
-                'label' => 'Surname',
+                'label' => 'Nazwisko',
                 'required' => true,
             ])
             ->add('mail',TextType::class, [
@@ -29,23 +29,23 @@ class HealthType extends AbstractType
                 'required' => true,
             ])
             ->add('phone',TelType::class, [
-                'label' => 'Phone',
+                'label' => 'Numer',
                 'required' => true,
             ])
             ->add('dateofbirth', DateType::class, [
-                'label' => 'Date of Birth',
+                'label' => 'Data urodzenia',
                 'required' => true,
             ])
             ->add('gender',TextType::class, [
-                'label' => 'Gender',
+                'label' => 'Płeć',
                 'required' => true,
             ])
             ->add('occupation',TextType::class, [
-                'label' => 'Occupation',
+                'label' => 'Zawód',
                 'required' => true,
             ])
             ->add('policyStartDate',DateType::class, [
-                'label' => 'Policy Start Date',
+                'label' => 'Dzień zaczęcia polisy',
                 'required' => true,
             ])
         ;
