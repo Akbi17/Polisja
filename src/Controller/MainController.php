@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Block\WebPageAdmin;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,8 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/main', name: 'app_main')]
-    public function index(): Response
+    public function index(WebPageAdmin $webPageAdmin): Response
     {
-        return $this->render('frontend/main/index.html.twig');
+        $webPageStatus = $webPageAdmin->getWebPageStatus();
+        return $this->render('frontend/main/index.html.twig',[
+           'webPageStatus'=>$webPageStatus
+        ]);
     }
 }

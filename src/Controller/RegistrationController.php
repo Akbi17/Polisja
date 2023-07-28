@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Admin;
+use App\Entity\WebPage;
 use App\Form\RegistrationFormType;
 use App\Form\WebPageType;
+use App\Block\WebPageAdmin;
 use App\Security\AdminCustomAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,17 +22,14 @@ class RegistrationController extends AbstractController
     public function __construct(public ManagerRegistry $doctrine)
     {}
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AdminCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
-    {
-       
+    public function register(Request $request, WebPageAdmin $webPageAdmin, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AdminCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    {    
         $webPageConfigForm = $this->createForm(WebPageType::class);
         $webPageConfigForm->handleRequest($request);
         $user = new Admin();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            
+        if ($form->isSubmitted() && $form->isValid()) {       
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -39,18 +38,14 @@ class RegistrationController extends AbstractController
             );
             $user->setRoles(['ROLE_ADMIN']);
             $entityManager->persist($user);
-            $entityManager->flush();
-           
+            $entityManager->flush();       
             $this->addFlash('success', 'Rejestracja admina zakończona pomyślnie!');
             return $this->redirectToRoute('app_login');
-        }
-       
-
+        }  
     if ($webPageConfigForm->isSubmitted() && $webPageConfigForm->isValid()) {
         $webPageData = $webPageConfigForm->getData();
         $webPageRepository = $this->doctrine->getRepository(WebPage::class);
         $existingWebPage = $webPageRepository->findOneBy(['webPage' => $webPageData->getWebPage()]);
-
         if ($existingWebPage) {
             $existingWebPage->setStatus($webPageData->isStatus());
             $entityManager = $this->doctrine->getManager();
@@ -61,11 +56,8 @@ class RegistrationController extends AbstractController
             $entityManager->persist($webPageData);
             $entityManager->flush();
         }
-
-        $this->addFlash('success', 'Zmiany zostały zapisane.');
+        $this->addFlash('success', 'Status strony został zapisany.');
     }
-
-    
 
     return $this->render('admin/install.html.twig', [
         'form' => $form->createView(),

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Block\WebPageAdmin;
 use App\Entity\Property;
 use App\Form\PropertyType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,7 +18,7 @@ class NieruchomoscController extends AbstractController
     {}
 
     #[Route('/nieruchomosc', name: 'app_nieruchomosc')]
-    public function index(Request $request): Response
+    public function index(Request $request,WebPageAdmin $webPageAdmin): Response
     {
         $entityManager = $this->doctrine->getManager();
         $property = new Property;
@@ -31,8 +32,10 @@ class NieruchomoscController extends AbstractController
         
             return $this->redirectToRoute('app_nieruchomosc');
         }
+        $webPageStatus = $webPageAdmin->getWebPageStatus();
         return $this->render('frontend/nieruchomosc/index.html.twig', [
             'form' => $form->createView(),
+            'webPageStatus'=>$webPageStatus
         ]);
     }
 }

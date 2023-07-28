@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Block\WebPageAdmin;
 use App\Entity\Auto;
 use App\Form\AutoType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AutoController extends AbstractController
 {
     #[Route('/auto', name: 'app_auto')]
-    public function index(Request $request, ManagerRegistry $doctrine): Response
+    public function index(Request $request, ManagerRegistry $doctrine,WebPageAdmin $webPageAdmin): Response
     {
         $entityManager = $doctrine->getManager();
         $auto = new Auto;
@@ -29,8 +30,10 @@ class AutoController extends AbstractController
 
             return $this->redirectToRoute('app_auto');
         }
+        $webPageStatus = $webPageAdmin->getWebPageStatus();
         return $this->render('frontend/auto/index.html.twig', [
             'form'=>$form->createView(),
+            'webPageStatus'=>$webPageStatus
         ]);
     }
 }

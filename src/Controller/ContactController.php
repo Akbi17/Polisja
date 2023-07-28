@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Block\WebPageAdmin;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,7 +23,7 @@ class ContactController extends AbstractController
     {}
 
     #[Route('/contact', name: 'contact')]
-    public function contact(Request $request, ManagerRegistry $doctrine , TransportInterface $mailer): Response
+    public function contact(Request $request, ManagerRegistry $doctrine , TransportInterface $mailer,WebPageAdmin $webPageAdmin): Response
     {
         $entityManager = $doctrine->getManager();
         $contact = new Contact();
@@ -45,9 +46,10 @@ class ContactController extends AbstractController
 
             return $this->redirectToRoute('contact');
         }
-
+        $webPageStatus = $webPageAdmin->getWebPageStatus();
         return $this->render('frontend/contact/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'webPageStatus'=>$webPageStatus
         ]);
     }
 

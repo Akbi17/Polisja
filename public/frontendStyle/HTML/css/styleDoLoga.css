@@ -9,7 +9,7 @@
 .polisja-logo img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 1px;
 }
 
 .grid-container {
@@ -28,31 +28,111 @@
   justify-content: center; /* Wyśrodkowanie zawartości w poziomie */
   align-items: center; /* Wyśrodkowanie zawartości w pionie */
 }
-@media (max-width: 320px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
-  .grid-container {
-    transform: translate(-50%, -50%) scale(1); /* Zwiększamy skalę do 1 */
-  }
-  .grid-container a {
-  display: flex; /* Ustawienie flex dla linków wewnątrz .grid-container */
-  justify-content: center; /* Wyśrodkowanie zawartości w poziomie */
-  align-items: center; /* Wyśrodkowanie zawartości w pionie */
-}
-}
-
-
-
 .informacjeDodatkowe {
+  display: none;
+  position: absolute;
+  width: 150%;
+  height: 70%;
+  top: 4em;
+  left:130%;
+  background-color: rgba(60, 59, 59, 0.8);
+  color: rgb(15, 155, 57);
+  padding: 2em;
+  z-index: 1;
+}
+
+@media (min-width: 320px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
+  .grid-container {
+  grid-gap: 1em;
+  padding-bottom: 0.7em;
+  }
+  
+  
+  
+}
+@media (min-width: 375px) { /* Dla ekranów o szerokości do 320px (np. iPhone XR) */
+  .grid-container {
+  grid-gap: 1.2em;
+  padding-bottom: 0.8em;
+  }
+  
+}@media (min-width: 425px) { /* Dla ekranów o szerokości do 320px (np. iPhone S) */
+  .grid-container {
+  grid-gap: 1.1em;
+  padding-bottom: 0.8em;
+  }
+  
+}
+@media (min-width: 530px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
+  .grid-container {
+  grid-gap: 1.1em;
+  padding-bottom: 1.5em;
+  }
+  
+}
+@media (min-width: 765px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
+  .grid-container {
+  grid-gap: 1.5em;
+  padding-bottom: 2em;
+  }
+  
+}
+@media (min-width: 1024px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
+  .grid-container {
+  grid-gap: 2em;
+  padding-bottom: 3em;
+  }
+  
+}
+@media (max-width: 1024px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
+  
+  #header .logo {
+    background: none;
+    border-bottom: none;
+    border-radius: initial;
+    color: initial;
+    display: initial;
+    float: none;
+    height: initial;
+    margin: initial;
+    padding: initial;
+    transition: initial;
+    z-index: initial;
+  }
+  .informacjeDodatkowe {
     display: none;
     position: absolute;
-    width: 550px;
-    height: 250px;
-    top: 50px;
-    left:100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
+    width: 150%;
+    height: 70%;
+    top: 2.5em;
+    left:130%;
+    background-color: rgba(60, 59, 59, 0.8);
+    color: rgb(15, 155, 57);
+    padding: 1em;
     z-index: 1;
+    font-size: 0.5em;
+  }
 }
+@media (max-width: 450px) { 
+  .informacjeDodatkowe {
+    display: none;
+    position: absolute;
+    width: 150%;
+    height: 70%;
+    top: 1.5em;
+    left:130%;
+    background-color: rgba(60, 59, 59, 0.8);
+    color: rgb(15, 155, 57);
+    padding: 1em;
+    z-index: 1;
+    font-size:0.3em;
+  }
+  
+}
+
+
+
+
     .grid-container img {
     /* pozostałe style, które już są */
     transition: transform 0.2s;

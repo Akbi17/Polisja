@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Block\WebPageAdmin;
 use App\Entity\Health;
 use App\Form\HealthType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,7 +18,7 @@ class ZycieController extends AbstractController
     {}
 
     #[Route('/zycie', name: 'app_zycie')]
-    public function index(Request $request): Response
+    public function index(Request $request,WebPageAdmin $webPageAdmin): Response
     {
         $entityManager = $this->doctrine->getManager();
         $health = new Health;
@@ -35,10 +36,11 @@ class ZycieController extends AbstractController
 
             return $this->redirectToRoute('app_zycie');
         }
-       
+        $webPageStatus = $webPageAdmin->getWebPageStatus();
         return $this->render('frontend/zycie/index.html.twig', [
             'controller_name' => 'ZycieController',
             'form' => $form->createView(),
+            'webPageStatus'=>$webPageStatus
         ]);
     }
 }

@@ -61,21 +61,35 @@
 								<li>
 									<a href="{{'main'}}">Główna</a>
 								</li>
-								<li>
-									<a href="{{'auto'}}">Samochody</a>
-								</li>
-								<li>
-									<a href="{{'nieruchomosc'}}">Dom</a>
-								</li>
-								<li>
-									<a href="{{'zycie'}}">Zycie</a>
-								</li>
-								<li>
-									<a href="{{'biznes'}}">Bizness</a>
-								</li>
-								<li>
-									<a href="{{'contact'}}">Kontakt</a>
-								</li>
+								{% for status in webPageStatus %}
+									{% if status.isStatus %}
+										{% if status.webPage == 'Auto' %}
+											<li>
+												<a href="{{'auto'}}">Samochody</a>
+											</li>
+										{% endif %}
+										{% if status.webPage == 'Property' %}
+											<li>
+												<a href="{{'nieruchomosc'}}">Dom</a>
+											</li>
+										{% endif %}
+										{% if status.webPage == 'Health' %}
+											<li>
+												<a href="{{'zycie'}}">Zycie</a>
+											</li>
+										{% endif %}
+										{% if status.webPage == 'Biznes' %}
+											<li>
+												<a href="{{'biznes'}}">Bizness</a>
+											</li>
+										{% endif %}
+										{% if status.webPage == 'Contact' %}
+											<li>
+												<a href="{{'contact'}}">Kontakt</a>
+											</li>
+										{% endif %}
+									{% endif %}
+								{% endfor %}
 							</ul>
 						</nav>
 					</div>
@@ -98,7 +112,7 @@
 				<div class="row">
 					<div class="col-md-3">
 							<a href="{{'main'}}" class="logo push-bottom">
-								<img alt="Tucson" width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisjanowa.jpg">
+								<img width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisjanowa.jpg">
 							</a>
 							<p>Polisja to najlepsza wyszukiwarka ubezpieczeń AC/OC oraz ubezpieczenia zdrowia, mieszkania oraz firmy <a href="{{'main'}}" class="btn-flat btn-xs">Zobacz więcej <i class="fa fa-arrow-right"></i></a></p>
 							<div class="contact-details">

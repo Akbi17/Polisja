@@ -1,25 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Dodaj tutaj swoje niestandardowe style CSS, jeśli masz jakieś -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 7px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #bddfc7;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-submit-btn:hover {
+            background-color: #bddfff;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
 <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <h1 class="text-center">WebPages</h1>
-                {{ form_start(webPageConfigForm, {'attr': {'class': 'my-form-class'}}) }}
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+            {% for flashMessage in app.session.flashBag.get('success') %}
+                <div class="alert alert-success" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashBag.get('error') %}
+                <div class="alert alert-danger" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            <div class="form-container">
+                <h2>WebPages</h2>
+                {{ form_start(webPageConfigForm) }}
                 <div class="form-group">
-                    {{ form_label(webPageConfigForm.webPage, 'Web Page', {'label_attr': {'class': 'my-label-class'}}) }}
-                    {{ form_widget(webPageConfigForm.webPage, {'attr': {'class': 'form-control', 'placeholder': 'Wpisz nazwę strony'}}) }}
+                    {{ form_label(webPageConfigForm.webPage, 'Web Page') }}
+                    {{ form_widget(webPageConfigForm.webPage, {'attr': {'class': 'form-control', 'placeholder': 'Enter webpage name'}}) }}
                     {{ form_errors(webPageConfigForm.webPage, {'attr': {'class': 'text-danger'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_label(webPageConfigForm.status, 'Status', {'label_attr': {'class': 'my-label-class'}}) }}
+                    {{ form_label(webPageConfigForm.status, 'Status') }}
                     {{ form_widget(webPageConfigForm.status, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(webPageConfigForm.status, {'attr': {'class': 'text-danger'}}) }}
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Zapisz</button>
+                <button type="submit" class="form-submit-btn">Save</button>
                 {{ form_end(webPageConfigForm) }}
             </div>
+
+            <div class="form-container">
+                <h2>User Registration</h2>
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.username, 'Username') }}
+                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Enter your username'}}) }}
+                    {{ form_errors(form.username, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.agreeTerms, 'Agree to Terms') }}
+                    {{ form_widget(form.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                    {{ form_errors(form.agreeTerms, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.plainPassword, 'Password') }}
+                    {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Enter your password'}}) }}
+                    {{ form_errors(form.plainPassword, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.password, 'Confirm Password') }}
+                    {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Confirm your password'}}) }}
+                    {{ form_errors(form.password, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.firstname, 'First Name') }}
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Enter your first name'}}) }}
+                    {{ form_errors(form.firstname, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.lastname, 'Last Name') }}
+                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Enter your last name'}}) }}
+                    {{ form_errors(form.lastname, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.email, 'Email') }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Enter your email'}}) }}
+                    {{ form_errors(form.email, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+                <button type="submit" class="form-submit-btn">Register</button>
+                {{ form_end(form) }}
+            </div>
+
         </div>
     </div>
-   
-{{ form_start(form) }}
-    <input type="submit" value="Zarejestruj">
-{{ form_end(form) }}
+</div>
 
+</body>
+</html>

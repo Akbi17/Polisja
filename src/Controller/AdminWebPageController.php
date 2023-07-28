@@ -17,12 +17,11 @@ class AdminWebPageController extends AbstractController
     public function __construct(public ManagerRegistry $doctrine )
     {}
 
-    #[Route('/admin/webPage', name: 'admin_webPage')]
+    #[Route('/admin/webPage', name: 'webPage')]
     public function adminWebPage(Request $request, WebPageAdmin $webPageAdmin): Response
     {
         $form = $this->createForm(WebPageType::class);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $webPageData = $form->getData();
             $webPageRepository = $this->doctrine->getRepository(WebPage::class);
@@ -40,11 +39,12 @@ class AdminWebPageController extends AbstractController
             }
             $this->addFlash('success', 'Zmiany zostały zapisane.');
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('webPage');
         }
-        $webPageStatus = $webPageAdmin->getWebPageStatus();
+        
         return $this->render('config/index.html.twig', [
             'form' => $form->createView(),
+            
         ]);
     }
 }

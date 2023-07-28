@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Block\WebPageAdmin;
 use App\Entity\Business;
 use App\Form\BiznesType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,7 +19,7 @@ class BiznesController extends AbstractController
     {}
 
     #[Route('/biznes', name: 'app_biznes')]
-    public function index(Request $request): Response
+    public function index(Request $request,WebPageAdmin $webPageAdmin): Response
     {
         $entityManager = $this->doctrine->getManager();
         $business = new Business();
@@ -37,10 +38,11 @@ class BiznesController extends AbstractController
 
             return $this->redirectToRoute('app_biznes');
         }
-    
+        $webPageStatus = $webPageAdmin->getWebPageStatus();
         return $this->render('frontend/biznes/index.html.twig', [
             'controller_name' => 'BiznesController',
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'webPageStatus'=>$webPageStatus
         ]);
     }
 }
