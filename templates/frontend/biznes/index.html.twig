@@ -1,20 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block biznes %}
-<style>
-    /* Dodaj odstęp od lewej krawędzi dla formularza */
-    .form-container {
-        padding-left: 2px;
-        width: 100%; /* Ogranicz maksymalną szerokość formularza do 600px */
-        margin: 0 auto; /* Możesz dostosować wartość odstępu do swoich potrzeb */
-    }
-    @media (max-width: 640px) {
-        .form-container {
-            max-width: 100%; /* Na mniejszych ekranach formularz będzie zajmował całą dostępną szerokość */
-        }
-    }
-    
-</style>
+<link rel="stylesheet" href="frontendStyle/HTML/css/styleDoFBiznes.css">
 	<div class="container">
         <div class="row ">
             <div class="col-md-12">
@@ -99,12 +86,9 @@
 
 <div class="container">
     <section class="call-to-action featured footer">
-        <div class="container">
-            <div class="row">
                 <div class="center">
-                    <h3>Chcesz porozmawiać o naszej <strong>ofercie ubezpieczeniowej</strong>  i  <strong>poznać ceny</strong>? <a href="{{'contact'}}" target="_blank" class="btn btn-lg btn-primary" data-appear-animation="bounceIn">Skontaktuj się</a> <span class="arrow hlb hidden-xs hidden-sm hidden-md" data-appear-animation="rotateInUpLeft" style="top: -22px;"></span></h3>                </div>
-            </div>
-        </div>
+                    <h3>Chcesz porozmawiać o naszej <strong>ofercie ubezpieczeniowej</strong>  i  <strong>poznać ceny</strong>? <a href="{{'contact'}}" class="btn btn-lg btn-primary" data-appear-animation="bounceIn">Skontaktuj się</a> <span class="arrow hlb hidden-xs hidden-sm hidden-md" data-appear-animation="rotateInUpLeft" style="top: -22px;"></span></h3>                
+                </div>
     </section>
 </div>
 {% endblock %}

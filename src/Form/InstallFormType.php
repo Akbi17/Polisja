@@ -1,7 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Form;
-
 use App\Entity\Admin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class InstallFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

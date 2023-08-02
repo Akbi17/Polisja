@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
 use App\Block\WebPageAdmin;
 use App\Entity\Health;
 use App\Form\HealthType;
@@ -12,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ZycieController extends AbstractController
+class HealthController extends AbstractController
 {
     public function __construct( public ManagerRegistry $doctrine)
     {}
@@ -20,6 +19,10 @@ class ZycieController extends AbstractController
     #[Route('/zycie', name: 'app_zycie')]
     public function index(Request $request,WebPageAdmin $webPageAdmin): Response
     {
+        if($webPageAdmin->getHealthStatus()->getValue() == 'Disactive')
+        {
+            return $this->redirectToRoute('app_main');
+        }
         $entityManager = $this->doctrine->getManager();
         $health = new Health;
         $form = $this->createForm(HealthType::class, $health);

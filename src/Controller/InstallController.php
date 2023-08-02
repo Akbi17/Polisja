@@ -1,13 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller;
-
 use App\Entity\Admin;
 use App\Entity\WebPage;
-use App\Form\RegistrationFormType;
+use App\Form\InstallFormType;
 use App\Form\WebPageType;
-use App\Block\WebPageAdmin;
-use App\Security\AdminCustomAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,31 +13,32 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
-class RegistrationController extends AbstractController
+class InstallController extends AbstractController
 {
-    public function __construct(public ManagerRegistry $doctrine)
-    {}
-    #[Route('/register', name: 'app_register')]
-    public function register(Request $request, WebPageAdmin $webPageAdmin, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AdminCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function __construct(public ManagerRegistry $doctrine){}
+
+    #[Route('/install', name: 'app_install')]
+    public function install(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {    
+        $adminRepository = $this->doctrine->getRepository(Admin::class);
+        $admins = $adminRepository->findAll();
+        if (count($admins) >= 1) 
+        {
+            return $this->redirectToRoute('app_login');
+        }
         $webPageConfigForm = $this->createForm(WebPageType::class);
         $webPageConfigForm->handleRequest($request);
         $user = new Admin();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(InstallFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {       
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $user->setPassword($userPasswordHasher->hashPassword($user,$form->get('plainPassword')->getData()));
             $user->setRoles(['ROLE_ADMIN']);
             $entityManager->persist($user);
             $entityManager->flush();       
             $this->addFlash('success', 'Rejestracja admina zakończona pomyślnie!');
+
             return $this->redirectToRoute('app_login');
         }  
     if ($webPageConfigForm->isSubmitted() && $webPageConfigForm->isValid()) {

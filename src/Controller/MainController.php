@@ -10,10 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/main', name: 'app_main')]
+    #[Route('/', name: 'app_main')]
     public function index(WebPageAdmin $webPageAdmin): Response
     {
         $webPageStatus = $webPageAdmin->getWebPageStatus();
+
         return $this->render('frontend/main/index.html.twig',[
            'webPageStatus'=>$webPageStatus
         ]);

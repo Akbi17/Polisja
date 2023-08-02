@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 namespace App\Form;
-
 use App\Entity\Health;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;

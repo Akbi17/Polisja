@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
 use App\Block\WebPageAdmin;
 use App\Entity\Contact;
 use App\Form\ContactType;
@@ -15,16 +14,18 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Block\TraitForTextCheck;
 
-
 class ContactController extends AbstractController
 {
     use TraitForTextCheck;
-    public function __construct( public ManagerRegistry $doctrine)
-    {}
+    public function __construct( public ManagerRegistry $doctrine){}
 
     #[Route('/contact', name: 'contact')]
     public function contact(Request $request, ManagerRegistry $doctrine , TransportInterface $mailer,WebPageAdmin $webPageAdmin): Response
     {
+        if($webPageAdmin->getContactStatus()->getValue() == 'Disactive')
+        {
+            return $this->redirectToRoute('app_main');
+        }
         $entityManager = $doctrine->getManager();
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -47,6 +48,7 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('contact');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
+
         return $this->render('frontend/contact/index.html.twig', [
             'form' => $form->createView(),
             'webPageStatus'=>$webPageStatus

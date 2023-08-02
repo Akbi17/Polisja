@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 namespace App\Block;
-
 use App\Entity\Contact;
 use Symfony\Component\Form\FormInterface as FormFormInterface;
 

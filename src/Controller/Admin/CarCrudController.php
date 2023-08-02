@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
-use App\Entity\Property;
+use App\Entity\Auto;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class PropertyCrudController extends AbstractCrudController
+class CarCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Property::class;
+        return Auto::class;
     }
 }

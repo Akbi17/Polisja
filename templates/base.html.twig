@@ -45,7 +45,7 @@
 		<header id="header">
 				<div class="container">
 					<h1 class="logo">
-						<a href="index.html">
+						<a href="{{'/'}}">
 							<img alt="Tucson" width="180" height="55" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/pol.jpg">
 						</a>
 					</h1>
@@ -59,31 +59,31 @@
 						<nav class="nav-main mega-menu">
 							<ul class="nav nav-pills nav-main" id="mainMenu">
 								<li>
-									<a href="{{'main'}}">Główna</a>
+									<a href="{{'/'}}">Główna</a>
 								</li>
 								{% for status in webPageStatus %}
-									{% if status.isStatus %}
-										{% if status.webPage == 'Auto' %}
+									{% if status.getValue == 'Active' %}
+										{% if status.name == 'Strona/Auto' %}
 											<li>
 												<a href="{{'auto'}}">Samochody</a>
 											</li>
 										{% endif %}
-										{% if status.webPage == 'Property' %}
+										{% if status.name == 'Strona/Dom' %}
 											<li>
 												<a href="{{'nieruchomosc'}}">Dom</a>
 											</li>
 										{% endif %}
-										{% if status.webPage == 'Health' %}
+										{% if status.name == 'Strona/Życie' %}
 											<li>
 												<a href="{{'zycie'}}">Zycie</a>
 											</li>
 										{% endif %}
-										{% if status.webPage == 'Biznes' %}
+										{% if status.name == 'Strona/Biznes' %}
 											<li>
 												<a href="{{'biznes'}}">Bizness</a>
 											</li>
 										{% endif %}
-										{% if status.webPage == 'Contact' %}
+										{% if status.name == 'Strona/Contact' %}
 											<li>
 												<a href="{{'contact'}}">Kontakt</a>
 											</li>
@@ -111,10 +111,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-							<a href="{{'main'}}" class="logo push-bottom">
+							<a href="{{'/'}}" class="logo push-bottom">
 								<img width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisjanowa.jpg">
 							</a>
-							<p>Polisja to najlepsza wyszukiwarka ubezpieczeń AC/OC oraz ubezpieczenia zdrowia, mieszkania oraz firmy <a href="{{'main'}}" class="btn-flat btn-xs">Zobacz więcej <i class="fa fa-arrow-right"></i></a></p>
+							<p>Polisja to najlepsza wyszukiwarka ubezpieczeń AC/OC oraz ubezpieczenia zdrowia, mieszkania oraz firmy <a href="{{'/'}}" class="btn-flat btn-xs">Zobacz więcej <i class="fa fa-arrow-right"></i></a></p>
 							<div class="contact-details">
 								<ul class="contact">
 									<li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 123 Street Name, City, USA</p></li>
@@ -132,7 +132,7 @@
 								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'biznes'}}">Bądź biezpieczny za swoje investycje z Polisją</a></li>
 							</ul>
 						</div>
-						<iframe width="50%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=17.2970724105835%2C50.94158292629885%2C17.30758666992188%2C50.94581472709556&amp;layer=mapnik&amp;marker=50.94369887484719%2C17.302329540252686" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=50.94370&amp;mlon=17.30233#map=18/50.94370/17.30233"></a></small>
+						<iframe class='mapa' width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=17.2970724105835%2C50.94158292629885%2C17.30758666992188%2C50.94581472709556&amp;layer=mapnik&amp;marker=50.94369887484719%2C17.302329540252686" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=50.94370&amp;mlon=17.30233#map=18/50.94370/17.30233"></a></small>
 					</div>
 				</div>
 				<div class="footer-copyright">
@@ -189,55 +189,6 @@
 
 		
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script>
-			$(document).ready(function() {
-			var images = $(".grid-container img");
-			var infoBox = $(".informacjeDodatkowe");
-			var currentIndex = 0;
-			var interval = 4000; // Czas zmiany zdjęcia (4 sekundy)
-
-			function showInfo(index) {
-			var currentImage = images.eq(index);
-			var text = currentImage.data("text");
-			infoBox.text(text).fadeIn();
-
-			if (!currentImage.hasClass("active")) {
-				// Animacja powiększenia tylko dla jednego zdjęcia (bez hovera)
-				images.removeClass("active").css("transform", "scale(1)");
-				currentImage.addClass("active").css("transform", "scale(1.1)");
-
-				// Po 3 sekundy zmniejszamy zdjęcie i ukrywamy informacje dodatkowe
-				setTimeout(function() {
-				currentImage.css("transform", "scale(1)");
-				infoBox.fadeOut();
-				}, 3000);
-			}
-			}
-
-			// Funkcja do obsługi efektu powiększenia przy najechaniu na zdjęcie
-			images.on("mouseenter", function() {
-			if (!$(this).hasClass("active")) {
-				$(this).css("transform", "scale(1.1)");
-				infoBox.text($(this).data("text")).fadeIn();
-			}
-			});
-
-			images.on("mouseleave", function() {
-			if (!$(this).hasClass("active")) {
-				$(this).css("transform", "scale(1)");
-				infoBox.hide();
-			}
-			});
-
-			// Wywołujemy funkcję na początku dla pierwszego zdjęcia
-			showInfo(currentIndex);
-
-			// Ustawienie animacji na następne zdjęcie co 4 sekundy
-			setInterval(function() {
-			currentIndex = (currentIndex + 1) % images.length;
-			showInfo(currentIndex);
-			}, interval);
-			});
-		</script>
+		<script src="frontendStyle/HTML/js/skryptDoLogo.js"></script>
     </body>
 </html>

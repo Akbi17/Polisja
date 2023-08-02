@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
 use App\Block\WebPageAdmin;
 use App\Entity\Business;
 use App\Form\BiznesType;
@@ -12,15 +11,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-
-class BiznesController extends AbstractController
+class BusinessController extends AbstractController
 {
     public function __construct( public ManagerRegistry $doctrine)
     {}
 
     #[Route('/biznes', name: 'app_biznes')]
     public function index(Request $request,WebPageAdmin $webPageAdmin): Response
-    {
+    {   
+        if($webPageAdmin->getBusinessStatus()->getValue() == 'Disactive'){
+            return $this->redirectToRoute('app_main');
+        }
         $entityManager = $this->doctrine->getManager();
         $business = new Business();
         $form = $this->createForm(BiznesType::class, $business);
@@ -39,6 +40,7 @@ class BiznesController extends AbstractController
             return $this->redirectToRoute('app_biznes');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
+        
         return $this->render('frontend/biznes/index.html.twig', [
             'controller_name' => 'BiznesController',
             'form' => $form->createView(),

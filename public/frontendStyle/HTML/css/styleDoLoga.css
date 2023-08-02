@@ -35,10 +35,11 @@
   height: 70%;
   top: 4em;
   left:130%;
-  background-color: rgba(60, 59, 59, 0.8);
-  color: rgb(15, 155, 57);
+  background-color: rgba(60, 59, 59, 0);
+  color: rgb(43, 49, 45);
   padding: 2em;
   z-index: 1;
+  font-size:medium;
 }
 
 @media (min-width: 320px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
@@ -82,10 +83,18 @@
   grid-gap: 2em;
   padding-bottom: 3em;
   }
+  .mapa {
+    width: 50%;
+  }
   
 }
 @media (max-width: 1024px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
-  
+  .body {
+    padding-top: 0px;
+  }
+  html.no-page-top body > .body {
+    padding-top: 0px;
+  }
   #header .logo {
     background: none;
     border-bottom: none;
@@ -106,8 +115,8 @@
     height: 70%;
     top: 2.5em;
     left:130%;
-    background-color: rgba(60, 59, 59, 0.8);
-    color: rgb(15, 155, 57);
+    background-color: rgba(60, 59, 59, 0);
+    color: rgb(43, 49, 45);
     padding: 1em;
     z-index: 1;
     font-size: 0.5em;
@@ -121,8 +130,8 @@
     height: 70%;
     top: 1.5em;
     left:130%;
-    background-color: rgba(60, 59, 59, 0.8);
-    color: rgb(15, 155, 57);
+    background-color: rgba(60, 59, 59, 0);
+    color: rgb(43, 49, 45);
     padding: 1em;
     z-index: 1;
     font-size:0.3em;
@@ -162,6 +171,7 @@ section.highlight.footer {
 }
 .read {
   background-color: #fff;
+  padding-top:50px;
 }
 .read .container {
   margin-top: 20px;

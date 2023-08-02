@@ -1,0 +1,4 @@
+/* Dodaj odstęp od lewej krawędzi dla formularza */
+.form-container {
+    padding-left: 20px; /* Możesz dostosować wartość odstępu do swoich potrzeb */
+}

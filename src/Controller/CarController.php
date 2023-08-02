@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
 use App\Block\WebPageAdmin;
 use App\Entity\Auto;
 use App\Form\AutoType;
@@ -12,17 +11,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AutoController extends AbstractController
+class CarController extends AbstractController
 {
     #[Route('/auto', name: 'app_auto')]
     public function index(Request $request, ManagerRegistry $doctrine,WebPageAdmin $webPageAdmin): Response
     {
+        if($webPageAdmin->getCarStatus()->getValue() == 'Disactive'){
+            return $this->redirectToRoute('app_main');
+        }
         $entityManager = $doctrine->getManager();
         $auto = new Auto;
         $form = $this->createForm(AutoType::class, $auto);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            
+        if ($form->isSubmitted() && $form->isValid()) 
+        {  
             $entityManager->persist($auto);
             $entityManager->flush();
             $this->addFlash('success', 'Your message has been sent successfully.');
@@ -31,6 +33,7 @@ class AutoController extends AbstractController
             return $this->redirectToRoute('app_auto');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
+
         return $this->render('frontend/auto/index.html.twig', [
             'form'=>$form->createView(),
             'webPageStatus'=>$webPageStatus

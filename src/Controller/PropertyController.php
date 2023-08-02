@@ -12,14 +12,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class NieruchomoscController extends AbstractController
+class PropertyController extends AbstractController
 {
-    public function __construct( public ManagerRegistry $doctrine)
-    {}
+    public function __construct( public ManagerRegistry $doctrine){}
 
     #[Route('/nieruchomosc', name: 'app_nieruchomosc')]
     public function index(Request $request,WebPageAdmin $webPageAdmin): Response
     {
+        if($webPageAdmin->getPropertyStatus()->getValue() == 'Disactive')
+        {
+            return $this->redirectToRoute('app_main');
+        }
         $entityManager = $this->doctrine->getManager();
         $property = new Property;
         $form = $this->createForm(PropertyType::class, $property);
@@ -33,6 +36,7 @@ class NieruchomoscController extends AbstractController
             return $this->redirectToRoute('app_nieruchomosc');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
+
         return $this->render('frontend/nieruchomosc/index.html.twig', [
             'form' => $form->createView(),
             'webPageStatus'=>$webPageStatus
