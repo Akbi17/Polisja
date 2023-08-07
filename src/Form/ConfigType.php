@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Form;
+
 use App\Entity\Config;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,17 +16,17 @@ class ConfigType extends AbstractType
         $builder
             ->add('name', ChoiceType::class, [
                 'choices' => [
-                    'Auto' => 'Strona/Auto',
-                    'Dom' => 'Strona/Dom',
-                    'Życie' => 'Strona/Życie',
-                    'Biznes' => 'Strona/Biznes',
-                    'Contact' => 'Strona/Contact',
+                    'Auto' => 'page/car/isActive',
+                    'Dom' => 'page/property/isActive',
+                    'Życie' => 'page/health/isActive',
+                    'Biznes' => 'page/business/isActive',
+                    'Contact' => 'page/contact/isActive',
                 ],
             ])
             ->add('value',ChoiceType::class,[
                 'choices' => [
-                    'Active' => 'Active',
-                    'Disactive' => 'Disactive', 
+                    'Włącz' => true,
+                    'Wyłącz' => false, 
                    
                 ]
             ])

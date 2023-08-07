@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+
+use App\Controller\Enum;
 use App\Block\WebPageAdmin;
 use App\Entity\Contact;
 use App\Form\ContactType;
@@ -20,9 +22,9 @@ class ContactController extends AbstractController
     public function __construct( public ManagerRegistry $doctrine){}
 
     #[Route('/contact', name: 'contact')]
-    public function contact(Request $request, ManagerRegistry $doctrine , TransportInterface $mailer,WebPageAdmin $webPageAdmin): Response
+    public function contact(Request $request, ManagerRegistry $doctrine, TransportInterface $mailer, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if($webPageAdmin->getContactStatus()->getValue() == 'Disactive')
+        if(!$webPageAdmin->getContactStatus()->getValue())
         {
             return $this->redirectToRoute('app_main');
         }
@@ -48,13 +50,13 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('contact');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
+        $enum = $enumValue->getEnumValues();
 
         return $this->render('frontend/contact/index.html.twig', [
             'form' => $form->createView(),
-            'webPageStatus'=>$webPageStatus
+            'webPageStatus'=> $webPageStatus,
+            'enum' => $enum
         ]);
-    }
-
-        
+    }   
     
 }

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Block;
+
 use App\Entity\Config;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,26 +22,26 @@ class WebPageAdmin extends AbstractController
 
     public function getCarStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'Strona/Auto']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/car/isActive']);
     }
 
     public function getPropertyStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'Strona/Dom']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/property/isActive']);
     }
 
     public function getHealthStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'Strona/Życie']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/health/isActive']);
     }
 
     public function getBusinessStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'Strona/Biznes']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/business/isActive']);
     }
     
     public function getContactStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'Strona/Contact']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/contact/isActive']);
     }
 }

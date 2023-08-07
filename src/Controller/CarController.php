@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+
 use App\Block\WebPageAdmin;
 use App\Entity\Auto;
 use App\Form\AutoType;
@@ -13,10 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CarController extends AbstractController
 {
-    #[Route('/auto', name: 'app_auto')]
-    public function index(Request $request, ManagerRegistry $doctrine,WebPageAdmin $webPageAdmin): Response
+    #[Route('/auto', name: 'app_car')]
+    public function index(Request $request, ManagerRegistry $doctrine,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if($webPageAdmin->getCarStatus()->getValue() == 'Disactive'){
+        if(!$webPageAdmin->getCarStatus()->getValue()){
             return $this->redirectToRoute('app_main');
         }
         $entityManager = $doctrine->getManager();
@@ -30,13 +31,15 @@ class CarController extends AbstractController
             $this->addFlash('success', 'Your message has been sent successfully.');
             $this->addFlash('error', 'There was an error processing the form. Please try again.');
 
-            return $this->redirectToRoute('app_auto');
+            return $this->redirectToRoute('app_car');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
-
-        return $this->render('frontend/auto/index.html.twig', [
+        $enum = $enumValue->getEnumValues();
+        
+        return $this->render('frontend/car/index.html.twig', [
             'form'=>$form->createView(),
-            'webPageStatus'=>$webPageStatus
+            'webPageStatus'=>$webPageStatus,
+            'enum' => $enum,
         ]);
     }
 }

@@ -9,10 +9,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h1 class="text-center">Pages</h1>
+                <h1 class="text-center">Aktywne Strony</h1>
                 {{ form_start(form, {'attr': {'class': 'my-form-class'}}) }}
                 <div class="form-group">
-                    {{ form_label(form.name, 'Page', {'label_attr': {'class': 'my-label-class'}}) }}
+                    {{ form_label(form.name, 'Strona', {'label_attr': {'class': 'my-label-class'}}) }}
                     {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Wpisz nazwę strony'}}) }}
                     {{ form_errors(form.name, {'attr': {'class': 'text-danger'}}) }}
                 </div>
@@ -32,12 +32,12 @@
                 <h1 class="text-center">Dane Kontaktowe</h1>
                 {{ form_start(formConfigData, {'attr': {'class': 'my-form-class'}}) }}
                 <div class="form-group">
-                    {{ form_label(formConfigData.name, "", {'label_attr': {'class': 'my-label-class'}}) }}
+                    {{ form_label(formConfigData.name, "Wybierz", {'label_attr': {'class': 'my-label-class'}}) }}
                     {{ form_widget(formConfigData.name, {'attr': {'class': 'form-control', 'placeholder': 'Wpisz nazwę strony'}}) }}
                     {{ form_errors(formConfigData.name, {'attr': {'class': 'text-danger'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_label(formConfigData.value, "",{'label_attr': {'class': 'my-label-class'}}) }}
+                    {{ form_label(formConfigData.value, "Wpisz",{'label_attr': {'class': 'my-label-class'}}) }}
                     {{ form_widget(formConfigData.value, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(formConfigData.value, {'attr': {'class': 'text-danger'}}) }}
                 </div>

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var images = $(".grid-container img");
-    var infoBox = $(".informacjeDodatkowe");
+    var infoBox = $(".information");
     var currentIndex = 0;
     var interval = 4000; // Czas zmiany zdjęcia (4 sekundy)
 
@@ -13,14 +13,17 @@ $(document).ready(function() {
         // Animacja powiększenia tylko dla jednego zdjęcia (bez hovera)
         images.removeClass("active").css("transform", "scale(1)");
         currentImage.addClass("active").css("transform", "scale(1.1)");
+         
 
         // Po 3 sekundy zmniejszamy zdjęcie i ukrywamy informacje dodatkowe
         setTimeout(function() {
         currentImage.css("transform", "scale(1)");
         infoBox.fadeOut();
         }, 3000);
+      
     }
     }
+     // Zmiana obramowania na ciemniejszy kolor przy najechaniu myszką
 
     // Funkcja do obsługi efektu powiększenia przy najechaniu na zdjęcie
     images.on("mouseenter", function() {

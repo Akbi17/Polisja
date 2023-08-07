@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+
 use App\Block\WebPageAdmin;
 use App\Entity\Business;
 use App\Form\BiznesType;
@@ -16,10 +17,10 @@ class BusinessController extends AbstractController
     public function __construct( public ManagerRegistry $doctrine)
     {}
 
-    #[Route('/biznes', name: 'app_biznes')]
-    public function index(Request $request,WebPageAdmin $webPageAdmin): Response
+    #[Route('/biznes', name: 'app_business')]
+    public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {   
-        if($webPageAdmin->getBusinessStatus()->getValue() == 'Disactive'){
+        if(!$webPageAdmin->getBusinessStatus()->getValue()){
             return $this->redirectToRoute('app_main');
         }
         $entityManager = $this->doctrine->getManager();
@@ -37,14 +38,15 @@ class BusinessController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success','Your message has been sent successfully.');
 
-            return $this->redirectToRoute('app_biznes');
+            return $this->redirectToRoute('app_business');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
-        
-        return $this->render('frontend/biznes/index.html.twig', [
-            'controller_name' => 'BiznesController',
+        $enum = $enumValue->getEnumValues();
+
+        return $this->render('frontend/business/index.html.twig', [
             'form' => $form->createView(),
-            'webPageStatus'=>$webPageStatus
+            'webPageStatus'=>$webPageStatus,
+            'enum' => $enum,
         ]);
     }
 }

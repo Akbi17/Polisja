@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Form;
+
 use App\Entity\Config;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -16,8 +17,8 @@ class DataConfigType extends AbstractType
         $builder
             ->add('name', ChoiceType::class, [
                 'choices' => [
-                    'Numer' => 'polisa/number',
-                    'Email' => 'polisa/email',
+                    'Numer' => 'polisja/contact/phonenumber',
+                    'E-mail' => 'polisja/contact/mail',
                 ],
             ])
             ->add('value',TextType::class)

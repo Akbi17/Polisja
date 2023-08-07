@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+
 use App\Block\WebPageAdmin;
 use App\Entity\Health;
 use App\Form\HealthType;
@@ -16,10 +17,10 @@ class HealthController extends AbstractController
     public function __construct( public ManagerRegistry $doctrine)
     {}
 
-    #[Route('/zycie', name: 'app_zycie')]
-    public function index(Request $request,WebPageAdmin $webPageAdmin): Response
+    #[Route('/zycie', name: 'app_health')]
+    public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if($webPageAdmin->getHealthStatus()->getValue() == 'Disactive')
+        if(!$webPageAdmin->getHealthStatus()->getValue())
         {
             return $this->redirectToRoute('app_main');
         }
@@ -37,13 +38,15 @@ class HealthController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success','Your message has been sent successfully.');
 
-            return $this->redirectToRoute('app_zycie');
+            return $this->redirectToRoute('app_health');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
-        return $this->render('frontend/zycie/index.html.twig', [
-            'controller_name' => 'ZycieController',
+        $enum = $enumValue->getEnumValues();
+
+        return $this->render('frontend/health/index.html.twig', [
             'form' => $form->createView(),
-            'webPageStatus'=>$webPageStatus
+            'webPageStatus'=> $webPageStatus,
+            'enum' => $enum,
         ]);
     }
 }

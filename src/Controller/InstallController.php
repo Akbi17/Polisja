@@ -2,10 +2,11 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+
 use App\Entity\Admin;
 use App\Entity\WebPage;
 use App\Form\InstallFormType;
-use App\Form\WebPageType;
+use App\Form\ConfigType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,7 @@ class InstallController extends AbstractController
         {
             return $this->redirectToRoute('app_login');
         }
-        $webPageConfigForm = $this->createForm(WebPageType::class);
+        $webPageConfigForm = $this->createForm(ConfigType::class);
         $webPageConfigForm->handleRequest($request);
         $user = new Admin();
         $form = $this->createForm(InstallFormType::class, $user);
@@ -43,7 +44,7 @@ class InstallController extends AbstractController
         }  
     if ($webPageConfigForm->isSubmitted() && $webPageConfigForm->isValid()) {
         $webPageData = $webPageConfigForm->getData();
-        $webPageRepository = $this->doctrine->getRepository(WebPage::class);
+        $webPageRepository = $this->doctrine->getRepository(Config::class);
         $existingWebPage = $webPageRepository->findOneBy(['webPage' => $webPageData->getWebPage()]);
         if ($existingWebPage) {
             $existingWebPage->setStatus($webPageData->isStatus());

@@ -16,10 +16,10 @@ class PropertyController extends AbstractController
 {
     public function __construct( public ManagerRegistry $doctrine){}
 
-    #[Route('/nieruchomosc', name: 'app_nieruchomosc')]
-    public function index(Request $request,WebPageAdmin $webPageAdmin): Response
+    #[Route('/nieruchomosc', name: 'app_property')]
+    public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if($webPageAdmin->getPropertyStatus()->getValue() == 'Disactive')
+        if(!$webPageAdmin->getPropertyStatus()->getValue())
         {
             return $this->redirectToRoute('app_main');
         }
@@ -33,13 +33,14 @@ class PropertyController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success','Your message has been sent successfully.');
         
-            return $this->redirectToRoute('app_nieruchomosc');
+            return $this->redirectToRoute('app_property');
         }
         $webPageStatus = $webPageAdmin->getWebPageStatus();
-
-        return $this->render('frontend/nieruchomosc/index.html.twig', [
+        $enum = $enumValue->getEnumValues();
+        return $this->render('frontend/property/index.html.twig', [
             'form' => $form->createView(),
-            'webPageStatus'=>$webPageStatus
+            'webPageStatus' => $webPageStatus,
+            'enum' => $enum,
         ]);
     }
 }

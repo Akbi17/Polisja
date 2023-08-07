@@ -10,8 +10,11 @@
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+ 
 		<!-- Web Fonts  -->
+		{% block stylesheets %}
+		
+		
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Alegreya|Alegreya+SC|Oswald:400,300" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
@@ -21,14 +24,14 @@
 		<link rel="stylesheet" href="frontendStyle/HTML/vendor/owlcarousel/owl.carousel.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/vendor/owlcarousel/owl.theme.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/vendor/magnific-popup/magnific-popup.css">
-
+		<link rel="stylesheet" href="styles/app.css">
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-elements.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-blog.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-shop.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-animate.css">
-
+		{% endblock %}
 
 		<!-- Skin CSS -->
 		<link rel="stylesheet" href="frontendStyle/HTML/css/skins/default.css">
@@ -38,15 +41,15 @@
 
 		<!-- Head Libs -->
 		<script src="frontendStyle/HTML/vendor/modernizr/modernizr.js"></script>
-		<link rel="stylesheet" href="frontendStyle/HTML/css/styleDoLoga.css">
+		<link rel="stylesheet" href="frontendStyle/HTML/css/styleLogo.css">
 	</head>
 <body>
 	<div class="body">
 		<header id="header">
 				<div class="container">
 					<h1 class="logo">
-						<a href="{{'/'}}">
-							<img alt="Tucson" width="180" height="55" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/pol.jpg">
+						<a href="{{ path('app_main') }}">
+							<img alt="Tucson" width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisja.jpg">
 						</a>
 					</h1>
 					<button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
@@ -59,36 +62,44 @@
 						<nav class="nav-main mega-menu">
 							<ul class="nav nav-pills nav-main" id="mainMenu">
 								<li>
-									<a href="{{'/'}}">Główna</a>
+									<a href="{{path('app_main')}}">Główna</a>
 								</li>
-								{% for status in webPageStatus %}
-									{% if status.getValue == 'Active' %}
-										{% if status.name == 'Strona/Auto' %}
-											<li>
-												<a href="{{'auto'}}">Samochody</a>
-											</li>
+								{% for configName in webPageStatus %}
+										{% if configName.name == enum.CAR_PATH %}
+											{% if configName.getValue %}
+												<li>
+													<a href="{{ path('app_car') }}">Samochody</a>
+												</li>
+											{% endif %}
 										{% endif %}
-										{% if status.name == 'Strona/Dom' %}
-											<li>
-												<a href="{{'nieruchomosc'}}">Dom</a>
-											</li>
+										{% if configName.name == enum.PROPERTY_PATH %}
+											{% if configName.getValue %}
+												<li>
+													<a href="{{ path('app_property') }}">Dom</a>
+												</li>
+											{% endif %}
 										{% endif %}
-										{% if status.name == 'Strona/Życie' %}
-											<li>
-												<a href="{{'zycie'}}">Zycie</a>
-											</li>
+										{% if configName.name == enum.HEALTH_PATH %}
+											{% if configName.getValue %}
+												<li>
+													<a href="{{ path('app_health') }}">Zycie</a>
+												</li>
+											{% endif %}
 										{% endif %}
-										{% if status.name == 'Strona/Biznes' %}
-											<li>
-												<a href="{{'biznes'}}">Bizness</a>
-											</li>
+										{% if configName.name == enum.BUSINESS_PATH %}
+											{% if configName.getValue %}
+												<li>
+													<a href="{{ path('app_business') }}">Bizness</a>
+												</li>
+											{% endif %}
 										{% endif %}
-										{% if status.name == 'Strona/Contact' %}
-											<li>
-												<a href="{{'contact'}}">Kontakt</a>
-											</li>
+										{% if configName.name == enum.CONTACT_PATH %}
+											{% if configName.getValue %}
+												<li>
+													<a href="{{ path('contact') }}">Kontakt</a>
+												</li>
+											{% endif %}
 										{% endif %}
-									{% endif %}
 								{% endfor %}
 							</ul>
 						</nav>
@@ -111,10 +122,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-							<a href="{{'/'}}" class="logo push-bottom">
+							<a href="{{path('app_main')}}" class="logo push-bottom">
 								<img width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisjanowa.jpg">
 							</a>
-							<p>Polisja to najlepsza wyszukiwarka ubezpieczeń AC/OC oraz ubezpieczenia zdrowia, mieszkania oraz firmy <a href="{{'/'}}" class="btn-flat btn-xs">Zobacz więcej <i class="fa fa-arrow-right"></i></a></p>
+							<p>Polisja to najlepsza wyszukiwarka ubezpieczeń AC/OC oraz ubezpieczenia zdrowia, mieszkania oraz firmy <a href="{{path('app_main')}}" class="btn-flat btn-xs">Zobacz więcej <i class="fa fa-arrow-right"></i></a></p>
 							<div class="contact-details">
 								<ul class="contact">
 									<li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 123 Street Name, City, USA</p></li>
@@ -126,10 +137,10 @@
 						<div class="col-md-3">
 							<h4>Polisja Wyszukiwarka Ubezpieczeń</h4>
 							<ul class="nav nav-list primary push-bottom">
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'auto'}}">Jeżdij śmiało z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'nieruchomosc'}}">Ubezpiecz nieruchomość z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'zycie'}}">Bądź biezpieczny z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'biznes'}}">Bądź biezpieczny za swoje investycje z Polisją</a></li>
+								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_car')}}">Jeżdij śmiało z Polisją</a></li>
+								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_property')}}">Ubezpiecz nieruchomość z Polisją</a></li>
+								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_health')}}">Bądź biezpieczny z Polisją</a></li>
+								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_business')}}">Bądź biezpieczny za swoje investycje z Polisją</a></li>
 							</ul>
 						</div>
 						<iframe class='mapa' width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=17.2970724105835%2C50.94158292629885%2C17.30758666992188%2C50.94581472709556&amp;layer=mapnik&amp;marker=50.94369887484719%2C17.302329540252686" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=50.94370&amp;mlon=17.30233#map=18/50.94370/17.30233"></a></small>
@@ -155,6 +166,7 @@
 			</div>
 		</footer>
 	</div>
+	
 <!-- Vendor -->
 		<script src="frontendStyle/HTML/vendor/jquery/jquery.js"></script>
 		<script src="frontendStyle/HTML/vendor/jquery.appear/jquery.appear.js"></script>
@@ -189,6 +201,7 @@
 
 		
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="frontendStyle/HTML/js/skryptDoLogo.js"></script>
+		<script src="frontendStyle/HTML/js/skryptLogo.js"></script>
+		
     </body>
 </html>

@@ -27,7 +27,7 @@ class SecurityController extends AbstractController
         $admins = $adminRepository->findAll();
         if (count($admins) == 0) 
         {
-            return $this->redirectToRoute('install');
+            return $this->redirectToRoute('app_install');
         }
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();

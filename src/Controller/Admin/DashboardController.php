@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Controller\Admin;
+
 use App\Entity\Auto;
 use App\Entity\Contact;
 use App\Entity\Business;
@@ -23,7 +25,7 @@ class DashboardController extends AbstractDashboardController
     public function __construct(public ManagerRegistry $doctrine ){}
 
     #[Route('/admin', name: 'admin')]
-    public function inde(Request $request):Response
+    public function indexforms(Request $request):Response
     {
         $formConfigData = $this->createForm(DataConfigType::class);
         $formConfigData->handleRequest($request);

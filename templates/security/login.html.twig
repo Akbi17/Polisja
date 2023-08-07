@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Log in!</title>
-    <link rel="stylesheet" href="frontendStyle/HTML/css/styleDoLoginDoAdmina.css">
+    <link rel="stylesheet" href="frontendStyle/HTML/css/styleLoginAdmin.css">
 </head>
 <body>
 <div class="login-container">
@@ -13,23 +13,23 @@
         {% endif %}
 
                 {% if app.user %}
-            <div class="alert alert-success">You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a></div>
+            <div class="alert alert-success">Jesteś zalogowany jako {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Wyloguj</a></div>
         {% endif %}
 
-        <h1>Log in!</h1>
+        <h1>Zaloguj się!</h1>
         <form method="post">
             <div class="form-group">
-                <label for="inputUsername">Username</label>
+                <label for="inputUsername">Nazwa Użytkownika</label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" required autofocus>
             </div>
             <div class="form-group">
-                <label for="inputPassword">Password</label>
+                <label for="inputPassword">Hasło</label>
                 <input type="password" name="password" id="inputPassword" required>
             </div>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <button type="submit" class="button">Sign in</button>
+            <button type="submit" class="button">Zaloguj</button>
         </form>
     </div>
 </div>

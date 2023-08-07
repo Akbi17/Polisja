@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 	{% block body %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 			<div role="main" class="main">
 				<div class="row">
 					<div class="container">
@@ -8,27 +9,24 @@
 								<img src="frontendStyle/HTML/img/polisjalogo.jpg">
 								<div class="grid-container">
 									<a href="{{'auto'}}" class="autopolisa">
-										<img src="frontendStyle/HTML/img/autopolisa.jpg" data-text="Klienci cenią nas za kompleksowość działań i profesjonalizm. Nasi doradcy podczas bezpłatnej konsultacji zaledwie w kilka minut porównują oferty ubezpieczeniowe ponad 30 działających 
-																									na rynku Towarzystw i pomagają wybrać najkorzystniejsze ubezpieczenie domu, życia i zdrowia, 
-																									podróży albo firmy. Współpracujemy z najlepszymi towarzystwami ubezpieczeniowymi działającymi na rynku. 
-																									Kontaktując się z nami oszczędzasz czas i pieniądze">
+										<img class="animated-img" src="frontendStyle/HTML/img/autopolisa.jpg" data-text="Klienci">
 									</a>
 									<a href="{{'nieruchomosc'}}" class="biuropolisa">
-										<img src="frontendStyle/HTML/img/biuropolisa.jpg" data-text="Biuropolisa">
+										<img class="animated-img" src="frontendStyle/HTML/img/biuropolisa.jpg" data-text="Biuropolisa">
 									</a>
 									<a href="{{'zycie'}}" class="sercepolisa">
-										<img src="frontendStyle/HTML/img/sercepolisa.jpg" data-text="Sercepolisa">
+										<img class="animated-img" src="frontendStyle/HTML/img/sercepolisa.jpg" data-text="Sercepolisa">
 									</a>
 									<a href="{{'biznes'}}" class="dompolisa">
-										<img src="frontendStyle/HTML/img/dompolisa.jpg" data-text="Dompolska">
+										<img class="animated-img" src="frontendStyle/HTML/img/dompolisa.jpg" data-text="Dompolska">
 									</a>
 								</div>
-								<div class="informacjeDodatkowe" id="informacjeTekst">Informacje o obszarze</div>
+								<div class="information" id="informacjeTekst">Informacje o obszarze</div>
 							</div>
 							
 						</div>
 					</div>
-				</div>	
+				</div>
 				<div class="webdesing">
 					<div class="container">
 						<div class="row ">

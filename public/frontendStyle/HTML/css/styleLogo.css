@@ -28,7 +28,7 @@
   justify-content: center; /* Wyśrodkowanie zawartości w poziomie */
   align-items: center; /* Wyśrodkowanie zawartości w pionie */
 }
-.informacjeDodatkowe {
+.information {
   display: none;
   position: absolute;
   width: 150%;
@@ -108,7 +108,7 @@
     transition: initial;
     z-index: initial;
   }
-  .informacjeDodatkowe {
+  .information {
     display: none;
     position: absolute;
     width: 150%;
@@ -123,7 +123,7 @@
   }
 }
 @media (max-width: 450px) { 
-  .informacjeDodatkowe {
+  .information {
     display: none;
     position: absolute;
     width: 150%;
@@ -139,15 +139,14 @@
   
 }
 
-
-
-
     .grid-container img {
     /* pozostałe style, które już są */
     transition: transform 0.2s;
 }
 
-.informacjeDodatkowe {
+
+
+.information {
     /* pozostałe style, które już są */
     display: none;
     transition: opacity 1.8s;
