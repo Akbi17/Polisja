@@ -15,9 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class CarController extends AbstractController
 {
     #[Route('/auto', name: 'app_car')]
-    public function index(Request $request, ManagerRegistry $doctrine,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
+    public function index(Request $request, ManagerRegistry $doctrine, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if(!$webPageAdmin->getCarStatus()->getValue()){
+        if(!$webPageAdmin->getCarStatus()->getValue())
+        {
             return $this->redirectToRoute('app_main');
         }
         $entityManager = $doctrine->getManager();

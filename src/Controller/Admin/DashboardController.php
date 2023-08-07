@@ -25,7 +25,7 @@ class DashboardController extends AbstractDashboardController
     public function __construct(public ManagerRegistry $doctrine ){}
 
     #[Route('/admin', name: 'admin')]
-    public function indexforms(Request $request):Response
+    public function indexforms(Request $request): Response
     {
         $formConfigData = $this->createForm(DataConfigType::class);
         $formConfigData->handleRequest($request);

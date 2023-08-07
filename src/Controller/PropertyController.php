@@ -17,7 +17,7 @@ class PropertyController extends AbstractController
     public function __construct( public ManagerRegistry $doctrine){}
 
     #[Route('/nieruchomosc', name: 'app_property')]
-    public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
+    public function index(Request $request, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
         if(!$webPageAdmin->getPropertyStatus()->getValue())
         {
