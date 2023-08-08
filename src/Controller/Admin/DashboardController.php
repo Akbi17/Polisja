@@ -16,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Exception;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,6 +33,7 @@ class DashboardController extends AbstractDashboardController
         $formConfigData->handleRequest($request);
         $form = $this->createForm(ConfigType::class);
         $form->handleRequest($request);
+    try {
         if ($form->isSubmitted() && $form->isValid()) {
             $webPageData = $form->getData();
             $webPageRepository = $this->doctrine->getRepository(Config::class);
@@ -45,10 +48,14 @@ class DashboardController extends AbstractDashboardController
                 $entityManager->persist($webPageData);
                 $entityManager->flush();
             }
-            $this->addFlash('success', 'Zmiany zostały zapisane.');
+            $this->addFlash('success', 'Zmiany stron zostały zapisane.');
 
             return $this->redirectToRoute('admin');
         }
+    } catch(Exception $e) {
+        $form->addError(new FormError('Błąd przy aktywacji strony'));
+    }
+    try {
         if ($formConfigData->isSubmitted() && $formConfigData->isValid()) {
             $Data = $formConfigData->getData();
             $existingWebPage = $this->doctrine->getRepository(Config::class)->findOneBy(['name' => $Data->getName()]);
@@ -66,6 +73,9 @@ class DashboardController extends AbstractDashboardController
 
             return $this->redirectToRoute('admin');
         }
+    } catch(Exception $e){
+        $form->addError(new FormError('Wystąpił błąd przy konfiguracji'));
+    }
 
         return $this->render('config/index.html.twig', [
             'form' => $form->createView(),

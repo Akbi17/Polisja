@@ -7,7 +7,9 @@ use App\Block\WebPageAdmin;
 use App\Entity\Health;
 use App\Form\HealthType;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,6 +30,7 @@ class HealthController extends AbstractController
         $health = new Health;
         $form = $this->createForm(HealthType::class, $health);
         $form->handleRequest($request);
+    try {
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $health->setName($form->get('name')->getData());
@@ -40,12 +43,15 @@ class HealthController extends AbstractController
 
             return $this->redirectToRoute('app_health');
         }
-        $webPageStatus = $webPageAdmin->getWebPageStatus();
+    } catch(Exception $e) {
+        $form->addError(new FormError('Błąd przy formularzu'));
+    }
+        $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
 
         return $this->render('frontend/health/index.html.twig', [
             'form' => $form->createView(),
-            'webPageStatus'=> $webPageStatus,
+            'activepages'=> $activepages,
             'enum' => $enum,
         ]);
     }

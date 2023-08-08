@@ -7,7 +7,9 @@ use App\Block\WebPageAdmin;
 use App\Entity\Property;
 use App\Form\PropertyType;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +29,7 @@ class PropertyController extends AbstractController
         $property = new Property;
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
+    try {
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $entityManager->persist($property);
@@ -35,11 +38,14 @@ class PropertyController extends AbstractController
         
             return $this->redirectToRoute('app_property');
         }
-        $webPageStatus = $webPageAdmin->getWebPageStatus();
+    } catch(Exception $e) {
+        $form->addError(new FormError('Błąd przy formularzu'));
+    }
+        $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
         return $this->render('frontend/property/index.html.twig', [
             'form' => $form->createView(),
-            'webPageStatus' => $webPageStatus,
+            'activepages' => $activepages,
             'enum' => $enum,
         ]);
     }

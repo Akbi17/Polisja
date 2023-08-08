@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Entity\Config;
+use App\Controller\Enum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,11 +17,11 @@ class ConfigType extends AbstractType
         $builder
             ->add('name', ChoiceType::class, [
                 'choices' => [
-                    'Auto' => 'page/car/isActive',
-                    'Dom' => 'page/property/isActive',
-                    'Życie' => 'page/health/isActive',
-                    'Biznes' => 'page/business/isActive',
-                    'Contact' => 'page/contact/isActive',
+                    'Auto' => Enum::CAR_PATH,
+                    'Dom' => Enum::PROPERTY_PATH,
+                    'Życie' => Enum::HEALTH_PATH,
+                    'Biznes' => Enum::BUSINESS_PATH,
+                    'Contact' => Enum::CONTACT_PATH,
                 ],
             ])
             ->add('value',ChoiceType::class,[

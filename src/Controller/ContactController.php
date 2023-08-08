@@ -15,6 +15,8 @@ use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Block\TraitForTextCheck;
+use Exception;
+use Symfony\Component\Form\FormError;
 
 class ContactController extends AbstractController
 {
@@ -32,6 +34,7 @@ class ContactController extends AbstractController
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
+    try {
         if ($form->isSubmitted() && $form->isValid()) {
             $contact->setName($form->get('name')->getData());
             $contact->setEmail($form->get('email')->getData());
@@ -49,12 +52,15 @@ class ContactController extends AbstractController
 
             return $this->redirectToRoute('contact');
         }
-        $webPageStatus = $webPageAdmin->getWebPageStatus();
+    } catch(Exception $e) {
+        $form->addError(new FormError('Błąd przy formularzu'));
+    }
+        $activepages = $webPageAdmin->Activepages();
         $enum = $enumValue->getEnumValues();
 
         return $this->render('frontend/contact/index.html.twig', [
             'form' => $form->createView(),
-            'webPageStatus'=> $webPageStatus,
+            'activepages'=> $activepages,
             'enum' => $enum
         ]);
     }   

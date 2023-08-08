@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\FormError;
 
 class InstallController extends AbstractController
 {
@@ -24,7 +25,7 @@ class InstallController extends AbstractController
     {    
         $adminRepository = $this->doctrine->getRepository(Admin::class);
         $admins = $adminRepository->findAll();
-        if (count($admins) >= 1) 
+        if (count($admins)) 
         {
             return $this->redirectToRoute('app_login');
         }
@@ -33,6 +34,7 @@ class InstallController extends AbstractController
         $user = new Admin();
         $form = $this->createForm(InstallFormType::class, $user);
         $form->handleRequest($request);
+    try {
         if ($form->isSubmitted() && $form->isValid()) {       
             $user->setPassword($userPasswordHasher->hashPassword($user,$form->get('plainPassword')->getData()));
             $user->setRoles(['ROLE_ADMIN']);
@@ -42,23 +44,31 @@ class InstallController extends AbstractController
 
             return $this->redirectToRoute('app_login');
         }  
-    if ($webPageConfigForm->isSubmitted() && $webPageConfigForm->isValid()) {
-        $webPageData = $webPageConfigForm->getData();
-        $webPageRepository = $this->doctrine->getRepository(Config::class);
-        $existingWebPage = $webPageRepository->findOneBy(['webPage' => $webPageData->getWebPage()]);
-        if ($existingWebPage) {
-            $existingWebPage->setStatus($webPageData->isStatus());
-            $entityManager = $this->doctrine->getManager();
-            $entityManager->persist($existingWebPage);
-            $entityManager->flush();
-        } else {
-            $entityManager = $this->doctrine->getManager();
-            $entityManager->persist($webPageData);
-            $entityManager->flush();
-        }
-        $this->addFlash('success', 'Status strony został zapisany.');
+    }   catch (\Exception $e) {
+        $form->addError(new FormError('Wystąpił błąd podczas rejestracji admina.'));
     }
 
+    try {
+        if ($webPageConfigForm->isSubmitted() && $webPageConfigForm->isValid()) {
+            $webPageData = $webPageConfigForm->getData();
+            $webPageRepository = $this->doctrine->getRepository(Config::class);
+            $existingWebPage = $webPageRepository->findOneBy(['webPage' => $webPageData->getWebPage()]);
+            if ($existingWebPage) {
+                $existingWebPage->setStatus($webPageData->isStatus());
+                $entityManager = $this->doctrine->getManager();
+                $entityManager->persist($existingWebPage);
+                $entityManager->flush();
+            } else {
+                $entityManager = $this->doctrine->getManager();
+                $entityManager->persist($webPageData);
+                $entityManager->flush();
+            }
+            $this->addFlash('success', 'Status strony został zapisany.');
+        }
+    } catch (\Exception $e) {
+        $form->addError(new FormError("Wystąpił błąd podczas ustawiania strony"));
+    }
+    
     return $this->render('admin/install.html.twig', [
         'form' => $form->createView(),
         'webPageConfigForm' => $webPageConfigForm->createView(),

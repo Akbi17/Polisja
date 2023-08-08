@@ -61,42 +61,10 @@
 								<li>
 									<a href="{{path('app_main')}}">Główna</a>
 								</li>
-								{% for configName in webPageStatus %}
-										{% if configName.name == enum.CAR_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('app_car') }}">Samochody</a>
-												</li>
-											{% endif %}
-										{% endif %}
-										{% if configName.name == enum.PROPERTY_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('app_property') }}">Dom</a>
-												</li>
-											{% endif %}
-										{% endif %}
-										{% if configName.name == enum.HEALTH_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('app_health') }}">Zycie</a>
-												</li>
-											{% endif %}
-										{% endif %}
-										{% if configName.name == enum.BUSINESS_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('app_business') }}">Bizness</a>
-												</li>
-											{% endif %}
-										{% endif %}
-										{% if configName.name == enum.CONTACT_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('contact') }}">Kontakt</a>
-												</li>
-											{% endif %}
-										{% endif %}
+								{% for page in activepages %}
+									<li>
+										<a href="{{ page.path }}">{{ page.label }}</a>
+									</li>
 								{% endfor %}
 							</ul>
 						</nav>
@@ -199,15 +167,7 @@
 					</ul>
 					</div>
 				</div>
-				<div class="col-md-3">
-					<h4>Polisja Wyszukiwarka Ubezpieczeń</h4>
-					<ul class="nav nav-list primary push-bottom">
-						<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_car')}}">Jeżdij śmiało z Polisją</a></li>
-						<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_property')}}">Ubezpiecz nieruchomość z Polisją</a></li>
-						<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_health')}}">Bądź biezpieczny z Polisją</a></li>
-						<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_business')}}">Bądź biezpieczny za swoje investycje z Polisją</a></li>
-					</ul>
-				</div>
+				{% include 'siteMapOnFooter.html.twig' %}
 				</div>
 			</div>
 </footer>

@@ -57,42 +57,10 @@
 								<li>
 									<a href="{{path('app_main')}}">Główna</a>
 								</li>
-								{% for configName in webPageStatus %}
-										{% if configName.name == enum.CAR_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('app_car') }}">Samochody</a>
-												</li>
-											{% endif %}
-										{% endif %}
-										{% if configName.name == enum.PROPERTY_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('app_property') }}">Dom</a>
-												</li>
-											{% endif %}
-										{% endif %}
-										{% if configName.name == enum.HEALTH_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('app_health') }}">Zycie</a>
-												</li>
-											{% endif %}
-										{% endif %}
-										{% if configName.name == enum.BUSINESS_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('app_business') }}">Bizness</a>
-												</li>
-											{% endif %}
-										{% endif %}
-										{% if configName.name == enum.CONTACT_PATH %}
-											{% if configName.getValue %}
-												<li>
-													<a href="{{ path('contact') }}">Kontakt</a>
-												</li>
-											{% endif %}
-										{% endif %}
+								{% for page in activepages %}
+									<li>
+										<a href="{{ page.path }}">{{ page.label }}</a>
+									</li>
 								{% endfor %}
 							</ul>
 						</nav>
@@ -127,15 +95,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="col-md-3">
-							<h4>Polisja Wyszukiwarka Ubezpieczeń</h4>
-							<ul class="nav nav-list primary push-bottom">
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_car')}}">Jeżdij śmiało z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_property')}}">Ubezpiecz nieruchomość z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_health')}}">Bądź biezpieczny z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{path('app_business')}}">Bądź biezpieczny za swoje investycje z Polisją</a></li>
-							</ul>
-						</div>
+						{% include 'siteMapOnFooter.html.twig' %}
 						<iframe class='mapa' width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=17.2970724105835%2C50.94158292629885%2C17.30758666992188%2C50.94581472709556&amp;layer=mapnik&amp;marker=50.94369887484719%2C17.302329540252686" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=50.94370&amp;mlon=17.30233#map=18/50.94370/17.30233"></a></small>
 					</div>
 				</div>

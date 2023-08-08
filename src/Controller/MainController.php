@@ -14,11 +14,11 @@ class MainController extends AbstractController
     #[Route('/', name: 'app_main')]
     public function index(WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        $webPageStatus = $webPageAdmin->getWebPageStatus();
+        $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
 
         return $this->render('frontend/main/index.html.twig',[
-           'webPageStatus'=>$webPageStatus,
+           'activepages'=>$activepages,
            'enum' => $enum,
         ]);
     }

@@ -7,7 +7,9 @@ use App\Block\WebPageAdmin;
 use App\Entity\Business;
 use App\Form\BiznesType;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +29,7 @@ class BusinessController extends AbstractController
         $business = new Business();
         $form = $this->createForm(BiznesType::class, $business);
         $form->handleRequest($request);
+    try {
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $business->setNameOfBusiness($form->get('nameOfBusiness')->getData());
@@ -40,12 +43,15 @@ class BusinessController extends AbstractController
 
             return $this->redirectToRoute('app_business');
         }
-        $webPageStatus = $webPageAdmin->getWebPageStatus();
+    } catch(Exception $e) {
+        $form->addError(new FormError('Błąd przy formularzu'));
+    }
+        $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
 
         return $this->render('frontend/business/index.html.twig', [
             'form' => $form->createView(),
-            'webPageStatus'=>$webPageStatus,
+            'activepages'=>$activepages,
             'enum' => $enum,
         ]);
     }
