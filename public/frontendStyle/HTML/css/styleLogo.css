@@ -1,7 +1,7 @@
 
 
 .polisja-logo {
-  position: relative; /* Ustaw pozycję na relative, aby umożliwić .grid-container nałożenie się na niego */
+  position: relative; 
   width: 30%;
   
 }
@@ -9,86 +9,225 @@
 .polisja-logo img {
   width: 100%;
   height: auto;
-  border-radius: 1px;
+ 
 }
 
 .grid-container {
-  position: absolute; /* Dodaj pozycję absolute dla .grid-container */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
+  position: absolute; 
+  top: 45%;
+  left: 50.5%;
+  transform: translate(-50%, -50%) scale(0.9);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 40px;
-  padding-bottom: 2em;
+  
 }
 
+.autopolisa {
+  bottom: -8px;
+}
 .grid-container a {
-  display: flex; /* Ustawienie flex dla linków wewnątrz .grid-container */
-  justify-content: center; /* Wyśrodkowanie zawartości w poziomie */
-  align-items: center; /* Wyśrodkowanie zawartości w pionie */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 1s, filter 0.7s;
+}
+
+.grid-container a.vibrating {
+  animation: vibration 0.5s infinite;
+}
+
+.grid-container a:hover img {
+  transform: rotateY(180deg); 
+  transition: transform 0.5s; 
+}
+
+.grid-container a:not(:hover) img {
+  transform: rotateY(0deg); 
+  transition: transform 1s;
+}
+
+
+@keyframes vibration {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+.information {
+  display: none;
+  position: absolute;
+  width: 150%;
+  height: 70%;
+  top: 2em;
+  left: 130%;
+  background-color: rgba(60, 59, 59, 0);
+  color: rgb(43, 49, 45);
+  padding: 1em; 
+  margin: 0; 
+  z-index: 1;
+  font-size: medium;
+}
+
+
+.info-title {
+  font-size: 1.5em; 
+}
+
+.info-content {
+  font-size: 1em; 
+}
+
+@media (min-width: 320px) { 
+  .logopol {
+    visibility: hidden; 
+    
+}
+.autopolisa {
+  bottom: -5px;
+}
+.information {
+  display: none;
+  position: absolute;
+  width: 300%;
+  height: 100%;
+  top: 0em;
+  left: 10%;
+  background-color: rgba(60, 59, 59, 0);
+  color: rgb(43, 49, 45);
+  padding: 3px; 
+  margin: 0; 
+  z-index: 1;
+  font-size: medium;
+}
+  
+  .information h1{
+    margin: 0px 0px 0px 0px;
+    font-size:3rem;
+  }
+  
+  .info-content {
+    line-height: 1.9rem; 
+    margin-bottom: 0.8rem;
+    
+  }
+  .information .btn  {
+    font-size: 1.2rem; 
+    
+  }
+  .logotyp {
+    height: 15vh;
+    margin-top:3rem;
+  }
+  
+
+  
+}
+@media (min-width: 375px) {
+  
+  .information .btn  {
+    font-size: auto; 
+    
+  }
+  .push-top {
+    margin-top: auto;
+    
+  }
+  .logotyp {
+    height: 15vh;
+  }
+  
+  
+  
+}@media (min-width: 425px) {
+  
+  .information .btn  {
+    font-size: 1.8rem; 
+    
+  }
+  .logotyp {
+    height: 13vh;
+    margin-top:3rem;
+  }
+}
+   
+@media (min-width: 765px) { 
+  .logopol {
+    visibility: visible; /* lub visibility: hidden; */
+    
 }
 .information {
   display: none;
   position: absolute;
   width: 150%;
   height: 70%;
-  top: 4em;
-  left:130%;
+  top: 2em;
+  left: 130%;
   background-color: rgba(60, 59, 59, 0);
   color: rgb(43, 49, 45);
-  padding: 2em;
+  padding: 1em;
+  margin: 0; 
   z-index: 1;
-  font-size:medium;
+  font-size: medium;
 }
-
-@media (min-width: 320px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
-  .grid-container {
-  grid-gap: 1em;
-  padding-bottom: 0.7em;
-  }
-  
-  
-  
-}
-@media (min-width: 375px) { /* Dla ekranów o szerokości do 320px (np. iPhone XR) */
   .grid-container {
   grid-gap: 1.2em;
-  padding-bottom: 0.8em;
+  }
+  .info-title {
+    line-height: 0.5rem; 
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.01rem;
   }
   
-}@media (min-width: 425px) { /* Dla ekranów o szerokości do 320px (np. iPhone S) */
-  .grid-container {
-  grid-gap: 1.1em;
-  padding-bottom: 0.8em;
+  .info-content {
+    line-height: 1.9rem; 
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
   }
-  
+  .information .btn  {
+    font-size: 1.9rem; 
+  }
+  .information h1{
+    margin: 0px 0px 20px 0px;
+  }
+  .information p {
+    line-height: 2rem;
+  }
+  .logotyp {
+    height: auto;
+    margin-top:3rem;
+  }
 }
-@media (min-width: 530px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
+@media (min-width: 1024px) { 
   .grid-container {
-  grid-gap: 1.1em;
-  padding-bottom: 1.5em;
-  }
+  grid-gap: 1em;
   
-}
-@media (min-width: 765px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
-  .grid-container {
-  grid-gap: 1.5em;
-  padding-bottom: 2em;
   }
+  .grid-container img {
+    transform: scale(0.1);
   
-}
-@media (min-width: 1024px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
-  .grid-container {
-  grid-gap: 2em;
-  padding-bottom: 3em;
   }
   .mapa {
     width: 50%;
   }
   
 }
-@media (max-width: 1024px) { /* Dla ekranów o szerokości do 320px (np. iPhone SE) */
+@media (max-width: 1024px) { 
   .body {
     padding-top: 0px;
   }
@@ -108,49 +247,10 @@
     transition: initial;
     z-index: initial;
   }
-  .information {
-    display: none;
-    position: absolute;
-    width: 150%;
-    height: 70%;
-    top: 2.5em;
-    left:130%;
-    background-color: rgba(60, 59, 59, 0);
-    color: rgb(43, 49, 45);
-    padding: 1em;
-    z-index: 1;
-    font-size: 0.5em;
-  }
-}
-@media (max-width: 450px) { 
-  .information {
-    display: none;
-    position: absolute;
-    width: 150%;
-    height: 70%;
-    top: 1.5em;
-    left:130%;
-    background-color: rgba(60, 59, 59, 0);
-    color: rgb(43, 49, 45);
-    padding: 1em;
-    z-index: 1;
-    font-size:0.3em;
-  }
+ 
   
 }
 
-    .grid-container img {
-    /* pozostałe style, które już są */
-    transition: transform 0.2s;
-}
-
-
-
-.information {
-    /* pozostałe style, które już są */
-    display: none;
-    transition: opacity 1.8s;
-}
 section.call-to-action.footer {
     margin: 10px 0 40px;
 }
@@ -168,10 +268,7 @@ section.highlight.footer {
   padding-bottom: 25px;
   margin-bottom: 40px;
 }
-.read {
-  background-color: #fff;
-  padding-top:50px;
-}
+
 .read .container {
   margin-top: 20px;
   padding-top: 20px;

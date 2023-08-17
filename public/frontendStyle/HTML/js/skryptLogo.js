@@ -1,51 +1,96 @@
 $(document).ready(function() {
-    var images = $(".grid-container img");
-    var infoBox = $(".information");
-    var currentIndex = 0;
-    var interval = 4000; // Czas zmiany zdjęcia (4 sekundy)
+  var icons = $(".grid-container a img");
+  var infoBox = $(".information");
+  var currentIndex = 0;
+  var interval = 2000;
+  var vibrationDuration = 1500;
+  var pauseBetweenVibrations = 3500;
+  var resumeVibrationDelay = 4000;
 
-    function showInfo(index) {
-    var currentImage = images.eq(index);
-    var text = currentImage.data("text");
+  var timer;
+  var isManualVibration = false;
+
+  function showInfo(index) {
+    var currentIcon = icons.eq(index);
+    var text = currentIcon.data("text");
     infoBox.text(text).fadeIn();
 
-    if (!currentImage.hasClass("active")) {
-        // Animacja powiększenia tylko dla jednego zdjęcia (bez hovera)
-        images.removeClass("active").css("transform", "scale(1)");
-        currentImage.addClass("active").css("transform", "scale(1.1)");
-         
+    if (!currentIcon.hasClass("active")) {
+      icons.removeClass("active");
+      vibrateIcon(currentIcon);
 
-        // Po 3 sekundy zmniejszamy zdjęcie i ukrywamy informacje dodatkowe
-        setTimeout(function() {
-        currentImage.css("transform", "scale(1)");
+      timer = setTimeout(function() {
+        resetIcon(currentIcon);
         infoBox.fadeOut();
-        }, 3000);
-      
+        if (!isManualVibration) {
+          resumeAutomaticVibration();
+        }
+      }, vibrationDuration + pauseBetweenVibrations);
     }
-    }
-     // Zmiana obramowania na ciemniejszy kolor przy najechaniu myszką
+  }
 
-    // Funkcja do obsługi efektu powiększenia przy najechaniu na zdjęcie
-    images.on("mouseenter", function() {
-    if (!$(this).hasClass("active")) {
-        $(this).css("transform", "scale(1.1)");
-        infoBox.text($(this).data("text")).fadeIn();
-    }
+  function vibrateIcon(icon) {
+    icon.addClass("active");
+    icon.css({
+      animation: "vibration 1.5s ease-in-out infinite"
     });
+  }
 
-    images.on("mouseleave", function() {
-    if (!$(this).hasClass("active")) {
-        $(this).css("transform", "scale(1)");
-        infoBox.hide();
-    }
+  function resetIcon(icon) {
+    icon.removeClass("active");
+    icon.css({
+      animation: "none"
     });
+  }
 
-    // Wywołujemy funkcję na początku dla pierwszego zdjęcia
+  function vibrateNextIcon() {
+    currentIndex = (currentIndex + 1) % icons.length;
     showInfo(currentIndex);
+  }
 
-    // Ustawienie animacji na następne zdjęcie co 4 sekundy
-    setInterval(function() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showInfo(currentIndex);
-    }, interval);
-    });
+  vibrateNextIcon();
+
+  function resumeAutomaticVibration() {
+    if (!isManualVibration) {
+      timer = setTimeout(function() {
+        vibrateNextIcon();
+      }, pauseBetweenVibrations);
+    }
+  }
+
+  icons.on("mouseenter", function() {
+    if ($(this).hasClass("active")) {
+      return;
+    }
+
+    isManualVibration = true;
+    clearTimeout(timer);
+
+    icons.removeClass("active");
+    resetIcon(icons);
+    $(this).addClass("active");
+    vibrateIcon($(this));
+    infoBox.text($(this).data("text")).fadeIn();
+  });
+
+  icons.on("mouseleave", function() {
+    if ($(this).hasClass("active")) {
+      return;
+    }
+
+    isManualVibration = false;
+    clearTimeout(timer);
+    resetIcon(icons);
+    setTimeout(function() {
+      resumeAutomaticVibration();
+    }, resumeVibrationDelay);
+  });
+
+  $(".grid-container").on("mouseenter", function() {
+    resumeAutomaticVibration();
+  }).on("mouseleave", function() {
+    if (!isManualVibration) {
+      resumeAutomaticVibration();
+    }
+  });
+});

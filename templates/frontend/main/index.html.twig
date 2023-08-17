@@ -1,26 +1,47 @@
 {% extends 'base.html.twig' %}
 	{% block body %}
+	{# <link rel="stylesheet" href="frontendStyle/HTML/css/testLogo.css"> #}
+	
+	<link rel="stylesheet" href="frontendStyle/HTML/css/styleLogo.css">
+	
+	{# <script src="frontendStyle/HTML/js/skryptLogo.js"></script> #}
 			<div role="main" class="main">
 				<div class="row">
-					<div class="container">
+					<div class="container" style="padding-bottom:3rem;">
 						<div class="logotyp">
 							<div class="polisja-logo">
-								<img src="frontendStyle/HTML/img/polisjalogo.jpg">
-								<div class="grid-container">
-									<a href="{{'auto'}}" class="autopolisa">
-										<img class="animated-img" src="frontendStyle/HTML/img/autopolisa.jpg" data-text="Klienci">
-									</a>
-									<a href="{{'nieruchomosc'}}" class="biuropolisa">
-										<img class="animated-img" src="frontendStyle/HTML/img/biuropolisa.jpg" data-text="Biuropolisa">
-									</a>
-									<a href="{{'zycie'}}" class="sercepolisa">
-										<img class="animated-img" src="frontendStyle/HTML/img/sercepolisa.jpg" data-text="Sercepolisa">
-									</a>
-									<a href="{{'biznes'}}" class="dompolisa">
-										<img class="animated-img" src="frontendStyle/HTML/img/dompolisa.jpg" data-text="Dompolska">
-									</a>
+								<div class= "logopol">
+									<img src="frontendStyle/HTML/img/polisjalogo.jpg">
+									<div class="grid-container">
+										<a href="{{'auto'}}" class="autopolisa" data-href="{{'auto'}}">
+												<img class="animated-img" src="frontendStyle/HTML/img/auto.jpg" 
+													data-title="Auto Polisa" 
+													data-content="OC to obowiązkowe ubezpieczenie dla posiadaczy pojazdów mechanicznych.">
+										</a>
+										<a href="{{'biznes'}}" class="dompolisa" data-href="{{'biznes'}}">
+											<img class="animated-img" src="frontendStyle/HTML/img/dom.jpg" 
+												data-title="Dompolska" 
+												data-content="Ubezpieczenia dla biznesu.Twój biznes tak samo jak Ty i Twoi najbliżsi potrzebuje ochrony.  ">
+										</a>
+										<a href="{{'zycie'}}" class="sercepolisa" data-href="{{'zycie'}}">
+											<img class="animated-img" src="frontendStyle/HTML/img/serce.jpg" 
+												data-title="Sercepolisa" 
+												data-content="Ubezpieczenia na życie.Ubezpieczenie na życie zapewni ochronę Tobie i Twoim najbliższym. ">
+										</a>
+										<a href="{{'nieruchomosc'}}" class="biuropolisa" data-href="{{'nieruchomosc'}}">
+												<img class="animated-img" src="frontendStyle/HTML/img/dompolisa.jpg" 
+													data-title="Biuropolisa" 
+													data-content="Ubezpieczenia nieruchomościZadbaj o bezpieczeństwo swojego lokum.">
+										</a>
+										
+										
+									</div>
 								</div>
-								<div class="information" id="informacjeTekst">Informacje o obszarze</div>
+								<div class="information" id="information">
+									<h1 class="info-title">Tytuł</h1>
+									<p class="info-content">Treść</p>
+									<a href="#" class="btn btn-primary push-top pull-right info-button">Przejdz do formularza</a>
+								</div>
 							</div>
 							
 						</div>
