@@ -1,4 +1,4 @@
- /* Form container styles */
+
  .form-container {
     width:100%;
     padding: 20px;
@@ -7,7 +7,7 @@
     border-radius: 5px;
 }
 
-/* Form field styles */
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -25,7 +25,7 @@
     border-radius: 5px;
 }
 
-/* Form button style */
+
 .form-group button {
     background-color: #e36159;
     color: #fff;

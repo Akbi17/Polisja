@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Block;
 
 use App\Entity\Config;
-use App\Controller\Enum;
+use App\Enum\Enum;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
