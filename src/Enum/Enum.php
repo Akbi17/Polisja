@@ -15,7 +15,13 @@ class Enum
     public const BUSINESS ='Biznes';
     public const PROPERTY ='Nieruchomość';
     public const CONTACT ='Kontakt';
-
+    public const TURN_ON ='Włącz';
+    public const TURN_OFF ='Wyłącz';
+    public const CONTACT_NUMBER ='Number';
+    public const E_MAIL ='E-mail';
+    public const CONTACT_NUMBER_PATH ='polisja/contact/phonenumber';
+    public const E_MAIL_PATH ='polisja/contact/mail';
+    
     public function getEnumValues(): array
     {
         return [
@@ -29,6 +35,10 @@ class Enum
             'BUSINESS' => self::BUSINESS,
             'PROPERTY' => self::PROPERTY,
             'CONTACT' => self::CONTACT,
+            'TURN_ON' => self::TURN_ON,
+            'TURN_OFF' => self::TURN_OFF,
+            'CONTACT_NUMBER_PATH' => self::CONTACT_NUMBER_PATH,
+            'E_MAIL_PATH' => self::E_MAIL_PATH,
         ];
     }
 }

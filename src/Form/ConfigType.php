@@ -17,17 +17,17 @@ class ConfigType extends AbstractType
         $builder
             ->add('name', ChoiceType::class, [
                 'choices' => [
-                    'Auto' => Enum::CAR_PATH,
-                    'Dom' => Enum::PROPERTY_PATH,
-                    'Życie' => Enum::HEALTH_PATH,
-                    'Biznes' => Enum::BUSINESS_PATH,
-                    'Contact' => Enum::CONTACT_PATH,
+                    Enum::CAR => Enum::CAR_PATH,
+                    Enum::PROPERTY => Enum::PROPERTY_PATH,
+                    Enum::HEALTH => Enum::HEALTH_PATH,
+                    Enum::BUSINESS => Enum::BUSINESS_PATH,
+                    Enum::CONTACT => Enum::CONTACT_PATH,
                 ],
             ])
             ->add('value',ChoiceType::class,[
                 'choices' => [
-                    'Włącz' => true,
-                    'Wyłącz' => false, 
+                    Enum::TURN_ON => true,
+                    Enum::TURN_OFF => false, 
                    
                 ]
             ])

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Entity\Config;
+use App\Enum\Enum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,8 +18,8 @@ class DataConfigType extends AbstractType
         $builder
             ->add('name', ChoiceType::class, [
                 'choices' => [
-                    'Numer' => 'polisja/contact/phonenumber',
-                    'E-mail' => 'polisja/contact/mail',
+                    Enum::CONTACT_NUMBER => Enum::CONTACT_NUMBER_PATH,
+                    Enum::E_MAIL => Enum::E_MAIL_PATH,
                 ],
             ])
             ->add('value',TextType::class)
