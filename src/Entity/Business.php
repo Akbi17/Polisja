@@ -34,10 +34,10 @@ class Business
     private ?string $place = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $policystartdate = null;
+    private ?\DateTimeInterface $policyStartDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $policyenddate = null;
+    private ?\DateTimeInterface $policyEndDate = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $information = null;
@@ -119,26 +119,26 @@ class Business
         return $this;
     }
 
-    public function getPolicystartdate(): ?\DateTimeInterface
+    public function getPolicyStartDate(): ?\DateTimeInterface
     {
-        return $this->policystartdate;
+        return $this->policyStartDate;
     }
 
-    public function setPolicystartdate(\DateTimeInterface $policystartdate): static
+    public function setPolicyStartDate(\DateTimeInterface $policyStartDate): static
     {
-        $this->policystartdate = $policystartdate;
+        $this->policyStartDate = $policyStartDate;
 
         return $this;
     }
 
-    public function getPolicyenddate(): ?\DateTimeInterface
+    public function getPolicyEndDate(): ?\DateTimeInterface
     {
-        return $this->policyenddate;
+        return $this->policyEndDate;
     }
 
-    public function setPolicyenddate(\DateTimeInterface $policyenddate): static
+    public function setPolicyEndDate(\DateTimeInterface $policyEndDate): static
     {
-        $this->policyenddate = $policyenddate;
+        $this->policyEndDate = $policyEndDate;
 
         return $this;
     }

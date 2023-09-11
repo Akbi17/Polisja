@@ -5,19 +5,12 @@ namespace App\Form;
 
 use App\Entity\Property;
 use App\Form\ChoicesType;
-use Doctrine\DBAL\Types\DateTimeTzType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class PropertyType extends AbstractType
 {
@@ -33,7 +26,7 @@ class PropertyType extends AbstractType
                 'required' => true,
             ])
             ->add('place', TextType::class, [
-                'label' => 'Adress',
+                'label' => 'Adres',
                 'required' => true,
             ])
             ->add('mail', TextType::class, [
@@ -48,16 +41,16 @@ class PropertyType extends AbstractType
                 'label' => 'Imię',
                 'required' => true,
             ])
-            ->add('yearbuilt', IntegerType::class, [
-                'label' => 'Rok zabudowy budynku',
+            ->add('yearBuilt', IntegerType::class, [
+                'label' => 'Rok budowy nieruchomości',
                 'required' => true,
             ])
             ->add('policyStartDate', DateType::class, [
-                'label' => 'Dzień zaczęcia polisy',
+                'label' => 'Dzień rozpoczęcia polisy',
                 'required' => true,
             ])
-            ->add('constructiontype', TextType::class, [
-                'label' => 'Z czego jest zbudowana budynek',
+            ->add('constructionType', TextType::class, [
+                'label' => 'Z czego jest zbudowany budynek',
                 'required' => true,
             ]);
     }
@@ -68,6 +61,4 @@ class PropertyType extends AbstractType
             'data_class' => Property::class,
         ]);
     }
-
-    
 }
