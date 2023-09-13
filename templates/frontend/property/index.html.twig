@@ -26,9 +26,9 @@
 		</div>
     {{ form_start(form, {'attr': {'id': 'propertyInsuranceForm'}}) }}
         <div class="row">
-            <div class="form-group col-md-6">
-                <label for="{{ form.typeOfHouse.vars.id }}">{{ form.typeOfHouse.vars.label }}</label>
-                {{ form_widget(form.typeOfHouse, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+            <div class="form-group col-md-12">
+                <label for="{{ form.houseType.vars.id }}">{{ form.houseType.vars.label }}</label>
+                {{ form_widget(form.houseType, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
             </div>
         </div>
         <div class="row">

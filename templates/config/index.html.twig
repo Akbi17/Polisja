@@ -12,14 +12,17 @@
                 <h1 class="text-center">Aktywne Strony</h1>
                 {{ form_start(form, {'attr': {'class': 'my-form-class'}}) }}
                 <div class="form-group">
-                    {{ form_label(form.name, 'Strona', {'label_attr': {'class': 'my-label-class'}}) }}
-                    {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Wpisz nazwę strony'}}) }}
+
+                    
+                    {{ form_row(form.name) }}
                     {{ form_errors(form.name, {'attr': {'class': 'text-danger'}}) }}
                 </div>
                 <div class="form-group">
+                <div class="col-md-4">
                     {{ form_label(form.value, 'Status', {'label_attr': {'class': 'my-label-class'}}) }}
-                    {{ form_widget(form.value, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.value) }}
                     {{ form_errors(form.value, {'attr': {'class': 'text-danger'}}) }}
+                </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Zapisz</button>
                 {{ form_end(form) }}

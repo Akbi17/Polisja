@@ -9,6 +9,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class ConfigType extends AbstractType
 {
@@ -23,15 +25,16 @@ class ConfigType extends AbstractType
                     Enum::BUSINESS => Enum::BUSINESS_PATH,
                     Enum::CONTACT => Enum::CONTACT_PATH,
                 ],
+                'expanded' => true,
+                
             ])
-            ->add('value',ChoiceType::class,[
+            ->add('value', ChoiceType::class, [
                 'choices' => [
-                    Enum::TURN_ON => true,
-                    Enum::TURN_OFF => false, 
-                   
-                ]
-            ])
-        ;
+                    Enum::TURN_ON => 'true',
+                    Enum::TURN_OFF => 'false', 
+                ],
+                'expanded' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

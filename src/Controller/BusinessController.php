@@ -33,7 +33,7 @@ class BusinessController extends AbstractController
     try {
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            $business->setNameOfBusiness($form->get('nameOfBusiness')->getData());
+            $business->setCompanyName($form->get('companyName')->getData());
             $business->setName($form->get('name')->getData());
             $business->setPhone($form->get('phone')->getData());
             $business->setMail($form->get('mail')->getData());

@@ -19,16 +19,14 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, ManagerRegistry $entityManger): Response
     {
-        if($authenticationUtils->getLastUsername())
-        {
-            return new RedirectResponse($this->urlGenerator->generate('admin'));
-        }
         $adminRepository = $entityManger->getRepository(Admin::class);
         $admins = $adminRepository->findAll();
+        
         if (count($admins) == 0) 
         {
             return $this->redirectToRoute('app_install');
         }
+        
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 

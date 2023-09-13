@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Auto;
 use App\Entity\Contact;
 use App\Entity\Business;
@@ -101,12 +102,13 @@ class DashboardController extends AbstractDashboardController
     {
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::linkToCrud('Admin', 'fa fa-person',Admin::class),
             MenuItem::linkToCrud('Auto', 'fa fa-car',Auto::class),
-            MenuItem::linkToCrud('Business', 'fa fa-home',Business::class),
+            MenuItem::linkToCrud('Business', 'fa fa-wallet',Business::class),
             MenuItem::linkToCrud('Health', 'fa fa-heart',Health::class),
             MenuItem::linkToCrud('Property', 'fa fa-home',Property::class),    
-            MenuItem::linkToCrud('Contact', 'fa fa-home',Contact::class),    
-            MenuItem::linkToCrud('Config', 'fa fa-home',Config::class),    
+            MenuItem::linkToCrud('Contact', 'fa fa-phone',Contact::class),    
+            MenuItem::linkToCrud('Config', 'fa fa-key',Config::class),    
         ];
     }
 }

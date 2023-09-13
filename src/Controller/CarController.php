@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CarController extends AbstractController
 {
-    #[Route('/auto', name: 'app_car')]
+    #[Route('/ubezpieczenia-samochodu', name: 'app_car')]
     public function index(Request $request, ManagerRegistry $doctrine, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
         if(!$webPageAdmin->getCarStatus()->getValue())
@@ -34,7 +34,6 @@ class CarController extends AbstractController
             $entityManager->persist($auto);
             $entityManager->flush();
             $this->addFlash('success', 'Your message has been sent successfully.');
-            $this->addFlash('error', 'There was an error processing the form. Please try again.');
 
             return $this->redirectToRoute('app_car');
         }

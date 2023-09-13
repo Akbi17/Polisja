@@ -16,7 +16,7 @@ class PropertyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('typeOfHouse', TextType::class, [
+            ->add('houseType', TextType::class, [
                 'label' => 'Typ budynku',
                 'required' => true,
             ])
@@ -47,6 +47,12 @@ class PropertyType extends AbstractType
             ->add('policyStartDate', DateType::class, [
                 'label' => 'Dzień zaczęcia polisy',
                 'required' => true,
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Wybierz datę',
+                ],
             ])
             ->add('constructiontype', TextType::class, [
                 'label' => 'Z czego jest zbudowana budynek',
