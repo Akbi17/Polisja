@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Controller\Enum;
+use App\Enum\Enum;
 use App\Block\WebPageAdmin;
 use App\Entity\Contact;
 use App\Form\ContactType;

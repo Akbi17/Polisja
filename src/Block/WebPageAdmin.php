@@ -53,8 +53,8 @@ class WebPageAdmin extends AbstractController
         $activePages = [];
         
         foreach ($pages as $config) {
-            $configName = $config->getName(); // Pobierz nazwę z obiektu Config
-            $configValue = $config->getValue(); // Pobierz wartość z obiektu Config
+            $configName = $config->getName(); 
+            $configValue = $config->getValue(); 
             
             if ($configName === Enum::CAR_PATH && $configValue) {
                 $activePages[] = [
@@ -84,7 +84,6 @@ class WebPageAdmin extends AbstractController
             }
         }
         
-        // Zwracamy wynik jako odpowiedź HTTP, nie renderujemy szablonu tutaj
         return $activePages;
     }
 }

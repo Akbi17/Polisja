@@ -1,1 +1,9 @@
-/* Add here all your CSS customizations */
+@media (min-width: 1024px) {
+    .mapa {
+        width: 50%;
+      }
+}
+#header > .container
+{
+  margin-bottom: -40px;
+}

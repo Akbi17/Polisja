@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Block\WebPageAdmin;
 use App\Entity\Auto;
 use App\Form\AutoType;
+use App\Enum\Enum;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

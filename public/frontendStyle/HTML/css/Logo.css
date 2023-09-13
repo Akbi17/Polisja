@@ -3,6 +3,10 @@
   width: 30%;
 }
 
+.main .row:first-child {
+  margin-right:0px;
+  margin-left:0px;
+}
 .polisja-logo img {
   width: 100%;
   height: auto;
@@ -277,4 +281,7 @@ section.highlight.footer {
 .read .container {
   margin-top: 20px;
   padding-top: 20px;
+}
+.read {
+  background-color: #fff;
 }

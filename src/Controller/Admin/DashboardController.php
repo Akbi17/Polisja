@@ -18,69 +18,77 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Exception;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class DashboardController extends AbstractDashboardController
 {
-    public function __construct(public ManagerRegistry $doctrine ){}
+    public function __construct(public ManagerRegistry $doctrine, private RequestStack $requestStack){}
 
     #[Route('/admin', name: 'admin')]
-    public function indexforms(Request $request): Response
+    public function index(): Response
     {
+        $request = $this->requestStack->getCurrentRequest();
         $formConfigData = $this->createForm(DataConfigType::class);
         $formConfigData->handleRequest($request);
         $form = $this->createForm(ConfigType::class);
         $form->handleRequest($request);
-    try {
-        if ($form->isSubmitted() && $form->isValid()) {
-            $webPageData = $form->getData();
-            $webPageRepository = $this->doctrine->getRepository(Config::class);
-            $existingWebPage = $webPageRepository->findOneBy(['name' => $webPageData->getName()]);
-            if ($existingWebPage) {
-                $existingWebPage->setValue($webPageData->getValue());
+
+        try {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $webPageData = $form->getData();
+                $Data = $formConfigData->getData();
+                
                 $entityManager = $this->doctrine->getManager();
+                
+                $existingWebPage = $entityManager->getRepository(Config::class)->findOneBy(['name' => $webPageData->getName()]);
+                
+                if ($existingWebPage) {
+                    $existingWebPage->setValue($webPageData->getValue());
+                } else {
+                    $existingWebPage = $Data;
+                }
+
                 $entityManager->persist($existingWebPage);
                 $entityManager->flush();
-            } else {
-                $entityManager = $this->doctrine->getManager();
-                $entityManager->persist($webPageData);
-                $entityManager->flush();
-            }
-            $this->addFlash('success', 'Zmiany stron zostały zapisane.');
 
-            return $this->redirectToRoute('admin');
-        }
-    } catch(Exception $e) {
-        $form->addError(new FormError('Błąd przy aktywacji strony'));
-    }
-    try {
-        if ($formConfigData->isSubmitted() && $formConfigData->isValid()) {
-            $Data = $formConfigData->getData();
-            $existingWebPage = $this->doctrine->getRepository(Config::class)->findOneBy(['name' => $Data->getName()]);
-            if ($existingWebPage) {
-                $existingWebPage->setValue($Data->getValue());
+                $this->addFlash('success', 'Zmiany zostały zapisane.');
+                return $this->redirectToRoute('admin');
+            }
+            
+            if ($formConfigData->isSubmitted() && $formConfigData->isValid()) {
+                $Data = $formConfigData->getData();
+                
                 $entityManager = $this->doctrine->getManager();
+                
+                $existingWebPage = $entityManager->getRepository(Config::class)->findOneBy(['name' => $Data->getName()]);
+                
+                if ($existingWebPage) {
+                    $existingWebPage->setValue($Data->getValue());
+                } else {
+                    $existingWebPage = $Data;
+                }
+
                 $entityManager->persist($existingWebPage);
                 $entityManager->flush();
-            } else {
-                $entityManager = $this->doctrine->getManager();
-                $entityManager->persist($Data);
-                $entityManager->flush();
-            }
-            $this->addFlash('success', 'Zmiany zostały zapisane.');
 
-            return $this->redirectToRoute('admin');
+                $this->addFlash('success', 'Zmiany zostały zapisane.');
+                return $this->redirectToRoute('admin');
+            }
+        } catch (Exception $e) {
+            if ($form->isSubmitted()) {
+                $form->addError(new FormError('Wystąpił błąd przy aktywacji strony'));
+            } elseif ($formConfigData->isSubmitted()) {
+                $formConfigData->addError(new FormError('Wystąpił błąd przy konfiguracji'));
+            }
         }
-    } catch(Exception $e){
-        $form->addError(new FormError('Wystąpił błąd przy konfiguracji'));
-    }
 
         return $this->render('config/index.html.twig', [
             'form' => $form->createView(),
             'formConfigData' => $formConfigData->createView()
         ]);
+
     }
 
     public function configureDashboard(): Dashboard
