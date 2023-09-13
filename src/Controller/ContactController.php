@@ -5,28 +5,28 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Trait\TraitForTextCheck;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Block\TraitForTextCheck;
-
 
 class ContactController extends AbstractController
 {
     use TraitForTextCheck;
-    public function __construct( public ManagerRegistry $doctrine)
-    {}
+
+    public function __construct(public EntityManagerInterface $entityManager)
+    {
+    }
 
     #[Route('/contact', name: 'contact')]
-    public function contact(Request $request, ManagerRegistry $doctrine , TransportInterface $mailer): Response
+    public function contact(Request $request, TransportInterface $mailer): Response
     {
-        $entityManager = $doctrine->getManager();
-        $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
+        $contact       = new Contact();
+        $form          = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $contact->setName($form->get('name')->getData());
@@ -35,22 +35,19 @@ class ContactController extends AbstractController
             $this->TextCheckAndGet($form, $contact);
             $email = (new Email())
                 ->from($contact->getEmail())
-                ->to('polisja.oilisja@com') 
-                ->subject($contact->getSubject()) 
+                ->to('polisja@polisja.com')
+                ->subject($contact->getSubject())
                 ->text($contact->getMessage());
             $mailer->send($email);
-            $entityManager->persist($contact);
-            $entityManager->flush();
-            $this->addFlash('success', 'Your message has been sent successfully.');
+            $this->entityManager->persist($contact);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
 
             return $this->redirectToRoute('contact');
         }
 
         return $this->render('frontend/contact/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
-
-        
-    
 }

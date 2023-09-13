@@ -25,14 +25,14 @@ class HealthType extends AbstractType
                 'required' => true,
             ])
             ->add('mail',TextType::class, [
-                'label' => 'Email',
+                'label' => 'E-mail',
                 'required' => true,
             ])
             ->add('phone',TelType::class, [
                 'label' => 'Numer',
                 'required' => true,
             ])
-            ->add('dateofbirth', DateType::class, [
+            ->add('dateOfBirth', DateType::class, [
                 'label' => 'Data urodzenia',
                 'required' => true,
             ])

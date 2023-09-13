@@ -11,48 +11,47 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BiznesType extends AbstractType
+class BusinessType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nameOfBusiness',TextType::class, [
+            ->add('nameOfBusiness', TextType::class, [
                 'label' => 'Nazwa Firmy',
                 'required' => true,
             ])
-            ->add('name',TextType::class, [
-                'label' => 'Imię właściiela firmy',
+            ->add('name', TextType::class, [
+                'label' => 'Imię właściciela firmy',
                 'required' => true,
             ])
-            ->add('surname',TextType::class, [
+            ->add('surname', TextType::class, [
                 'label' => 'Nazwisko właściciela',
                 'required' => true,
             ])
-            ->add('phone',TelType::class, [
+            ->add('phone', TelType::class, [
                 'label' => 'Numer',
                 'required' => true,
             ])
-            ->add('mail',TextType::class, [
-                'label' => 'Email',
+            ->add('mail', TextType::class, [
+                'label' => 'E-mail',
                 'required' => true,
             ])
-            ->add('place',TextType::class, [
+            ->add('place', TextType::class, [
                 'label' => 'Adres',
                 'required' => true,
             ])
-            ->add('policystartdate',DateType::class, [
+            ->add('policyStartDate', DateType::class, [
                 'label' => 'Data początku polisy',
                 'required' => true,
             ])
-            ->add('policyenddate',DateType::class, [
-                'label' => 'Data konca polisy',
+            ->add('policyEndDate', DateType::class, [
+                'label' => 'Data końca polisy',
                 'required' => true,
             ])
-            ->add('information',TextType::class, [
+            ->add('information', TextType::class, [
                 'label' => 'Informacja dodatkowa',
                 'required' => true,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
