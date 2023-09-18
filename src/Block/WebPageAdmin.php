@@ -23,27 +23,27 @@ class WebPageAdmin extends AbstractController
 
     public function getCarStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/car/isActive']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::CAR_PATH]);
     }
 
     public function getPropertyStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/property/isActive']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::PROPERTY_PATH]);
     }
 
     public function getHealthStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/health/isActive']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::HEALTH_PATH]);
     }
 
     public function getBusinessStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/business/isActive']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::BUSINESS_PATH]);
     }
     
     public function getContactStatus()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => 'page/contact/isActive']);
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::CONTACT_PATH]);
     }
 
     public function ActivePages()

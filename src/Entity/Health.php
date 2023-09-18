@@ -28,7 +28,7 @@ class Health
     private ?string $phone = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $birthdate = null;
+    private ?\DateTimeInterface $birthDate = null;
 
     #[ORM\Column(length: 255)]
     private ?string $gender = null;
@@ -94,12 +94,12 @@ class Health
 
     public function getBirthDate(): ?\DateTimeInterface
     {
-        return $this->birthdate;
+        return $this->birthDate;
     }
 
-    public function setBirthDate(\DateTimeInterface $birthdate ): static
+    public function setBirthDate(\DateTimeInterface $birthDate ): static
     {
-        $this->birthdate = $birthdate;
+        $this->birthDate = $birthDate;
 
         return $this;
     }

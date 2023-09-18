@@ -32,7 +32,7 @@ class HealthType extends AbstractType
                 'label' => 'Numer',
                 'required' => true,
             ])
-            ->add('birthdate', DateType::class, [
+            ->add('birthDate', DateType::class, [
                 'label' => 'Data Urodzenia',
                 'required' => true,
                 'widget' => 'single_text',
