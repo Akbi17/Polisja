@@ -25,7 +25,7 @@ class PropertyType extends AbstractType
                 'required' => true,
             ])
             ->add('place', TextType::class, [
-                'label' => 'Adress',
+                'label' => 'Adres',
                 'required' => true,
             ])
             ->add('mail', TextType::class, [
@@ -40,12 +40,12 @@ class PropertyType extends AbstractType
                 'label' => 'Imię',
                 'required' => true,
             ])
-            ->add('yearbuilt', IntegerType::class, [
-                'label' => 'Rok zabudowy budynku',
+            ->add('yearBuilt', IntegerType::class, [
+                'label' => 'Rok budowy nieruchomości',
                 'required' => true,
             ])
             ->add('policyStartDate', DateType::class, [
-                'label' => 'Dzień zaczęcia polisy',
+                'label' => 'Dzień rozpoczęcia polisy',
                 'required' => true,
                 'widget' => 'single_text',
                 'html5' => true,
@@ -54,8 +54,8 @@ class PropertyType extends AbstractType
                     'placeholder' => 'Wybierz datę',
                 ],
             ])
-            ->add('constructiontype', TextType::class, [
-                'label' => 'Z czego jest zbudowana budynek',
+            ->add('constructionType', TextType::class, [
+                'label' => 'Z czego jest zbudowany budynek',
                 'required' => true,
             ]);
     }

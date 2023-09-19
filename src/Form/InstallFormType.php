@@ -23,7 +23,7 @@ class InstallFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Musisz zaakceptować regulamin', //todo chociaż cholera wie jaki to regulamin
                     ]),
                 ],
             ])
@@ -34,11 +34,11 @@ class InstallFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Wprowadź hasło',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Twoje hasło powinno zawierać co najmniej {{ limit }} znaków',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
@@ -47,8 +47,7 @@ class InstallFormType extends AbstractType
             ->add('password')
             ->add('firstname')
             ->add('lastname')
-            ->add('email')
-        ;
+            ->add('email');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

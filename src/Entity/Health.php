@@ -91,7 +91,6 @@ class Health
 
         return $this;
     }
-
     public function getBirthDate(): ?\DateTimeInterface
     {
         return $this->birthDate;

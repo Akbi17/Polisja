@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\AutoRepository;
+use App\Repository\CarRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AutoRepository::class)]
-class Auto
+#[ORM\Entity(repositoryClass: CarRepository::class)]
+class Car
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -36,7 +36,7 @@ class Auto
     private ?int $caryear = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $coveragetype = null;
+    private ?string $coverageType = null;
 
     public function getId(): ?int
     {
@@ -127,14 +127,14 @@ class Auto
         return $this;
     }
 
-    public function getCoveragetype(): ?string
+    public function getCoverageType(): ?string
     {
-        return $this->coveragetype;
+        return $this->coverageType;
     }
 
-    public function setCoveragetype(string $coveragetype): static
+    public function setCoverageType(string $coverageType): static
     {
-        $this->coveragetype = $coveragetype;
+        $this->coverageType = $coverageType;
 
         return $this;
     }

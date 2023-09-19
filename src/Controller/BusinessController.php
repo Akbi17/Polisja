@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use App\Block\WebPageAdmin;
 use App\Entity\Business;
-use App\Form\BiznesType;
+use App\Form\BusinessType;
 use App\Enum\Enum;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
@@ -28,7 +28,7 @@ class BusinessController extends AbstractController
         }
         $entityManager = $this->doctrine->getManager();
         $business = new Business();
-        $form = $this->createForm(BiznesType::class, $business);
+        $form = $this->createForm(BusinessType::class, $business);
         $form->handleRequest($request);
     try {
         if ($form->isSubmitted() && $form->isValid()) 

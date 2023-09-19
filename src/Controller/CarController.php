@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Car;
 use App\Block\WebPageAdmin;
-use App\Entity\Auto;
-use App\Form\AutoType;
-use App\Enum\Enum;
-use Doctrine\Persistence\ManagerRegistry;
-use Exception;
+use App\Form\CarType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Enum\Enum;
+use Exception;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,33 +18,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class CarController extends AbstractController
 {
     #[Route('/ubezpieczenia-samochodu', name: 'app_car')]
-    public function index(Request $request, ManagerRegistry $doctrine, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, Enum $enumValue, WebPageAdmin $webPageAdmin): Response
     {
-        if(!$webPageAdmin->getCarStatus()->getValue())
-        {
-            return $this->redirectToRoute('app_main');
-        }
-        $entityManager = $doctrine->getManager();
-        $auto = new Auto;
-        $form = $this->createForm(AutoType::class, $auto);
+        $auto = new Car;
+        $form = $this->createForm(CarType::class, $auto);
         $form->handleRequest($request);
-    try {
-        if ($form->isSubmitted() && $form->isValid()) 
-        {  
-            $entityManager->persist($auto);
-            $entityManager->flush();
-            $this->addFlash('success', 'Your message has been sent successfully.');
 
-            return $this->redirectToRoute('app_car');
+        try {
+            if ($form->isSubmitted() && $form->isValid()) 
+            {  
+                $entityManager->persist($auto);
+                $entityManager->flush();
+                $this->addFlash('success', 'Your message has been sent successfully.');
+    
+                return $this->redirectToRoute('app_car');
+            }
+        } catch(Exception $e) {
+            $form->addError(new FormError('Błąd przy formularzu'));
         }
-    } catch(Exception $e) {
-        $form->addError(new FormError('Błąd przy formularzu'));
-    }
-        $activepages = $webPageAdmin->ActivePages();
-        $enum = $enumValue->getEnumValues();
-        
+
+            $activepages = $webPageAdmin->ActivePages();
+            $enum = $enumValue->getEnumValues();
+
         return $this->render('frontend/car/index.html.twig', [
-            'form'=>$form->createView(),
+            'form' => $form->createView(),
             'activepages'=>$activepages,
             'enum' => $enum,
         ]);

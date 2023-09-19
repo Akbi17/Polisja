@@ -7,33 +7,36 @@ use App\Enum\Enum;
 use App\Block\WebPageAdmin;
 use App\Entity\Contact;
 use App\Form\ContactType;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Trait\TraitForTextCheck;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Block\TraitForTextCheck;
 use Exception;
 use Symfony\Component\Form\FormError;
+
 
 class ContactController extends AbstractController
 {
     use TraitForTextCheck;
-    public function __construct( public ManagerRegistry $doctrine){}
+
+    public function __construct(public EntityManagerInterface $entityManager)
+    {
+    }
 
     #[Route('/contact', name: 'contact')]
-    public function contact(Request $request, ManagerRegistry $doctrine, TransportInterface $mailer, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
+    public function contact(Request $request, TransportInterface $mailer, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
+        $contact       = new Contact();
+        $form          = $this->createForm(ContactType::class, $contact);
+        $form          ->handleRequest($request);
         if(!$webPageAdmin->getContactStatus()->getValue())
         {
             return $this->redirectToRoute('app_main');
         }
-        $entityManager = $doctrine->getManager();
-        $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
-        $form->handleRequest($request);
     try {
         if ($form->isSubmitted() && $form->isValid()) {
             $contact->setName($form->get('name')->getData());
@@ -42,13 +45,13 @@ class ContactController extends AbstractController
             $this->TextCheckAndGet($form, $contact);
             $email = (new Email())
                 ->from($contact->getEmail())
-                ->to('polisja.oilisja@com') 
-                ->subject($contact->getSubject()) 
+                ->to('polisja@polisja.com')
+                ->subject($contact->getSubject())
                 ->text($contact->getMessage());
             $mailer->send($email);
-            $entityManager->persist($contact);
-            $entityManager->flush();
-            $this->addFlash('success', 'Your message has been sent successfully.');
+            $this->entityManager->persist($contact);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
 
             return $this->redirectToRoute('contact');
         }
@@ -63,6 +66,5 @@ class ContactController extends AbstractController
             'activepages'=> $activepages,
             'enum' => $enum
         ]);
-    }   
-    
+    }
 }

@@ -34,10 +34,10 @@ class Property
     private ?string $name = null;
 
     #[ORM\Column]
-    private ?int $yearbuilt = null;
+    private ?int $yearBuilt = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $constructiontype = null;
+    private ?string $constructionType = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $policyStartDate = null;
@@ -119,26 +119,26 @@ class Property
         return $this;
     }
 
-    public function getYearbuilt(): ?int
+    public function getYearBuilt(): ?int
     {
-        return $this->yearbuilt;
+        return $this->yearBuilt;
     }
 
-    public function setYearbuilt(int $yearbuilt): static
+    public function setYearBuilt(int $yearBuilt): static
     {
-        $this->yearbuilt = $yearbuilt;
+        $this->yearBuilt = $yearBuilt;
 
         return $this;
     }
 
-    public function getConstructiontype(): ?string
+    public function getConstructionType(): ?string
     {
-        return $this->constructiontype;
+        return $this->constructionType;
     }
 
-    public function setConstructiontype(string $constructiontype): static
+    public function setConstructionType(string $constructionType): static
     {
-        $this->constructiontype = $constructiontype;
+        $this->constructionType = $constructionType;
 
         return $this;
     }

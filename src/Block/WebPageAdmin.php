@@ -3,20 +3,19 @@ declare(strict_types=1);
 
 namespace App\Block;
 
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Config;
 use App\Enum\Enum;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class WebPageAdmin extends AbstractController
 {
-    public $entityManager;
-    function __construct(public ManagerRegistry $doctrine) 
+    function __construct(public EntityManagerInterface $entityManager)
+
     {
-        $this->entityManager = $this->doctrine->getManager();
     }
 
-    public function getWebPageStatus()
+    public function getWebPageStatus(): array
     {
         return $this->entityManager->getRepository(Config::class)->findAll();
     }

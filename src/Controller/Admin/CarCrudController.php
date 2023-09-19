@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Entity\Auto;
+use App\Entity\Car;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class CarCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Auto::class;
+        return Car::class;
     }
 }
