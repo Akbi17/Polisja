@@ -45,6 +45,16 @@ class WebPageAdmin extends AbstractController
         return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::CONTACT_PATH]);
     }
 
+    public function getContactPhone()
+    {
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::CONTACT_NUMBER_PATH])->getValue();
+    }
+
+    public function getContactEmail()
+    {
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::E_MAIL_PATH])->getValue();
+    }
+
     public function ActivePages()
     {
         $pages = $this->getWebPageStatus();

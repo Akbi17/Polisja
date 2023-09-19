@@ -16,10 +16,14 @@ class MainController extends AbstractController
     {
         $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
+        $phone = $webPageAdmin->getContactPhone();
+        $mail = $webPageAdmin->getContactEmail();
 
         return $this->render('frontend/main/index.html.twig',[
-           'activepages'=>$activepages,
-           'enum' => $enum,
+            'activepages'=>$activepages,
+            'enum' => $enum,
+            'phone' => $phone,
+            'mail' => $mail,
         ]);
     }
 }

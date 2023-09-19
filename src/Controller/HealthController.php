@@ -49,11 +49,15 @@ class HealthController extends AbstractController
     }
         $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
+        $phone = $webPageAdmin->getContactPhone();
+        $mail = $webPageAdmin->getContactEmail();
 
         return $this->render('frontend/health/index.html.twig', [
             'form' => $form->createView(),
             'activepages'=> $activepages,
             'enum' => $enum,
+            'phone' => $phone,
+            'mail' => $mail,
         ]);
     }
 }

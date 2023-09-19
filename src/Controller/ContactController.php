@@ -60,11 +60,15 @@ class ContactController extends AbstractController
     }
         $activepages = $webPageAdmin->Activepages();
         $enum = $enumValue->getEnumValues();
+        $phone = $webPageAdmin->getContactPhone();
+        $mail = $webPageAdmin->getContactEmail();
 
         return $this->render('frontend/contact/index.html.twig', [
             'form' => $form->createView(),
             'activepages'=> $activepages,
-            'enum' => $enum
+            'enum' => $enum,
+            'phone' => $phone,
+            'mail' => $mail,
         ]);
     }
 }

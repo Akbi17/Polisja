@@ -44,10 +44,15 @@ class PropertyController extends AbstractController
     }
         $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
+        $phone = $webPageAdmin->getContactPhone();
+        $mail = $webPageAdmin->getContactEmail();
+
         return $this->render('frontend/property/index.html.twig', [
             'form' => $form->createView(),
             'activepages' => $activepages,
             'enum' => $enum,
+            'phone' => $phone,
+            'mail' => $mail,
         ]);
     }
 }

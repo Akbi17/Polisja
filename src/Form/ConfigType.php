@@ -30,8 +30,8 @@ class ConfigType extends AbstractType
             ])
             ->add('value', ChoiceType::class, [
                 'choices' => [
-                    Enum::TURN_ON => 'true',
-                    Enum::TURN_OFF => 'false', 
+                    Enum::TURN_ON => 1,
+                    Enum::TURN_OFF => 0, 
                 ],
                 'expanded' => true,
             ]);
