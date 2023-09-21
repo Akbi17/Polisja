@@ -41,4 +41,17 @@ class Enum
             'E_MAIL_PATH' => self::E_MAIL_PATH,
         ];
     }
+
+    public static function getPagesValue(): array
+    {
+        return [
+            'CAR_PATH' => self::CAR_PATH,
+            'HEALTH_PATH' => self::HEALTH_PATH,
+            'BUSINESS_PATH' => self::BUSINESS_PATH,
+            'PROPERTY_PATH' => self::PROPERTY_PATH,
+            'CONTACT_PATH' => self::CONTACT_PATH,
+            'CONTACT_NUMBER_PATH' => self::CONTACT_NUMBER_PATH,
+            'E_MAIL_PATH' => self::E_MAIL_PATH,
+        ];
+    }
 }

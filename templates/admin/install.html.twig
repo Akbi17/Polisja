@@ -24,23 +24,6 @@
             {% endfor %}
 
             <div class="form-container">
-                <h2>Aktywacja Stron</h2>
-                {{ form_start(webPageConfigForm) }}
-                <div class="form-group">
-                    {{ form_label(webPageConfigForm.name, 'Strony') }}
-                    {{ form_widget(webPageConfigForm.name, {'attr': {'class': 'form-control', 'placeholder': 'Wybierz stronę'}}) }}
-                    {{ form_errors(webPageConfigForm.name, {'attr': {'class': 'text-danger'}}) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(webPageConfigForm.value, 'Status') }}
-                    {{ form_widget(webPageConfigForm.value, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(webPageConfigForm.value, {'attr': {'class': 'text-danger'}}) }}
-                </div>
-                <button type="submit" class="form-submit-btn">Zapisz</button>
-                {{ form_end(webPageConfigForm) }}
-            </div>
-
-            <div class="form-container">
                 <h2>Rejestarcja Admina</h2>
                 {{ form_start(form) }}
                 <div class="form-group">
