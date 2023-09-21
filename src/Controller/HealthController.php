@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Block\WebPageAdmin;
 use App\Entity\Health;
 use App\Form\HealthType;
+use App\Enum\Enum;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,11 +22,16 @@ class HealthController extends AbstractController
     }
 
     #[Route('/zycie', name: 'app_health')]
-    public function index(Request $request): Response
+    public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
+        if(!$webPageAdmin->getHealthStatus()->getValue())
+        {
+            return $this->redirectToRoute('app_main');
+        }
         $health        = new Health;
         $form          = $this->createForm(HealthType::class, $health);
         $form->handleRequest($request);
+    try {
         if ($form->isSubmitted() && $form->isValid()) {
             $health->setName($form->get('name')->getData());
             $health->setPhone($form->get('phone')->getData());
@@ -34,10 +43,20 @@ class HealthController extends AbstractController
 
             return $this->redirectToRoute('app_health');
         }
+    } catch(Exception $e) {
+        $form->addError(new FormError('Błąd przy formularzu'));
+    }
+        $activepages = $webPageAdmin->ActivePages();
+        $enum = $enumValue->getEnumValues();
+        $phone = $webPageAdmin->getContactPhone();
+        $mail = $webPageAdmin->getContactEmail();
 
         return $this->render('frontend/health/index.html.twig', [
-            'controller_name' => 'HealthController',
             'form' => $form->createView(),
+            'activepages'=> $activepages,
+            'enum' => $enum,
+            'phone' => $phone,
+            'mail' => $mail,
         ]);
     }
 }

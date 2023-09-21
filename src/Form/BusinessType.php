@@ -16,7 +16,7 @@ class BusinessType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nameOfBusiness', TextType::class, [
+            ->add('companyName', TextType::class, [
                 'label' => 'Nazwa Firmy',
                 'required' => true,
             ])
@@ -43,10 +43,22 @@ class BusinessType extends AbstractType
             ->add('policyStartDate', DateType::class, [
                 'label' => 'Data początku polisy',
                 'required' => true,
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Wybierz datę',
+                ],
             ])
             ->add('policyEndDate', DateType::class, [
                 'label' => 'Data końca polisy',
                 'required' => true,
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Wybierz datę',
+                ],
             ])
             ->add('information', TextType::class, [
                 'label' => 'Informacja dodatkowa',

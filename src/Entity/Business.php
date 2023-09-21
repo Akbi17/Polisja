@@ -16,7 +16,7 @@ class Business
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nameOfBusiness = null;
+    private ?string $companyName = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -47,14 +47,14 @@ class Business
         return $this->id;
     }
 
-    public function getNameOfBusiness(): ?string
+    public function getCompanyName(): ?string
     {
-        return $this->nameOfBusiness;
+        return $this->companyName;
     }
 
-    public function setNameOfBusiness(string $nameOfBusiness): static
+    public function setCompanyName(string $companyName): static
     {
-        $this->nameOfBusiness = $nameOfBusiness;
+        $this->companyName = $companyName;
 
         return $this;
     }

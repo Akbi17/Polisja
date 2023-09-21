@@ -1,0 +1,287 @@
+.polisja-logo {
+  position: relative;
+  width: 30%;
+}
+
+.main .row:first-child {
+  margin-right:0px;
+  margin-left:0px;
+}
+.polisja-logo img {
+  width: 100%;
+  height: auto;
+}
+
+.grid-container {
+  position: absolute;
+  top: 45%;
+  left: 50.5%;
+  transform: translate(-50%, -50%) scale(0.9);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.autopolisa {
+  bottom: -8px;
+}
+
+.grid-container a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 1s, filter 0.7s;
+}
+
+.grid-container a.vibrating {
+  animation: vibration 0.5s infinite;
+}
+
+.grid-container a:hover img {
+  transform: rotateY(180deg);
+  transition: transform 0.5s;
+}
+
+.grid-container a:not(:hover) img {
+  transform: rotateY(0deg);
+  transition: transform 1s;
+}
+
+@keyframes vibration {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(3px);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(-3px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.information {
+  display: none;
+  position: absolute;
+  width: 150%;
+  height: 70%;
+  top: 2em;
+  left: 130%;
+  background-color: rgba(60, 59, 59, 0);
+  color: rgb(43, 49, 45);
+  padding: 1em;
+  margin: 0;
+  z-index: 1;
+  font-size: medium;
+}
+
+.info-title {
+  font-size: 1.5em;
+}
+
+.info-content {
+  font-size: 1em;
+}
+
+@media (min-width: 320px) {
+  .logopol {
+    visibility: hidden;
+  }
+
+  .autopolisa {
+    bottom: -5px;
+  }
+
+  .information {
+    display: none;
+    position: absolute;
+    width: 300%;
+    height: 100%;
+    top: 0em;
+    left: 10%;
+    background-color: rgba(60, 59, 59, 0);
+    color: rgb(43, 49, 45);
+    padding: 3px;
+    margin: 0;
+    z-index: 1;
+    font-size: medium;
+  }
+
+  .information h1 {
+    margin: 0px 0px 0px 0px;
+    font-size: 3rem;
+  }
+
+  .info-content {
+    line-height: 1.9rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .information .btn {
+    font-size: 1.2rem;
+  }
+
+  .logotyp {
+    height: 15vh;
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: 375px) {
+  .information .btn {
+    font-size: auto;
+  }
+
+  .push-top {
+    margin-top: auto;
+  }
+
+  .logotyp {
+    height: 15vh;
+  }
+}
+
+@media (min-width: 425px) {
+  .information .btn {
+    font-size: 1.8rem;
+  }
+
+  .logotyp {
+    height: 13vh;
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: 765px) {
+  .logopol {
+    visibility: visible;
+    /* lub visibility: hidden; */
+  }
+
+  .information {
+    display: none;
+    position: absolute;
+    width: 150%;
+    height: 70%;
+    top: 2em;
+    left: 130%;
+    background-color: rgba(60, 59, 59, 0);
+    color: rgb(43, 49, 45);
+    padding: 1em;
+    margin: 0;
+    z-index: 1;
+    font-size: medium;
+  }
+
+  .grid-container {
+    grid-gap: 1.2em;
+  }
+
+  .info-title {
+    line-height: 0.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.01rem;
+  }
+
+  .info-content {
+    line-height: 1.9rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+  }
+
+  .information .btn {
+    font-size: 1.9rem;
+  }
+
+  .information h1 {
+    margin: 0px 0px 20px 0px;
+  }
+
+  .information p {
+    line-height: 2rem;
+  }
+
+  .logotyp {
+    height: auto;
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-gap: 1em;
+  }
+
+  .grid-container img {
+    transform: scale(0.1);
+  }
+
+  .mapa {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .body {
+    padding-top: 0px;
+  }
+
+  html.no-page-top body > .body {
+    padding-top: 0px;
+  }
+
+  #header .logo {
+    background: none;
+    border-bottom: none;
+    border-radius: initial;
+    color: initial;
+    display: initial;
+    float: none;
+    height: initial;
+    margin: initial;
+    padding: initial;
+    transition: initial;
+    z-index: initial;
+  }
+}
+
+section.call-to-action.footer {
+  margin: 10px 0 40px;
+}
+
+.kontakt .push-top {
+  margin-top: 0px;
+}
+
+.webdesing {
+  background-color: #fff;
+}
+
+section.highlight.footer {
+  margin: 0px 0 -70px;
+}
+
+.webdesing {
+  padding-top: 30px;
+  padding-bottom: 25px;
+  margin-bottom: 40px;
+}
+
+.read .container {
+  margin-top: 20px;
+  padding-top: 20px;
+}
+.read {
+  background-color: #fff;
+}

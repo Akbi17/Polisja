@@ -30,7 +30,7 @@ class CarType extends AbstractType
                     'Comprehensive' => 'comprehensive',
                     'Third Party' => 'third_party',
                 ],
-                'placeholder' => 'Select coverage type', //todo tekst wyświetlany po polsku
+                'placeholder' => 'Wybierz typ',
             ]);
 
     }

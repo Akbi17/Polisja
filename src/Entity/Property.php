@@ -16,7 +16,7 @@ class Property
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $typeOfHouse = null;
+    private ?string $houseType  = null;
 
     #[ORM\Column]
     private ?int $residentialArea = null;
@@ -47,14 +47,14 @@ class Property
         return $this->id;
     }
 
-    public function getTypeOfHouse(): ?string
+    public function getHouseType(): ?string
     {
-        return $this->typeOfHouse;
+        return $this->houseType;
     }
 
-    public function setTypeOfHouse(string $typeOfHouse): static
+    public function setHouseType (string $houseType ): static
     {
-        $this->typeOfHouse = $typeOfHouse;
+        $this->houseType  = $houseType ;
 
         return $this;
     }
@@ -121,12 +121,12 @@ class Property
 
     public function getYearBuilt(): ?int
     {
-        return $this->yearbuilt;
+        return $this->yearBuilt;
     }
 
     public function setYearBuilt(int $yearBuilt): static
     {
-        $this->yearbuilt = $yearBuilt;
+        $this->yearBuilt = $yearBuilt;
 
         return $this;
     }

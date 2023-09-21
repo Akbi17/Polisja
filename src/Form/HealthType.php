@@ -32,9 +32,15 @@ class HealthType extends AbstractType
                 'label' => 'Numer',
                 'required' => true,
             ])
-            ->add('dateOfBirth', DateType::class, [
-                'label' => 'Data urodzenia',
+            ->add('birthDate', DateType::class, [
+                'label' => 'Data Urodzenia',
                 'required' => true,
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Wybierz datę',
+                ],
             ])
             ->add('gender',TextType::class, [
                 'label' => 'Płeć',
@@ -44,10 +50,17 @@ class HealthType extends AbstractType
                 'label' => 'Zawód',
                 'required' => true,
             ])
-            ->add('policyStartDate',DateType::class, [
+            ->add('policyStartDate', DateType::class, [
                 'label' => 'Dzień zaczęcia polisy',
                 'required' => true,
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Wybierz datę',
+                ],
             ])
+            
         ;
     }
 

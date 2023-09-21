@@ -3,16 +3,29 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Admin;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    public function __construct(private UrlGeneratorInterface $urlGenerator){}
+
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, ManagerRegistry $entityManger): Response
     {
+        $adminRepository = $entityManger->getRepository(Admin::class);
+        $admins          = $adminRepository->findAll();
+        
+        if (count($admins) == 0) 
+        {
+            return $this->redirectToRoute('app_install');
+        }
+        
         $error        = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 

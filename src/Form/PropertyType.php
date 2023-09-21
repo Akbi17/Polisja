@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Entity\Property;
-use App\Form\ChoicesType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +16,7 @@ class PropertyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('typeOfHouse', TextType::class, [
+            ->add('houseType', TextType::class, [
                 'label' => 'Typ budynku',
                 'required' => true,
             ])
@@ -30,7 +29,7 @@ class PropertyType extends AbstractType
                 'required' => true,
             ])
             ->add('mail', TextType::class, [
-                'label' => 'Email',
+                'label' => 'E-mail',
                 'required' => true,
             ])
             ->add('phone', TextType::class, [
@@ -48,6 +47,12 @@ class PropertyType extends AbstractType
             ->add('policyStartDate', DateType::class, [
                 'label' => 'Dzień rozpoczęcia polisy',
                 'required' => true,
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Wybierz datę',
+                ],
             ])
             ->add('constructionType', TextType::class, [
                 'label' => 'Z czego jest zbudowany budynek',
@@ -60,5 +65,5 @@ class PropertyType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Property::class,
         ]);
-    }
+    }   
 }

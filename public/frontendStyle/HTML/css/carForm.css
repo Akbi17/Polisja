@@ -1,0 +1,36 @@
+
+ .form-container {
+    width:100%;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.form-group button {
+    background-color: #e36159;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

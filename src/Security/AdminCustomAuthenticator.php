@@ -19,7 +19,6 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 class AdminCustomAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
-
     public const LOGIN_ROUTE = 'app_login';
 
     public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
@@ -29,11 +28,9 @@ class AdminCustomAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): Passport
     {
         $username = $request->request->get('username', '');
-
         $request->getSession()->set(Security::LAST_USERNAME, $username);
 
-        return new Passport(
-            new UserBadge($username),
+        return new Passport(new UserBadge($username),
             new PasswordCredentials($request->request->get('password', '')),
             [
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
@@ -43,11 +40,11 @@ class AdminCustomAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) 
+        {
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
         return new RedirectResponse($this->urlGenerator->generate('admin'));
         
     }

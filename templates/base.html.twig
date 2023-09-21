@@ -3,14 +3,12 @@
 	<head>
 		<!-- Basic -->
 		<meta charset="utf-8">
-		<title>Tucson - Responsive HTML5 Template 2.1.0</title>		
-		<meta name="keywords" content="HTML5 Template" />
-		<meta name="description" content="Tucson - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
-
+		<title>Polisa-Wyszukiwarka Ubezpieczenia</title>		
+		<meta name="keywords" content="polisy ubezpieczeniowe, ubezpieczenia samochodowe, ubezpieczenia zdrowotne, ubezpieczenia na życie">
+		<meta name="description" content="Nasza firma oferuje różnego rodzaju polisy ubezpieczeniowe, w tym ubezpieczenia samochodowe, zdrowotne i na życie. Sprawdź naszą ofertę już teraz.">
+		<meta name="author" content="polisa.pl">
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 		<!-- Web Fonts  -->
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Alegreya|Alegreya+SC|Oswald:400,300" rel="stylesheet" type="text/css">
 
@@ -21,14 +19,12 @@
 		<link rel="stylesheet" href="frontendStyle/HTML/vendor/owlcarousel/owl.carousel.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/vendor/owlcarousel/owl.theme.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/vendor/magnific-popup/magnific-popup.css">
-
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-elements.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-blog.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-shop.css">
 		<link rel="stylesheet" href="frontendStyle/HTML/css/theme-animate.css">
-
 
 		<!-- Skin CSS -->
 		<link rel="stylesheet" href="frontendStyle/HTML/css/skins/default.css">
@@ -38,15 +34,15 @@
 
 		<!-- Head Libs -->
 		<script src="frontendStyle/HTML/vendor/modernizr/modernizr.js"></script>
-		<link rel="stylesheet" href="frontendStyle/HTML/css/styleDoLoga.css">
+		
 	</head>
 <body>
 	<div class="body">
 		<header id="header">
 				<div class="container">
 					<h1 class="logo">
-						<a href="index.html">
-							<img alt="Tucson" width="180" height="55" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/pol.jpg">
+						<a href="{{ path('app_main') }}">
+							<img alt="Tucson" width="150" height="45" src="frontendStyle/HTML/img/pol.jpg">
 						</a>
 					</h1>
 					<button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
@@ -59,23 +55,13 @@
 						<nav class="nav-main mega-menu">
 							<ul class="nav nav-pills nav-main" id="mainMenu">
 								<li>
-									<a href="{{'main'}}">Główna</a>
+									<a href="{{path('app_main')}}">Główna</a>
 								</li>
-								<li>
-									<a href="{{'auto'}}">Samochody</a>
-								</li>
-								<li>
-									<a href="{{'nieruchomosc'}}">Dom</a>
-								</li>
-								<li>
-									<a href="{{'zycie'}}">Zycie</a>
-								</li>
-								<li>
-									<a href="{{'biznes'}}">Bizness</a>
-								</li>
-								<li>
-									<a href="{{'contact'}}">Kontakt</a>
-								</li>
+								{% for page in activepages %}
+									<li>
+										<a href="{{ page.path }}">{{ page.label }}</a>
+									</li>
+								{% endfor %}
 							</ul>
 						</nav>
 					</div>
@@ -97,35 +83,32 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-							<a href="{{'main'}}" class="logo push-bottom">
-								<img alt="Tucson" width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisjanowa.jpg">
+							<a href="{{path('app_main')}}" class="logo push-bottom">
+								<img width="180" height="44" data-sticky-width="134" data-sticky-height="40" src="frontendStyle/HTML/img/polisjanowa.jpg">
 							</a>
-							<p>Polisja to najlepsza wyszukiwarka ubezpieczeń AC/OC oraz ubezpieczenia zdrowia, mieszkania oraz firmy <a href="{{'main'}}" class="btn-flat btn-xs">Zobacz więcej <i class="fa fa-arrow-right"></i></a></p>
+							<p>Polisja to najlepsza wyszukiwarka ubezpieczeń AC/OC oraz ubezpieczenia zdrowia, mieszkania oraz firmy</p>
 							<div class="contact-details">
 								<ul class="contact">
 									<li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 123 Street Name, City, USA</p></li>
-									<li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:" id="email"></a></p></li>
-									<li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> <a href="tel" id="callToPhoneNumber"></a></p></li>
+									<li>
+										<p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:" id="email">{{ mail }}</a></p>
+									</li>
+									<li>
+										<p><i class="fa fa-phone"></i> <strong>Phone:</strong> <a href="tel" id="callToPhoneNumber">{{ phone }}</a></p>
+									</li>
+
 								</ul>
 							</div>
 						</div>
-						<div class="col-md-3">
-							<h4>Polisja Wyszukiwarka Ubezpieczeń</h4>
-							<ul class="nav nav-list primary push-bottom">
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'auto'}}">Jeżdij śmiało z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'nieruchomosc'}}">Ubezpiecz nieruchomość z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'zycie'}}">Bądź biezpieczny z Polisją</a></li>
-								<li><a title="Class aptent taciti sociosqu ad litora torquent" href="{{'biznes'}}">Bądź biezpieczny za swoje investycje z Polisją</a></li>
-							</ul>
-						</div>
-						<iframe width="50%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=17.2970724105835%2C50.94158292629885%2C17.30758666992188%2C50.94581472709556&amp;layer=mapnik&amp;marker=50.94369887484719%2C17.302329540252686" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=50.94370&amp;mlon=17.30233#map=18/50.94370/17.30233"></a></small>
+						{% include 'siteMapOnFooter.html.twig' %}
+						<iframe class='mapa' width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=17.2970724105835%2C50.94158292629885%2C17.30758666992188%2C50.94581472709556&amp;layer=mapnik&amp;marker=50.94369887484719%2C17.302329540252686" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=50.94370&amp;mlon=17.30233#map=18/50.94370/17.30233"></a></small>
 					</div>
 				</div>
 				<div class="footer-copyright">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-6">
-								<p>Copyright © 2014. All Rights Reserved.</p>
+								<p>Copyright © 2023. All Rights Reserved.</p>
 							</div>
 							<div class="col-md-6">
 								<ul class="social-icons">
@@ -141,6 +124,7 @@
 			</div>
 		</footer>
 	</div>
+	
 <!-- Vendor -->
 		<script src="frontendStyle/HTML/vendor/jquery/jquery.js"></script>
 		<script src="frontendStyle/HTML/vendor/jquery.appear/jquery.appear.js"></script>
@@ -175,55 +159,7 @@
 
 		
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script>
-			$(document).ready(function() {
-			var images = $(".grid-container img");
-			var infoBox = $(".informacjeDodatkowe");
-			var currentIndex = 0;
-			var interval = 4000; // Czas zmiany zdjęcia (4 sekundy)
-
-			function showInfo(index) {
-			var currentImage = images.eq(index);
-			var text = currentImage.data("text");
-			infoBox.text(text).fadeIn();
-
-			if (!currentImage.hasClass("active")) {
-				// Animacja powiększenia tylko dla jednego zdjęcia (bez hovera)
-				images.removeClass("active").css("transform", "scale(1)");
-				currentImage.addClass("active").css("transform", "scale(1.1)");
-
-				// Po 3 sekundy zmniejszamy zdjęcie i ukrywamy informacje dodatkowe
-				setTimeout(function() {
-				currentImage.css("transform", "scale(1)");
-				infoBox.fadeOut();
-				}, 3000);
-			}
-			}
-
-			// Funkcja do obsługi efektu powiększenia przy najechaniu na zdjęcie
-			images.on("mouseenter", function() {
-			if (!$(this).hasClass("active")) {
-				$(this).css("transform", "scale(1.1)");
-				infoBox.text($(this).data("text")).fadeIn();
-			}
-			});
-
-			images.on("mouseleave", function() {
-			if (!$(this).hasClass("active")) {
-				$(this).css("transform", "scale(1)");
-				infoBox.hide();
-			}
-			});
-
-			// Wywołujemy funkcję na początku dla pierwszego zdjęcia
-			showInfo(currentIndex);
-
-			// Ustawienie animacji na następne zdjęcie co 4 sekundy
-			setInterval(function() {
-			currentIndex = (currentIndex + 1) % images.length;
-			showInfo(currentIndex);
-			}, interval);
-			});
-		</script>
+		
+		<script src="frontendStyle/HTML/js/logorotate.js"></script> 
     </body>
 </html>
