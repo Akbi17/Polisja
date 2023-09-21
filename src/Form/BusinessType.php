@@ -16,7 +16,7 @@ class BusinessType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('companyName',TextType::class, [
+            ->add('companyName', TextType::class, [
                 'label' => 'Nazwa Firmy',
                 'required' => true,
             ])

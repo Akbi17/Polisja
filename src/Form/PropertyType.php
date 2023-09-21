@@ -29,7 +29,7 @@ class PropertyType extends AbstractType
                 'required' => true,
             ])
             ->add('mail', TextType::class, [
-                'label' => 'Email',
+                'label' => 'E-mail',
                 'required' => true,
             ])
             ->add('phone', TextType::class, [

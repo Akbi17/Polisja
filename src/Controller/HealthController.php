@@ -7,7 +7,7 @@ use App\Block\WebPageAdmin;
 use App\Entity\Health;
 use App\Form\HealthType;
 use App\Enum\Enum;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -17,8 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HealthController extends AbstractController
 {
-    public function __construct( public ManagerRegistry $doctrine)
-    {}
+    public function __construct(public EntityManagerInterface $entityManager)
+    {
+    }
 
     #[Route('/zycie', name: 'app_health')]
     public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
@@ -27,20 +28,18 @@ class HealthController extends AbstractController
         {
             return $this->redirectToRoute('app_main');
         }
-        $entityManager = $this->doctrine->getManager();
-        $health = new Health;
-        $form = $this->createForm(HealthType::class, $health);
+        $health        = new Health;
+        $form          = $this->createForm(HealthType::class, $health);
         $form->handleRequest($request);
     try {
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $health->setName($form->get('name')->getData());
             $health->setPhone($form->get('phone')->getData());
             $health->setMail($form->get('mail')->getData());
             $health->setSurname($form->get('surname')->getData());
-            $entityManager->persist($health);
-            $entityManager->flush();
-            $this->addFlash('success','Your message has been sent successfully.');
+            $this->entityManager->persist($health);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
 
             return $this->redirectToRoute('app_health');
         }

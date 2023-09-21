@@ -25,7 +25,7 @@ class CarType extends AbstractType
             ->add('carmake', TextType::class)
             ->add('carmodel', TextType::class)
             ->add('caryear', NumberType::class)
-            ->add('coveragetype', ChoiceType::class, [
+            ->add('coverageType', ChoiceType::class, [
                 'choices' => [
                     'Comprehensive' => 'comprehensive',
                     'Third Party' => 'third_party',

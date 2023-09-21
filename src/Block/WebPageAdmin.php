@@ -56,43 +56,60 @@ class WebPageAdmin extends AbstractController
     }
 
     public function ActivePages()
-    {
-        $pages = $this->getWebPageStatus();
+{
+    $pages = $this->getWebPageStatus();
     
-        $activePages = [];
+    $activePages = [];
+    
+    foreach ($pages as $config) {
+        $configName = $config->getName();
+        $configValue = $config->getValue();
         
-        foreach ($pages as $config) {
-            $configName = $config->getName(); 
-            $configValue = $config->getValue(); 
-            
-            if ($configName === Enum::CAR_PATH && $configValue) {
-                $activePages[] = [
-                    'label' => 'Samochody',
-                    'path' => $this->generateUrl('app_car'),
-                ];
-            } elseif ($configName === Enum::PROPERTY_PATH && $configValue) {
-                $activePages[] = [
-                    'label' => 'Dom',
-                    'path' => $this->generateUrl('app_property'),
-                ];
-            } elseif ($configName === Enum::HEALTH_PATH && $configValue) {
-                $activePages[] = [
-                    'label' => 'Zycie',
-                    'path' => $this->generateUrl('app_health'),
-                ];
-            } elseif ($configName === Enum::BUSINESS_PATH && $configValue) {
-                $activePages[] = [
-                    'label' => 'Bizness',
-                    'path' => $this->generateUrl('app_business'),
-                ];
-            } elseif ($configName === Enum::CONTACT_PATH && $configValue) {
-                $activePages[] = [
-                    'label' => 'Kontakt',
-                    'path' => $this->generateUrl('contact'),
-                ];
-            }
+        switch ($configName) {
+            case Enum::CAR_PATH:
+                if ($configValue) {
+                    $activePages[] = [
+                        'label' => 'Samochody',
+                        'path' => $this->generateUrl('app_car'),
+                    ];
+                }
+                break;
+            case Enum::PROPERTY_PATH:
+                if ($configValue) {
+                    $activePages[] = [
+                        'label' => 'Dom',
+                        'path' => $this->generateUrl('app_property'),
+                    ];
+                }
+                break;
+            case Enum::HEALTH_PATH:
+                if ($configValue) {
+                    $activePages[] = [
+                        'label' => 'Zycie',
+                        'path' => $this->generateUrl('app_health'),
+                    ];
+                }
+                break;
+            case Enum::BUSINESS_PATH:
+                if ($configValue) {
+                    $activePages[] = [
+                        'label' => 'Bizness',
+                        'path' => $this->generateUrl('app_business'),
+                    ];
+                }
+                break;
+            case Enum::CONTACT_PATH:
+                if ($configValue) {
+                    $activePages[] = [
+                        'label' => 'Kontakt',
+                        'path' => $this->generateUrl('contact'),
+                    ];
+                }
+                break;
         }
-        
-        return $activePages;
     }
+    
+    return $activePages;
+}
+
 }

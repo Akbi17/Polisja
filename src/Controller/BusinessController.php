@@ -7,7 +7,7 @@ use App\Block\WebPageAdmin;
 use App\Entity\Business;
 use App\Form\BusinessType;
 use App\Enum\Enum;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -17,8 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BusinessController extends AbstractController
 {
-    public function __construct( public ManagerRegistry $doctrine)
-    {}
+    public function __construct(public EntityManagerInterface $entityManager)
+    {
+    }
 
     #[Route('/biznes', name: 'app_business')]
     public function index(Request $request, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
@@ -26,21 +27,19 @@ class BusinessController extends AbstractController
         if(!$webPageAdmin->getBusinessStatus()->getValue()){
             return $this->redirectToRoute('app_main');
         }
-        $entityManager = $this->doctrine->getManager();
-        $business = new Business();
-        $form = $this->createForm(BusinessType::class, $business);
+        $business      = new Business();
+        $form          = $this->createForm(BusinessType::class, $business);
         $form->handleRequest($request);
     try {
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $business->setCompanyName($form->get('companyName')->getData());
             $business->setName($form->get('name')->getData());
             $business->setPhone($form->get('phone')->getData());
             $business->setMail($form->get('mail')->getData());
             $business->setPlace($form->get('place')->getData());
-            $entityManager->persist($business);
-            $entityManager->flush();
-            $this->addFlash('success','Your message has been sent successfully.');
+            $this->entityManager->persist($business);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
 
             return $this->redirectToRoute('app_business');
         }

@@ -101,13 +101,13 @@ class DashboardController extends AbstractDashboardController
     {
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
-            MenuItem::linkToCrud('Admin', 'fa fa-person',Admin::class),
-            MenuItem::linkToCrud('Auto', 'fa fa-car',Car::class),
-            MenuItem::linkToCrud('Business', 'fa fa-wallet',Business::class),
-            MenuItem::linkToCrud('Health', 'fa fa-heart',Health::class),
-            MenuItem::linkToCrud('Property', 'fa fa-home',Property::class),    
-            MenuItem::linkToCrud('Contact', 'fa fa-phone',Contact::class),    
-            MenuItem::linkToCrud('Config', 'fa fa-key',Config::class),
+            MenuItem::linkToCrud('Admin', 'fa fa-person', Admin::class),
+            MenuItem::linkToCrud('Auto', 'fa fa-car', Car::class),
+            MenuItem::linkToCrud('Business', 'fa fa-wallet', Business::class),
+            MenuItem::linkToCrud('Health', 'fa fa-heart', Health::class),
+            MenuItem::linkToCrud('Property', 'fa fa-home', Property::class),    
+            MenuItem::linkToCrud('Contact', 'fa fa-phone', Contact::class),    
+            MenuItem::linkToCrud('Config', 'fa fa-key', Config::class),
         ];
     }
 }

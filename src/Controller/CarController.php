@@ -25,11 +25,10 @@ class CarController extends AbstractController
         $form->handleRequest($request);
 
         try {
-            if ($form->isSubmitted() && $form->isValid()) 
-            {  
+            if ($form->isSubmitted() && $form->isValid()) {  
                 $entityManager->persist($auto);
                 $entityManager->flush();
-                $this->addFlash('success', 'Your message has been sent successfully.');
+                $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
     
                 return $this->redirectToRoute('app_car');
             }
@@ -44,7 +43,7 @@ class CarController extends AbstractController
 
         return $this->render('frontend/car/index.html.twig', [
             'form' => $form->createView(),
-            'activepages'=>$activepages,
+            'activepages' => $activepages,
             'enum' => $enum,
             'phone' => $phone,
             'mail' => $mail,
