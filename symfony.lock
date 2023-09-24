@@ -197,5 +197,5 @@
         "files": [
             "config/packages/validator.yaml"
         ]
-    },
+    }
 }
