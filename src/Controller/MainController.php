@@ -16,8 +16,8 @@ class MainController extends AbstractController
     {
         $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
-        $phone = $webPageAdmin->getContactPhone();
-        $mail = $webPageAdmin->getContactEmail();
+        $phone = $webPageAdmin->getContactPhone()->getValue();
+        $mail = $webPageAdmin->getContactEmail()->getValue();
 
         return $this->render('frontend/main/index.html.twig',[
             'activepages'=>$activepages,

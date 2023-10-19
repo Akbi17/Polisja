@@ -48,8 +48,8 @@ class BusinessController extends AbstractController
     }
         $activepages = $webPageAdmin->ActivePages();
         $enum = $enumValue->getEnumValues();
-        $phone = $webPageAdmin->getContactPhone();
-        $mail = $webPageAdmin->getContactEmail();
+        $phone = $webPageAdmin->getContactPhone()->getValue();
+        $mail = $webPageAdmin->getContactEmail()->getValue();
 
         return $this->render('frontend/business/index.html.twig', [
             'form' => $form->createView(),

@@ -38,8 +38,8 @@ class CarController extends AbstractController
 
             $activepages = $webPageAdmin->ActivePages();
             $enum = $enumValue->getEnumValues();
-            $phone = $webPageAdmin->getContactPhone();
-            $mail = $webPageAdmin->getContactEmail();
+            $phone = $webPageAdmin->getContactPhone()->getValue();
+            $mail = $webPageAdmin->getContactEmail()->getValue();
 
         return $this->render('frontend/car/index.html.twig', [
             'form' => $form->createView(),

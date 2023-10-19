@@ -26,8 +26,9 @@ class ConfigType extends AbstractType
                     Enum::CONTACT => Enum::CONTACT_PATH,
                 ],
                 'expanded' => true,
-                
+
             ])
+
             ->add('value', ChoiceType::class, [
                 'choices' => [
                     Enum::TURN_ON => 1,

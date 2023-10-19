@@ -47,12 +47,12 @@ class WebPageAdmin extends AbstractController
 
     public function getContactPhone()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::CONTACT_NUMBER_PATH])->getValue();
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::CONTACT_NUMBER_PATH]);
     }
 
     public function getContactEmail()
     {
-        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::E_MAIL_PATH])->getValue();
+        return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::E_MAIL_PATH]);
     }
 
     public function ActivePages()
@@ -62,8 +62,9 @@ class WebPageAdmin extends AbstractController
     $activePages = [];
     
     foreach ($pages as $config) {
-        $configName = $config->getName();
-        $configValue = $config->getValue();
+        if ($config !== null) {
+            $configName = $config->getName();
+            $configValue = $config->getValue();
         
         switch ($configName) {
             case Enum::CAR_PATH:
@@ -106,7 +107,7 @@ class WebPageAdmin extends AbstractController
                     ];
                 }
                 break;
-        }
+        }}
     }
     
     return $activePages;
