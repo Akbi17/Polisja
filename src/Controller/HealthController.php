@@ -24,9 +24,10 @@ class HealthController extends AbstractController
     #[Route('/zycie', name: 'app_health')]
     public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if($webPageAdmin->ActivePages())
+        if(!$webPageAdmin->getHealthStatus()->getValue())
         {
-            return $this->redirectToRoute('app_main');
+            dump($webPageAdmin->ActivePages());
+
         }
         $health        = new Health;
         $form          = $this->createForm(HealthType::class, $health);

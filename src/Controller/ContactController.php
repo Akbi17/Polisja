@@ -30,7 +30,7 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'contact')]
     public function contact(Request $request, TransportInterface $mailer, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if($webPageAdmin->ActivePages())
+        if(!$webPageAdmin->getContactStatus()->getValue())
         {
             return $this->redirectToRoute('app_main');
         }

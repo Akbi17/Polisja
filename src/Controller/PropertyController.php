@@ -24,7 +24,7 @@ class PropertyController extends AbstractController
     #[Route('/nieruchomosc', name: 'app_property')]
     public function index(Request $request, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if($webPageAdmin->ActivePages())
+        if(!$webPageAdmin->getPropertyStatus()->getValue())
         {
             return $this->redirectToRoute('app_main');
         }
