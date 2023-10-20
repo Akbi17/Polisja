@@ -30,13 +30,14 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'contact')]
     public function contact(Request $request, TransportInterface $mailer, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        $contact       = new Contact();
-        $form          = $this->createForm(ContactType::class, $contact);
-        $form          ->handleRequest($request);
-        if(!$webPageAdmin->getContactStatus()->getValue())
+        if($webPageAdmin->ActivePages())
         {
             return $this->redirectToRoute('app_main');
         }
+        $contact       = new Contact();
+        $form          = $this->createForm(ContactType::class, $contact);
+        $form          ->handleRequest($request);
+
     try {
         if ($form->isSubmitted() && $form->isValid()) {
             $contact->setName($form->get('name')->getData());

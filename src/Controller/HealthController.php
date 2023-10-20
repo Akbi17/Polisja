@@ -24,7 +24,7 @@ class HealthController extends AbstractController
     #[Route('/zycie', name: 'app_health')]
     public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if(!$webPageAdmin->getHealthStatus()->getValue())
+        if($webPageAdmin->ActivePages())
         {
             return $this->redirectToRoute('app_main');
         }

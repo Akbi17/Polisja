@@ -23,8 +23,9 @@ class BusinessController extends AbstractController
 
     #[Route('/biznes', name: 'app_business')]
     public function index(Request $request, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
-    {   
-        if(!$webPageAdmin->getBusinessStatus()->getValue()){
+    {
+        if($webPageAdmin->ActivePages())
+        {
             return $this->redirectToRoute('app_main');
         }
         $business      = new Business();

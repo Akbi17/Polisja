@@ -20,6 +20,10 @@ class CarController extends AbstractController
     #[Route('/ubezpieczenia-samochodu', name: 'app_car')]
     public function index(Request $request, EntityManagerInterface $entityManager, Enum $enumValue, WebPageAdmin $webPageAdmin): Response
     {
+        if($webPageAdmin->ActivePages())
+        {
+            return $this->redirectToRoute('app_main');
+        }
         $auto = new Car;
         $form = $this->createForm(CarType::class, $auto);
         $form->handleRequest($request);
