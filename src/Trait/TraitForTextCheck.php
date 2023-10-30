@@ -6,7 +6,7 @@ namespace App\Trait;
 use App\Entity\Contact;
 use Symfony\Component\Form\FormInterface as FormFormInterface;
 
-trait TraitForTextCheck 
+trait TraitForTextCheck
 {
     protected function TextCheckAndGet(FormFormInterface $form, Contact $contact): void
     {

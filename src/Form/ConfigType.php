@@ -6,6 +6,7 @@ namespace App\Form;
 use App\Entity\Config;
 use App\Enum\Enum;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,13 +29,15 @@ class ConfigType extends AbstractType
                 'expanded' => true,
 
             ])
-
             ->add('value', ChoiceType::class, [
+                'label' => 'Wybierz opcję',
                 'choices' => [
                     Enum::TURN_ON => 1,
-                    Enum::TURN_OFF => 0, 
+                    Enum::TURN_OFF => 0,
                 ],
                 'expanded' => true,
+                'multiple' => false,
+
             ]);
     }
 

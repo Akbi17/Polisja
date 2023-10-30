@@ -30,43 +30,42 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'contact')]
     public function contact(Request $request, TransportInterface $mailer, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if(!$webPageAdmin->getContactStatus()->getValue())
-        {
+        if (!$webPageAdmin->getContactStatus()->getValue()) {
             return $this->redirectToRoute('app_main');
         }
-        $contact       = new Contact();
-        $form          = $this->createForm(ContactType::class, $contact);
-        $form          ->handleRequest($request);
+        $contact = new Contact();
+        $form    = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
 
-    try {
-        if ($form->isSubmitted() && $form->isValid()) {
-            $contact->setName($form->get('name')->getData());
-            $contact->setEmail($form->get('email')->getData());
-            $contact->setSubject($form->get('subject')->getData());
-            $this->TextCheckAndGet($form, $contact);
-            $email = (new Email())
-                ->from($contact->getEmail())
-                ->to('polisja@polisja.com')
-                ->subject($contact->getSubject())
-                ->text($contact->getMessage());
-            $mailer->send($email);
-            $this->entityManager->persist($contact);
-            $this->entityManager->flush();
-            $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
+        try {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $contact->setName($form->get('name')->getData());
+                $contact->setEmail($form->get('email')->getData());
+                $contact->setSubject($form->get('subject')->getData());
+                $this->TextCheckAndGet($form, $contact);
+                $email = (new Email())
+                    ->from($contact->getEmail())
+                    ->to('polisja@polisja.com')
+                    ->subject($contact->getSubject())
+                    ->text($contact->getMessage());
+                $mailer->send($email);
+                $this->entityManager->persist($contact);
+                $this->entityManager->flush();
+                $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
 
-            return $this->redirectToRoute('contact');
+                return $this->redirectToRoute('contact');
+            }
+        } catch (Exception $e) {
+            $form->addError(new FormError('Błąd przy formularzu'));
         }
-    } catch(Exception $e) {
-        $form->addError(new FormError('Błąd przy formularzu'));
-    }
         $activepages = $webPageAdmin->Activepages();
-        $enum = $enumValue->getEnumValues();
-        $phone = $webPageAdmin->getContactPhone()->getValue();
-        $mail = $webPageAdmin->getContactEmail()->getValue();
+        $enum        = $enumValue->getEnumValues();
+        $phone       = $webPageAdmin->getContactPhone()->getValue();
+        $mail        = $webPageAdmin->getContactEmail()->getValue();
 
-        return $this->render('frontend/contact/index.html.twig', [
+        return $this->render('frontend/contact.html.twig', [
             'form' => $form->createView(),
-            'activepages'=> $activepages,
+            'activepages' => $activepages,
             'enum' => $enum,
             'phone' => $phone,
             'mail' => $mail,

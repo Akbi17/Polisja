@@ -20,54 +20,53 @@ use Symfony\Component\Form\FormError;
 
 class InstallController extends AbstractController
 {
-    public function __construct(public ManagerRegistry $doctrine){}
+    public function __construct(public ManagerRegistry $doctrine)
+    {
+    }
 
     #[Route('/install', name: 'app_install')]
     public function install(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {    
+    {
         $adminRepository = $this->doctrine->getRepository(Admin::class);
-        $admins = $adminRepository->findAll();
-        if (count($admins)) 
-        {
+        $admins          = $adminRepository->findAll();
+        if (count($admins)) {
             return $this->redirectToRoute('app_login');
         }
-        
+
         $user = new Admin();
         $form = $this->createForm(InstallFormType::class, $user);
         $form->handleRequest($request);
-    try {
-        if ($form->isSubmitted() && $form->isValid()) {       
-            $user->setPassword($userPasswordHasher->hashPassword($user,$form->get('plainPassword')->getData()));
-            $user->setRoles(['ROLE_ADMIN']);
+        try {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
+                $user->setRoles(['ROLE_ADMIN']);
 
-            $sectionKeys = Enum::getPagesValue();
-            $configRepository = $entityManager->getRepository(Config::class);
-                foreach ($sectionKeys as $sectionKey) 
-                {
+                $sectionKeys      = Enum::getPagesValue();
+                $configRepository = $entityManager->getRepository(Config::class);
+                foreach ($sectionKeys as $sectionKey) {
                     $existingConfig = $configRepository->findOneBy(['name' => $sectionKey]);
 
-                    if (!$existingConfig) 
-                    {
+                    if (!$existingConfig) {
                         $newConfig = new Config();
                         $newConfig->setName($sectionKey);
-                        $newConfig->setValue('1'); 
+                        $newConfig->setValue('1');
                         $entityManager->persist($newConfig);
                         $entityManager->flush();
                     }
                 }
-            $entityManager->persist($user);
-            $entityManager->flush();       
-            $this->addFlash('success', 'Rejestracja admina zakończona pomyślnie!');
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('success', 'Rejestracja admina zakończona pomyślnie!');
 
-            return $this->redirectToRoute('app_login');
-        }  
-    }   catch (\Exception $e) {
-        $form->addError(new FormError('Wystąpił błąd podczas rejestracji admina.'));
+                return $this->redirectToRoute('app_login');
+            }
+        } catch (\Exception $e) {
+            $form->addError(new FormError('Wystąpił błąd podczas rejestracji admina.'));
+        }
+
+        return $this->render('admin/install.html.twig', [
+            'form' => $form->createView(),
+
+        ]);
     }
-    
-    return $this->render('admin/install.html.twig', [
-        'form' => $form->createView(),
-        
-    ]);
-}
 }

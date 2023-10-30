@@ -20,8 +20,7 @@ class CarController extends AbstractController
     #[Route('/ubezpieczenia-samochodu', name: 'app_car')]
     public function index(Request $request, EntityManagerInterface $entityManager, Enum $enumValue, WebPageAdmin $webPageAdmin): Response
     {
-        if(!$webPageAdmin->getCarStatus()->getValue())
-        {
+        if (!$webPageAdmin->getCarStatus()->getValue()) {
             return $this->redirectToRoute('app_main');
         }
         $auto = new Car;
@@ -29,23 +28,23 @@ class CarController extends AbstractController
         $form->handleRequest($request);
 
         try {
-            if ($form->isSubmitted() && $form->isValid()) {  
+            if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->persist($auto);
                 $entityManager->flush();
                 $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
-    
+
                 return $this->redirectToRoute('app_car');
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $form->addError(new FormError('Błąd przy formularzu'));
         }
 
-            $activepages = $webPageAdmin->ActivePages();
-            $enum = $enumValue->getEnumValues();
-            $phone = $webPageAdmin->getContactPhone()->getValue();
-            $mail = $webPageAdmin->getContactEmail()->getValue();
+        $activepages = $webPageAdmin->ActivePages();
+        $enum        = $enumValue->getEnumValues();
+        $phone       = $webPageAdmin->getContactPhone()->getValue();
+        $mail        = $webPageAdmin->getContactEmail()->getValue();
 
-        return $this->render('frontend/car/index.html.twig', [
+        return $this->render('frontend/car.html.twig', [
             'form' => $form->createView(),
             'activepages' => $activepages,
             'enum' => $enum,

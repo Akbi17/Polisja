@@ -13,19 +13,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    public function __construct(private UrlGeneratorInterface $urlGenerator){}
 
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, ManagerRegistry $entityManger): Response
     {
         $adminRepository = $entityManger->getRepository(Admin::class);
         $admins          = $adminRepository->findAll();
-        
-        if (count($admins) == 0) 
-        {
+
+        if (count($admins) == 0) {
             return $this->redirectToRoute('app_install');
         }
-        
+
         $error        = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 

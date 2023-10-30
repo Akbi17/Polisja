@@ -19,6 +19,7 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 class AdminCustomAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
+
     public const LOGIN_ROUTE = 'app_login';
 
     public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
@@ -40,13 +41,12 @@ class AdminCustomAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) 
-        {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->urlGenerator->generate('admin'));
-        
+
     }
 
     protected function getLoginUrl(Request $request): string

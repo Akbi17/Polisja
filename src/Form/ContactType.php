@@ -20,12 +20,12 @@ class ContactType extends AbstractType
         $builder
             ->add('name')
             ->add('email', EmailType::class)
-            ->add('subject',TextType::class)
-            ->add('message',TextareaType::class,[
+            ->add('subject', TextType::class)
+            ->add('message', TextareaType::class, [
                 'label' => 'Treść wiadomości',
-                'attr' => ['class' => 'form-control', 'placeholder' =>'Wpisz w jakiej sprawię chcesz się skontaktować'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Wpisz w jakiej sprawię chcesz się skontaktować'],
                 'constraints' => [
-                    new NotBlank(['message' =>'Wiadomość nie może być pusta']),
+                    new NotBlank(['message' => 'Wiadomość nie może być pusta']),
                     new Regex([
                         'message' => 'Wiadomość nie może zawierać znaków specjalnych',
                         'pattern' => '/^[^\n\r\t@#$%^&*()+=?<>{}[\]~\\\\]+$/',

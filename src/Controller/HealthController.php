@@ -22,39 +22,38 @@ class HealthController extends AbstractController
     }
 
     #[Route('/zycie', name: 'app_health')]
-    public function index(Request $request,WebPageAdmin $webPageAdmin, Enum $enumValue): Response
+    public function index(Request $request, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if(!$webPageAdmin->getHealthStatus()->getValue())
-        {
+        if (!$webPageAdmin->getHealthStatus()->getValue()) {
             dump($webPageAdmin->ActivePages());
 
         }
-        $health        = new Health;
-        $form          = $this->createForm(HealthType::class, $health);
+        $health = new Health;
+        $form   = $this->createForm(HealthType::class, $health);
         $form->handleRequest($request);
-    try {
-        if ($form->isSubmitted() && $form->isValid()) {
-            $health->setName($form->get('name')->getData());
-            $health->setPhone($form->get('phone')->getData());
-            $health->setMail($form->get('mail')->getData());
-            $health->setSurname($form->get('surname')->getData());
-            $this->entityManager->persist($health);
-            $this->entityManager->flush();
-            $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
+        try {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $health->setName($form->get('name')->getData());
+                $health->setPhone($form->get('phone')->getData());
+                $health->setMail($form->get('mail')->getData());
+                $health->setSurname($form->get('surname')->getData());
+                $this->entityManager->persist($health);
+                $this->entityManager->flush();
+                $this->addFlash('success', 'Twoje zgłoszenie zostało wysłane. Wkrótce odpowiemy!');
 
-            return $this->redirectToRoute('app_health');
+                return $this->redirectToRoute('app_health');
+            }
+        } catch (Exception $e) {
+            $form->addError(new FormError('Błąd przy formularzu'));
         }
-    } catch(Exception $e) {
-        $form->addError(new FormError('Błąd przy formularzu'));
-    }
         $activepages = $webPageAdmin->ActivePages();
-        $enum = $enumValue->getEnumValues();
-        $phone = $webPageAdmin->getContactPhone()->getValue();
-        $mail = $webPageAdmin->getContactEmail()->getValue();
+        $enum        = $enumValue->getEnumValues();
+        $phone       = $webPageAdmin->getContactPhone()->getValue();
+        $mail        = $webPageAdmin->getContactEmail()->getValue();
 
-        return $this->render('frontend/health/index.html.twig', [
+        return $this->render('frontend/health.html.twig', [
             'form' => $form->createView(),
-            'activepages'=> $activepages,
+            'activepages' => $activepages,
             'enum' => $enum,
             'phone' => $phone,
             'mail' => $mail,

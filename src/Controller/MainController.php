@@ -15,12 +15,12 @@ class MainController extends AbstractController
     public function index(WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
         $activepages = $webPageAdmin->ActivePages();
-        $enum = $enumValue->getEnumValues();
-        $phone = $webPageAdmin->getContactPhone()->getValue();
-        $mail = $webPageAdmin->getContactEmail()->getValue();
+        $enum        = $enumValue->getEnumValues();
+        $phone       = $webPageAdmin->getContactPhone()->getValue();
+        $mail        = $webPageAdmin->getContactEmail()->getValue();
 
-        return $this->render('frontend/main/index.html.twig',[
-            'activepages'=>$activepages,
+        return $this->render('frontend/main.html.twig', [
+            'activepages' => $activepages,
             'enum' => $enum,
             'phone' => $phone,
             'mail' => $mail,

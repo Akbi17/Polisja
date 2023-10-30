@@ -27,13 +27,13 @@ class Car
     private ?string $phone = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $carmake = null;
+    private ?string $maker = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $carmodel = null;
+    private ?string $model = null;
 
     #[ORM\Column]
-    private ?int $caryear = null;
+    private ?int $year = null;
 
     #[ORM\Column(length: 255)]
     private ?string $coverageType = null;
@@ -91,38 +91,38 @@ class Car
         return $this;
     }
 
-    public function getCarmake(): ?string
+    public function getMaker(): ?string
     {
-        return $this->carmake;
+        return $this->maker;
     }
 
-    public function setCarmake(string $carmake): static
+    public function setMaker(string $maker): static
     {
-        $this->carmake = $carmake;
+        $this->maker = $maker;
 
         return $this;
     }
 
-    public function getCarmodel(): ?string
+    public function getModel(): ?string
     {
-        return $this->carmodel;
+        return $this->model;
     }
 
-    public function setCarmodel(string $carmodel): static
+    public function setModel(string $model): static
     {
-        $this->carmodel = $carmodel;
+        $this->model = $model;
 
         return $this;
     }
 
-    public function getCaryear(): ?int
+    public function getYear(): ?int
     {
-        return $this->caryear;
+        return $this->year;
     }
 
-    public function setCaryear(int $caryear): static
+    public function setYear(int $year): static
     {
-        $this->caryear = $caryear;
+        $this->year = $year;
 
         return $this;
     }

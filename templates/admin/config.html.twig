@@ -6,6 +6,7 @@
 {% endblock %}
 {% block content_title %}{{ block('page_title') }}{% endblock %}
 {% block main %}
+
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -14,22 +15,20 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                        {{ form_row(form.name) }}
-                        {{ form_errors(form.name, {'attr': {'class': 'text-danger'}}) }}
+                            {% for child in form.name %}
+                                {{ form_row(child) }}
+                                {{ form_errors(child, {'attr': {'class': 'text-danger'}}) }}
+                            {% endfor %}
                         </div>
-                        <div class="col-md-6">
-                    {{ form_label(form.value, 'Status', {'label_attr': {'class': 'my-label-class'}}) }}
-                    {{ form_widget(form.value) }}
-                    {{ form_errors(form.value, {'attr': {'class': 'text-danger'}}) }}
-                        </div>
+                    </div>
                 </div>
-
-
                 <button type="submit" class="btn btn-primary btn-block">Zapisz</button>
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
+
+
 
     <div class="container">
         <div class="row">

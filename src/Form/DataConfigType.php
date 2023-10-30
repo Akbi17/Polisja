@@ -22,8 +22,7 @@ class DataConfigType extends AbstractType
                     Enum::E_MAIL => Enum::E_MAIL_PATH,
                 ],
             ])
-            ->add('value',TextType::class)
-        ;
+            ->add('value', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

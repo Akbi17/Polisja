@@ -25,26 +25,25 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class DashboardController extends AbstractDashboardController
 {
-    public function __construct(public ManagerRegistry $doctrine, private RequestStack $requestStack){}
+    public function __construct(public ManagerRegistry $doctrine, private RequestStack $requestStack)
+    {
+    }
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        $request = $this->requestStack->getCurrentRequest();
+        $request        = $this->requestStack->getCurrentRequest();
         $formConfigData = $this->createForm(DataConfigType::class);
         $formConfigData->handleRequest($request);
         $form = $this->createForm(ConfigType::class);
         $form->handleRequest($request);
-
         try {
             if ($form->isSubmitted() && $form->isValid()) {
-                $webPageData = $form->getData();
-                $Data = $formConfigData->getData();
-                
-                $entityManager = $this->doctrine->getManager();
-                
+                $webPageData     = $form->getData();
+                $Data            = $formConfigData->getData();
+                $entityManager   = $this->doctrine->getManager();
                 $existingWebPage = $entityManager->getRepository(Config::class)->findOneBy(['name' => $webPageData->getName()]);
-                
+
                 if ($existingWebPage) {
                     $existingWebPage->setValue($webPageData->getValue());
                 } else {
@@ -53,18 +52,15 @@ class DashboardController extends AbstractDashboardController
 
                 $entityManager->persist($existingWebPage);
                 $entityManager->flush();
-
                 $this->addFlash('success', 'Zmiany zostały zapisane.');
                 return $this->redirectToRoute('admin');
             }
-            
+
             if ($formConfigData->isSubmitted() && $formConfigData->isValid()) {
-                $Data = $formConfigData->getData();
-                
-                $entityManager = $this->doctrine->getManager();
-                
+                $Data            = $formConfigData->getData();
+                $entityManager   = $this->doctrine->getManager();
                 $existingWebPage = $entityManager->getRepository(Config::class)->findOneBy(['name' => $Data->getName()]);
-                
+
                 if ($existingWebPage) {
                     $existingWebPage->setValue($Data->getValue());
                 } else {
@@ -73,7 +69,6 @@ class DashboardController extends AbstractDashboardController
 
                 $entityManager->persist($existingWebPage);
                 $entityManager->flush();
-
                 $this->addFlash('success', 'Zmiany zostały zapisane.');
                 return $this->redirectToRoute('admin');
             }
@@ -85,9 +80,9 @@ class DashboardController extends AbstractDashboardController
             }
         }
 
-        return $this->render('config/index.html.twig', [
+        return $this->render('admin/config.html.twig', [
             'form' => $form->createView(),
-            'formConfigData' => $formConfigData->createView()
+            'formConfigData' => $formConfigData->createView(),
         ]);
     }
 
@@ -105,8 +100,8 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Auto', 'fa fa-car', Car::class),
             MenuItem::linkToCrud('Business', 'fa fa-wallet', Business::class),
             MenuItem::linkToCrud('Health', 'fa fa-heart', Health::class),
-            MenuItem::linkToCrud('Property', 'fa fa-home', Property::class),    
-            MenuItem::linkToCrud('Contact', 'fa fa-phone', Contact::class),    
+            MenuItem::linkToCrud('Property', 'fa fa-home', Property::class),
+            MenuItem::linkToCrud('Contact', 'fa fa-phone', Contact::class),
             MenuItem::linkToCrud('Config', 'fa fa-key', Config::class),
         ];
     }

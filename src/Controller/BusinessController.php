@@ -24,7 +24,7 @@ class BusinessController extends AbstractController
     #[Route('/biznes', name: 'app_business')]
     public function index(Request $request, WebPageAdmin $webPageAdmin, Enum $enumValue): Response
     {
-        if(!$webPageAdmin->getBusinessStatus()->getValue())
+        if (!$webPageAdmin->getBusinessStatus()->getValue())
         {
             return $this->redirectToRoute('app_main');
         }
@@ -52,7 +52,7 @@ class BusinessController extends AbstractController
         $phone = $webPageAdmin->getContactPhone()->getValue();
         $mail = $webPageAdmin->getContactEmail()->getValue();
 
-        return $this->render('frontend/business/index.html.twig', [
+        return $this->render('frontend/business.html.twig', [
             'form' => $form->createView(),
             'activepages'=>$activepages,
             'enum' => $enum,

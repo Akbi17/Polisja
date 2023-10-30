@@ -277,10 +277,14 @@ section.highlight.footer {
   padding-bottom: 25px;
   margin-bottom: 40px;
 }
+.design {
+  padding-top: 30px;
+  padding-bottom: 25px;
+  background-color: #fff;
+}
+.design kontakt {
+  right: 1rem;
 
-.read .container {
-  margin-top: 20px;
-  padding-top: 20px;
 }
 .read {
   background-color: #fff;

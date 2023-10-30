@@ -5,23 +5,23 @@ namespace App\Enum;
 
 class Enum
 {
-    public const CAR_PATH ='page/car/isActive';
-    public const HEALTH_PATH ='page/health/isActive';
-    public const BUSINESS_PATH ='page/business/isActive';
-    public const PROPERTY_PATH ='page/property/isActive';
-    public const CONTACT_PATH ='page/contact/isActive';
-    public const CAR ='Auto';
-    public const HEALTH ='Życie';
-    public const BUSINESS ='Biznes';
-    public const PROPERTY ='Nieruchomość';
-    public const CONTACT ='Kontakt';
-    public const TURN_ON ='Włącz';
-    public const TURN_OFF ='Wyłącz';
-    public const CONTACT_NUMBER ='Number';
-    public const E_MAIL ='E-mail';
-    public const CONTACT_NUMBER_PATH ='polisja/contact/phonenumber';
-    public const E_MAIL_PATH ='polisja/contact/mail';
-    
+    public const CAR_PATH            = 'page/car/isActive';
+    public const HEALTH_PATH         = 'page/health/isActive';
+    public const BUSINESS_PATH       = 'page/business/isActive';
+    public const PROPERTY_PATH       = 'page/property/isActive';
+    public const CONTACT_PATH        = 'page/contact/isActive';
+    public const CAR                 = 'Auto';
+    public const HEALTH              = 'Życie';
+    public const BUSINESS            = 'Biznes';
+    public const PROPERTY            = 'Nieruchomość';
+    public const CONTACT             = 'Kontakt';
+    public const TURN_ON             = 'Włącz';
+    public const TURN_OFF            = 'Wyłącz';
+    public const CONTACT_NUMBER      = 'Number';
+    public const E_MAIL              = 'E-mail';
+    public const CONTACT_NUMBER_PATH = 'polisja/contact/phonenumber';
+    public const E_MAIL_PATH         = 'polisja/contact/mail';
+
     public function getEnumValues(): array
     {
         return [

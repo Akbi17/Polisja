@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class WebPageAdmin extends AbstractController
 {
     function __construct(public EntityManagerInterface $entityManager)
-
     {
     }
 
@@ -39,7 +38,7 @@ class WebPageAdmin extends AbstractController
     {
         return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::BUSINESS_PATH]);
     }
-    
+
     public function getContactStatus()
     {
         return $this->entityManager->getRepository(Config::class)->findOneBy(['name' => Enum::CONTACT_PATH]);
@@ -56,61 +55,62 @@ class WebPageAdmin extends AbstractController
     }
 
     public function ActivePages()
-{
-    $pages = $this->getWebPageStatus();
-    
-    $activePages = [];
-    
-    foreach ($pages as $config) {
-        if ($config !== null) {
-            $configName = $config->getName();
-            $configValue = $config->getValue();
-        
-        switch ($configName) {
-            case Enum::CAR_PATH:
-                if ($configValue) {
-                    $activePages[] = [
-                        'label' => 'Samochody',
-                        'path' => $this->generateUrl('app_car'),
-                    ];
+    {
+        $pages = $this->getWebPageStatus();
+
+        $activePages = [];
+
+        foreach ($pages as $config) {
+            if ($config !== null) {
+                $configName  = $config->getName();
+                $configValue = $config->getValue();
+
+                switch ($configName) {
+                    case Enum::CAR_PATH:
+                        if ($configValue) {
+                            $activePages[] = [
+                                'label' => 'Samochody',
+                                'path' => $this->generateUrl('app_car'),
+                            ];
+                        }
+                        break;
+                    case Enum::PROPERTY_PATH:
+                        if ($configValue) {
+                            $activePages[] = [
+                                'label' => 'Dom',
+                                'path' => $this->generateUrl('app_property'),
+                            ];
+                        }
+                        break;
+                    case Enum::HEALTH_PATH:
+                        if ($configValue) {
+                            $activePages[] = [
+                                'label' => 'Zycie',
+                                'path' => $this->generateUrl('app_health'),
+                            ];
+                        }
+                        break;
+                    case Enum::BUSINESS_PATH:
+                        if ($configValue) {
+                            $activePages[] = [
+                                'label' => 'Bizness',
+                                'path' => $this->generateUrl('app_business'),
+                            ];
+                        }
+                        break;
+                    case Enum::CONTACT_PATH:
+                        if ($configValue) {
+                            $activePages[] = [
+                                'label' => 'Kontakt',
+                                'path' => $this->generateUrl('contact'),
+                            ];
+                        }
+                        break;
                 }
-                break;
-            case Enum::PROPERTY_PATH:
-                if ($configValue) {
-                    $activePages[] = [
-                        'label' => 'Dom',
-                        'path' => $this->generateUrl('app_property'),
-                    ];
-                }
-                break;
-            case Enum::HEALTH_PATH:
-                if ($configValue) {
-                    $activePages[] = [
-                        'label' => 'Zycie',
-                        'path' => $this->generateUrl('app_health'),
-                    ];
-                }
-                break;
-            case Enum::BUSINESS_PATH:
-                if ($configValue) {
-                    $activePages[] = [
-                        'label' => 'Bizness',
-                        'path' => $this->generateUrl('app_business'),
-                    ];
-                }
-                break;
-            case Enum::CONTACT_PATH:
-                if ($configValue) {
-                    $activePages[] = [
-                        'label' => 'Kontakt',
-                        'path' => $this->generateUrl('contact'),
-                    ];
-                }
-                break;
-        }}
+            }
+        }
+
+        return $activePages;
     }
-    
-    return $activePages;
-}
 
 }

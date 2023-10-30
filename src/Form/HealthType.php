@@ -16,19 +16,19 @@ class HealthType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name',TextType::class, [
+            ->add('name', TextType::class, [
                 'label' => 'Imię',
                 'required' => true,
             ])
-            ->add('surname',TextType::class, [
+            ->add('surname', TextType::class, [
                 'label' => 'Nazwisko',
                 'required' => true,
             ])
-            ->add('mail',TextType::class, [
+            ->add('mail', TextType::class, [
                 'label' => 'E-mail',
                 'required' => true,
             ])
-            ->add('phone',TelType::class, [
+            ->add('phone', TelType::class, [
                 'label' => 'Numer',
                 'required' => true,
             ])
@@ -42,11 +42,11 @@ class HealthType extends AbstractType
                     'placeholder' => 'Wybierz datę',
                 ],
             ])
-            ->add('gender',TextType::class, [
+            ->add('gender', TextType::class, [
                 'label' => 'Płeć',
                 'required' => true,
             ])
-            ->add('occupation',TextType::class, [
+            ->add('occupation', TextType::class, [
                 'label' => 'Zawód',
                 'required' => true,
             ])
@@ -59,9 +59,7 @@ class HealthType extends AbstractType
                     'class' => 'form-control',
                     'placeholder' => 'Wybierz datę',
                 ],
-            ])
-            
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
