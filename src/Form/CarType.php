@@ -22,9 +22,9 @@ class CarType extends AbstractType
             ->add('lastname', TextType::class)
             ->add('email', EmailType::class)
             ->add('phone', TelType::class)
-            ->add('carmake', TextType::class)
-            ->add('carmodel', TextType::class)
-            ->add('caryear', NumberType::class)
+            ->add('maker', TextType::class)
+            ->add('model', TextType::class)
+            ->add('year', NumberType::class)
             ->add('coverageType', ChoiceType::class, [
                 'choices' => [
                     'Comprehensive' => 'comprehensive',

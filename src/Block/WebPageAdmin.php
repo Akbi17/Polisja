@@ -93,7 +93,7 @@ class WebPageAdmin extends AbstractController
                     case Enum::BUSINESS_PATH:
                         if ($configValue) {
                             $activePages[] = [
-                                'label' => 'Bizness',
+                                'label' => 'Biznes',
                                 'path' => $this->generateUrl('app_business'),
                             ];
                         }
