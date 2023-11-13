@@ -2,9 +2,9 @@ $(document).ready(function() {
   var images = $(".grid-container a");
   var infoBox = $(".information");
   var currentIndex = 0;
-  var interval = 4000; // Zwiększono czas między obrótami
-  var flippedAndInfoDuration = 2000; // Zmniejszono czas wyświetlania informacji
-  var resetDuration = 1000; // Czas opóźnienia resetowania ikonki
+  var interval = 1000; // Zwiększono czas między obrótami
+  var flippedAndInfoDuration = 4000; // Zmniejszono czas wyświetlania informacji
+  var resetDuration = 4000; // Czas opóźnienia resetowania ikonki
 
   var timer;
   var isManualRotation = false;
